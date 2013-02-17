@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	<f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Ezee Appointer	-	Appointee Dashboard</title>
+            </f:facet>
+	            <style type="text/css">
+	        		.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
+	            		 border: none;
+	        		}
+	        		.ui-datatable * {
+     border : 0px !important;
+}
+	        		body {
+    margin: 0px;
+    padding: 0;
+    font-size: 12px;
+    color: #616161;
+}
+    </style>
+		</h:head>
+      	<h:body>
+			<p:layout fullPage="true">
+	
+		    	<p:layoutUnit position="north" size="100">
+		    	</p:layoutUnit>
+		
+			    <p:layoutUnit position="south"  size="100">
+			    </p:layoutUnit>
+			
+			    <p:layoutUnit position="west"  size="175">
+			    </p:layoutUnit>
+			
+			    <p:layoutUnit position="east"  size="175">
+			    </p:layoutUnit>
+			
+			    <p:layoutUnit position="center">			    
+				    <p:layout>
+	                        <p:layoutUnit position="west">
+	                             <h:form>	
+				           			<p:menu>  
+								        <p:submenu>  
+								            <p:menuitem value="My Appointments" actionListener="#{appointmentbean.today}" />
+								            <p:menuitem value="Take Appointment" actionListener="#{appointmentbean.today}"  />    
+								            <p:menuitem value="Account Settings" actionListener="#{appointmentbean.today}"  />
+								            <p:menuitem value="Reports" actionListener="#{appointmentbean.today}"  />
+								            <p:menuitem value="Logout" actionListener="#{appointmentbean.today}"  />    
+								        </p:submenu>
+			    					</p:menu>  					
+				        		</h:form>
+	                       </p:layoutUnit>
+	                        <p:layoutUnit position="center">
+	                           <h1 class="title ui-widget-header ui-corner-all" style="margin-top:0px">#{appointeeDashboard.today} </h1>
+	                           <p:accordionPanel multiple="true" activeIndex="0,1,2">  
+					    <p:tab title="Upcoming Appointments: (#{fn:length(appointeeDashboard.apdbDTOs)})"> 
+					    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+					           <p:dataTable id="appts" var="appt" value="#{appointeeDashboard.apdbDTOs}" sortBy="#{appt.apptDate}">  					  
+												        <p:column headerText="Appt. No" sortBy="#{appt.apptNo}">  
+												            <h:outputText value="#{appt.apptNo}" />  
+												        </p:column>  
+												         <p:column headerText="Appt. Date" sortBy="#{appt.apptDate}" >  
+												            <h:outputText value="#{appt.apptDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column> 
+												           <p:column headerText="Booked Date" sortBy="#{appt.apptTakenDate}">  
+												            <h:outputText value="#{appt.apptTakenDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column>
+												        <p:column headerText="Status" sortBy="#{appt.apptSts}">  
+												            <h:outputText value="#{appt.apptSts}" />  
+												        </p:column> 							  
+												        <p:column headerText="Appointment Description" style="width:60%" sortBy="#{appt.apptDescr}">  
+												            <h:outputText value="#{appt.apptDescr}" />  
+												        </p:column>			  
+												  		  <p:column headerText="Action" style="width:8.25%">  
+												                <p:commandButton id="cancleButton" icon="ui-icon-cancel" title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}">  
+												                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
+												            </p:commandButton> 
+												            <p:commandButton id="changeButton" icon="ui-icon-update" title="Reschedule">  
+												            </p:commandButton>   
+												        </p:column>  					  
+								 </p:dataTable> 
+					    </p:tab>  
+    <p:tab title="Appointments History: (10)" >  
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.   
+            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,   
+            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />  
+        </h:panelGrid>  
+    </p:tab>  
+    <p:tab title="Appointments waiting for your feedback: (10)">  
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.   
+                Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />  
+        </h:panelGrid>  
+    </p:tab>  
+</p:accordionPanel>
+					         	
+	                     </p:layoutUnit>	
+	                    </p:layout> 		   		 
+			       
+			    </p:layoutUnit>
+		
+			</p:layout>
+                        
+		</h:body>
+
+    </f:view>	
+</html>

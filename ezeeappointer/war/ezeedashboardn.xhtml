@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+<h:head>
+
+       
+        
+        <title>Ezee Appointer - Dashboard</title>
+        <!-- Link shortcut icon-->
+        <link rel="shortcut icon" type="image/ico" href="images/favicon2.html" /> 
+        <!-- Link css-->
+  
+        <link rel="stylesheet" type="text/css" href="css/zice.style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/icon.css"/>
+        <link rel="stylesheet" type="text/css" href="css/ui-custom.css"/>
+        <link rel="stylesheet" type="text/css" href="css/timepicker.css"  />
+        <link rel="stylesheet" type="text/css" href="components/colorpicker/css/colorpicker.css"  />
+        <link rel="stylesheet" type="text/css" href="components/elfinder/css/elfinder.css" />
+        <link rel="stylesheet" type="text/css" href="components/datatables/dataTables.css"  />
+        <link rel="stylesheet" type="text/css" href="components/validationEngine/validationEngine.jquery.css" />
+      
+         
+        <link rel="stylesheet" type="text/css" href="components/jscrollpane/jscrollpane.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="components/fancybox/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="components/tipsy/tipsy.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="components/editor/jquery.cleditor.css"  />
+        <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />
+        <link rel="stylesheet" type="text/css" href="components/confirm/jquery.confirm.css" />
+        <link rel="stylesheet" type="text/css" href="components/sourcerer/sourcerer.css"/>
+        <link rel="stylesheet" type="text/css" href="components/fullcalendar/fullcalendar.css"/>
+        <link rel="stylesheet" type="text/css" href="components/Jcrop/jquery.Jcrop.css"  />
+         <link rel="stylesheet" type="text/css" href="css/table-css.css"  />
+   		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        </link>
+   
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="components/ui/jquery.ui.min.js"></script> 
+        <script type="text/javascript" src="components/ui/jquery.autotab.js"></script>
+        <script type="text/javascript" src="components/ui/timepicker.js"></script>
+        <script type="text/javascript" src="components/colorpicker/js/colorpicker.js"></script>
+        <script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+        <script type="text/javascript" src="components/elfinder/js/elfinder.full.js"></script>
+        <script type="text/javascript" src="components/datatables/dataTables.min.js"></script>
+        <script type="text/javascript" src="components/datatables/ColVis.js"></script>
+        <script type="text/javascript" src="components/scrolltop/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="components/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="components/jscrollpane/mousewheel.js"></script>
+        <script type="text/javascript" src="components/jscrollpane/mwheelIntent.js"></script>
+        <script type="text/javascript" src="components/jscrollpane/jscrollpane.min.js"></script>
+        <script type="text/javascript" src="components/spinner/ui.spinner.js"></script>
+        <script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
+        <script type="text/javascript" src="components/editor/jquery.cleditor.js"></script>
+        <script type="text/javascript" src="components/chosen/chosen.js"></script>
+        <script type="text/javascript" src="components/confirm/jquery.confirm.js"></script>
+        <script type="text/javascript" src="components/validationEngine/jquery.validationEngine.js" ></script>
+        <script type="text/javascript" src="components/validationEngine/jquery.validationEngine-en.js" ></script>
+        <script type="text/javascript" src="components/vticker/jquery.vticker-min.js"></script>
+        <script type="text/javascript" src="components/sourcerer/sourcerer.js"></script>
+        <script type="text/javascript" src="components/fullcalendar/fullcalendar.js"></script>
+        <script type="text/javascript" src="components/flot/flot.js"></script>
+        <script type="text/javascript" src="components/flot/flot.pie.min.js"></script>
+        <script type="text/javascript" src="components/flot/flot.resize.min.js"></script>
+        <script type="text/javascript" src="components/flot/graphtable.js"></script>
+
+        <script type="text/javascript" src="components/uploadify/swfobject.js"></script>
+        <script type="text/javascript" src="components/uploadify/uploadify.js"></script>        
+        <script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
+        <script type="text/javascript" src="components/effect/jquery-jrumble.js"></script>
+        <script type="text/javascript" src="components/filestyle/jquery.filestyle.js" ></script>
+        <script type="text/javascript" src="components/placeholder/jquery.placeholder.js" ></script>
+		<script type="text/javascript" src="components/Jcrop/jquery.Jcrop.js" ></script>
+        <script type="text/javascript" src="components/imgTransform/jquery.transform.js" ></script>
+        <script type="text/javascript" src="components/webcam/webcam.js" ></script>
+		<script type="text/javascript" src="components/rating_star/rating_star.js"></script>
+		<script type="text/javascript" src="components/dualListBox/dualListBox.js"  ></script>
+		<script type="text/javascript" src="components/smartWizard/jquery.smartWizard.min.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    	<script type="text/javascript" src="js/scripts.js"></script>        
+ <style type="text/css">
+ .notificationbox{
+	 margin: 0 0 10px;
+    padding: 15px 20px;
+    position: relative;
+	 background-color: #ffffff;
+border: 1px solid #a5a5a5;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 4px #999999;
+-webkit-box-shadow: 0px 0px 4px #999999;
+box-shadow: 0px 0px 4px #999999;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f8f8f8', endColorstr = '#eaeaea');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f8f8f8', endColorstr = '#eaeaea')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: -ms-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: -o-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#f8f8f8), to(#eaeaea));
+background-image: -webkit-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: linear-gradient(top, #f8f8f8, #eaeaea);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+
+ }
+.notification_left{
+	width:70%;
+	float:left;
+}
+.notification_right{
+	width:30%;
+	float:left;
+}
+.notificationbox strong{
+	color:#666666;
+	font-size:16px;
+}
+.notificationbox em{
+	color:#f24f84;
+	font-size:12px;
+}
+ </style>
+           
+</h:head>       
+        <h:body>        
+        <div id="alertMessage" class="error"></div> 
+                       
+        <div id="header" >
+                <div id="account_info"> 
+                    <img src="images/avatar.png" alt="Online" class="avatar" ></img>
+                   <div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">John Doe</b><img src="images/gear.png" class="gear"  alt="Profile Setting" ></img>
+                   </div>
+					<div class="logout" title="Disconnect"><b >Logout</b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" ></img>
+					</div> 
+                
+                </div>
+             
+            </div> <!--//  header -->
+			<div id="shadowhead"></div>
+                   
+                  <div id="left_menu">
+                    <ul id="main_menu" class="main_menu">
+                      <li class="limenu select" ><a href="dashboard.html"><span class="ico gray shadow home" ></span><b>Dashboard</b></a></li>
+                      <li class="limenu" ><a href="#" ><span class="ico gray shadow window"></span><b>Business Settings</b></a>
+                        <ul>
+                          <li ><a href="profile.html">Profile</a></li>
+                          <li ><a href="services.html"> Services </a></li>
+                          <li ><a href="staff.html"> Staff </a></li>
+                          <li ><a href="congig.html"> Configuration </a></li>
+                        </ul>
+                      </li>
+                      <li class="limenu" ><a href="#"><span class="ico gray  dimensions" ></span><b>Customers</b></a>
+                        <ul>
+                          <li ><a href="customers.html"> View/Search Customers </a></li>
+                          <li ><a href="promote.html"> Promote </a></li>
+                          <li ><a href="customer_settings.html">Customer Settings</a></li>
+                        </ul>
+                      </li>
+                      <li class="limenu" ><a href="table.html"><span class="ico gray shadow  spreadsheet"></span><b>Reports</b> </a></li>
+                      <li class="limenu" ><a href="gallery.html"><span class="ico gray shadow pictures_folder"></span><b>Accounting </b></a></li>   
+                    </ul>
+              </div>
+          
+            
+            <div id="content">
+                <div class="inner">
+					<div class="topcolumn">
+						<div class="logo"></div>
+                            
+					</div>
+                    <div class="clear"></div>
+                    
+                    <div class="onecolumn">
+                        <div class="header"> <span > Today's Overview: Sunday, May 20,<b> 2012</b></span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+                        <ul class="tabs">
+                        	<li><a href="#tab1">Overview</a></li>
+                            <li><a href="#tab2">Appointments</a></li>
+                        </ul>
+                        <div class="tab_container" >
+
+                          <div id="tab1" class="tab_content"> 
+                          
+                            <div class="boxtitle min">Notifications</div>
+                            <div class="grid1">
+                            	<div class="shoutcutBox green"> <span class="ico color chat-exclamation"></span> <strong>23</strong> <em>Total Appointments</em> </div>
+                            </div>
+                            <div class="grid1">
+                            	<div class="shoutcutBox yellow"> <span class="ico color chat-exclamation"></span> <strong>2</strong> <em>Pending for Approval</em> </div>
+                            </div>
+                            <div class="grid1">
+                            	<div class="shoutcutBox"> <span class="ico color chat-exclamation"></span> <strong>23</strong> <em>Total Appointments</em> </div>
+                            </div>
+                             <div class="grid1">
+                            	<div class="shoutcutBox"> <span class="ico color chat-exclamation"></span> <strong>23</strong> <em>Total Appointments</em> </div>
+                            </div>
+                            <div class="clear"></div>
+                           <div class="boxtitle min">Staff Appointments</div>
+                            <div class="grid2">
+                            	<div class="notificationbox tip"> <div class="notification_left"><strong>Sai Ram</strong> - <em>Service Name</em><br />
+										<span class="small">has 23 Appointments</span></div>
+                                        <div class="notification_right"> <a href="#" class="atip" original-title="Print Appointments"><span class="ico color print ico-right"></span></a> <a href="#" class="atip" original-title="View Appointments"><span class="ico color notepad ico-right"></span></a>
+                                        </div>
+                                        <div class="clear"></div>
+                                        </div>
+                            </div>
+                            <div class="grid2">
+                            	<div class="notificationbox tip"> <div class="notification_left"><strong>Sai Ram</strong> - <em>Service Name</em><br />
+										<span class="small">has 23 Appointments</span></div>
+                                        <div class="notification_right"> <a href="#" class="atip" original-title="Print Appointments"><span class="ico color print ico-right"></span></a> <a href="#" class="atip" original-title="View Appointments"><span class="ico color notepad ico-right"></span></a>
+                                        </div>
+                                        <div class="clear"></div>
+                                        </div>
+                            </div>
+                            <div class="clear"></div>
+                            
+                            <h3>Appointments waiting for Approval</h3>
+                            <table class="display static " id="static">
+                                <thead>
+                                  <tr>
+                                    <th width="10%" >Sl.No</th>
+                                    <th width="25%" align="left">Staff Name</th>
+                                    <th width="25%" >Service</th>
+                                    <th width="20%" >Time</th>
+                                    <th width="20%" >Approve/Disapprove</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                              
+                                  <tr>
+                                    <td>1</td>
+                                    <td  align="left">Dr. Sai Ram</td>
+                                    <td>Health Checkup</td>
+                                    <td>Nov 23 - 10:30am</td>
+                                    <td>
+                                      <input type="checkbox" id="approve" name="approve"   class="approve" />
+                                        </td>
+                                  </tr>
+
+                                 <tr>
+                                    <td>2</td>
+                                    <td  align="left">Dr. Sai Ram</td>
+                                    <td>Health Checkup</td>
+                                    <td>Nov 23 - 10:30am</td>
+                                    <td>
+                                      <input type="checkbox" id="approve" name="approve"   class="approve" />
+                                        </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            
+                            
+                           <div class="clear"></div> 
+                           </div>
+                           <div id="tab2" class="tab_content"> 
+                           
+                           <div class="section">
+                                <label>Select Date to View Appointments</label>   
+                                <div><h:inputText   id="datepicker" styleClass="datepicker" readonly="readonly" >
+                                      </h:inputText>
+                                </div>
+                            </div>
+                            
+                           <div class="timedahbaord">
+                           		<table class="simple">
+                                <thead>
+                                  <tr>
+                                    <th width="20%" >Time</th>
+                                    <th width="20%" align="left">Staff Name 1</th>
+                                    <th width="20%" >Staff Name 2</th>
+                                    <th width="20%" >Staff Name 3</th>
+                                    <th width="20%" >Staff Name 4</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                              
+                                  <tr>
+                                    <th>8:00am - 8:30 am</th>
+                                   <td class="booked">Booked</td>
+                                   <td class="booked">Booked</td>
+                                   <td class="open">Available</td>
+                                   <td class="booked">Booked</td>
+                                  </tr>
+
+                                 <tr>
+                                    <th>8:30am - 9:00 am</th>
+                                    <td class="booked">Booked</td>
+                                    <td class="open">Available</td>
+                                    <td class="open">Available</td>
+                                    <td class="open">Available</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                             </div> 
+                           </div>
+                          </div> 
+                            
+                            
+                            
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <!-- // End onecolumn -->
+                   
+                    
+                    <div class="clear"></div>
+                    <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Zice Admin" >Your Company Name</a> </span> </div>
+                </div> <!--// End inner -->
+            </div> <!--// End content --> 
+	</h:body>          
+</html>

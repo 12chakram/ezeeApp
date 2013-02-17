@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+  <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/fileupload.js"></script>
+  <title>Business Setup - Ezee Appointer</title>        <!-- Link css-->
+        <link rel="stylesheet" type="text/css" href="css/zice.style.css"/>        
+      <link rel="stylesheet" type="text/css" href="components/datatables/dataTables.css"  />
+        <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />    
+    	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
+    
+        <script type="text/javascript" src="components/ui/jquery.ui.min.js"></script> 
+        <script type="text/javascript" src="components/ui/jquery.autotab.js"></script>
+        <script type="text/javascript" src="components/ui/timepicker.js"></script>
+        <script type="text/javascript" src="components/colorpicker/js/colorpicker.js"></script>
+        <script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+        <script type="text/javascript" src="components/elfinder/js/elfinder.full.js"></script>
+        <script type="text/javascript" src="components/datatables/dataTables.min.js"></script>
+        <script type="text/javascript" src="components/datatables/ColVis.js"></script>
+        <script type="text/javascript" src="components/scrolltop/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="components/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="components/jscrollpane/mousewheel.js"></script>
+        <script type="text/javascript" src="components/jscrollpane/mwheelIntent.js"></script>
+        <script type="text/javascript" src="components/jscrollpane/jscrollpane.min.js"></script>
+        <script type="text/javascript" src="components/spinner/ui.spinner.js"></script>
+        <script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
+        <script type="text/javascript" src="components/editor/jquery.cleditor.js"></script>
+        <script type="text/javascript" src="components/chosen/chosen.js"></script>
+        <script type="text/javascript" src="components/confirm/jquery.confirm.js"></script>
+        <script type="text/javascript" src="components/validationEngine/jquery.validationEngine.js" ></script>
+        <script type="text/javascript" src="components/validationEngine/jquery.validationEngine-en.js" ></script>
+        <script type="text/javascript" src="components/vticker/jquery.vticker-min.js"></script>
+        <script type="text/javascript" src="components/sourcerer/sourcerer.js"></script>
+        <script type="text/javascript" src="components/fullcalendar/fullcalendar.js"></script>
+        <script type="text/javascript" src="components/flot/flot.js"></script>
+        <script type="text/javascript" src="components/flot/flot.pie.min.js"></script>
+        <script type="text/javascript" src="components/flot/flot.resize.min.js"></script>
+        <script type="text/javascript" src="components/flot/graphtable.js"></script>
+        <script type="text/javascript" src="components/uploadify/swfobject.js"></script>
+        <script type="text/javascript" src="components/uploadify/uploadify.js"></script>        
+        <script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
+        <script type="text/javascript" src="components/effect/jquery-jrumble.js"></script>
+        <script type="text/javascript" src="components/filestyle/jquery.filestyle.js" ></script>
+        <script type="text/javascript" src="components/placeholder/jquery.placeholder.js" ></script>
+		<script type="text/javascript" src="components/Jcrop/jquery.Jcrop.js" ></script>
+        <script type="text/javascript" src="components/imgTransform/jquery.transform.js" ></script>
+        <script type="text/javascript" src="components/webcam/webcam.js" ></script>
+		<script type="text/javascript" src="components/rating_star/rating_star.js"></script>
+		<script type="text/javascript" src="components/dualListBox/dualListBox.js"  ></script>
+		<script type="text/javascript" src="components/smartWizard/jquery.smartWizard.min.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/scripts.js"></script>        
+    
+      <style type="text/css">
+	      body.dashborad{
+		         background-image:none;
+	          }
+	          
+	       .fileupload{
+			    height: 30px;
+			    border-style: none; 
+			    border-width: 1px; 
+			    width:380px;
+			    margin-top: 1px;
+			    white-space: nowrap;
+ 
+			}	       
+	 </style>   
+</h:head>       
+<h:body>   
+<div id="alertMessage" class="error"></div> 
+  <div id="shadowhead"></div>
+    <div id="hide_panel"> 
+        <a class="butAcc" rel="0" id="show_menu"></a>
+        <a class="butAcc" rel="1" id="hide_menu"></a>
+        <a class="butAcc" rel="0" id="show_menu_icon"></a>
+        <a class="butAcc" rel="1" id="hide_menu_icon"></a>
+    </div>           
+
+	<div id="content" class="registrationpg">
+	  <div class="inner">
+		<div class="topcolumn">
+		    <div class="logo"></div>
+		</div>
+        <div class="clear"></div>
+        <div class="onecolumn">
+          <div class="clear"></div>
+             <div class="content">
+                <div class="registration_form">
+        	       <div class="setup_div">
+            		   <h3>Set Up Your Business in 10 Mintues</h3>
+                         <div class="uibar">
+	                    	   <div class="step step1_on">
+	                           </div>
+	                           <div class="step step2_on">
+	                           </div>
+	                           <div class="step step3_off">
+	                           </div>
+	                           <div class="step step4_off">
+	                           </div>
+	                           <div class="step step5_off">
+	                           </div>
+	                           <div class="step stepgo_off">
+	                           </div>
+                          </div>
+                   </div>
+                   
+  <h2>Step2 - Services</h2>
+    <div class="formEl_b">
+      <h:form id="validation"> 
+        <div class="section serviceboxes">
+      		<h:outputLabel value="Service Name"/>
+             
+             <h:inputText value="#{businessSetup.service.serviceName}"  name="servicename" id="ServiceName"  styleClass="medium e_required servicename" required = "true" requiredMessage="Service Name is required." validator = "#{businessSetup.validator.validateText}" >
+              <f:attribute name="minmax" value="4,50"/>
+              <f:ajax event="blur"  render="servicemsg" />
+              </h:inputText>
+              <h:message for="ServiceName" id="servicemsg" style="font-family:arial;color:red;font-size:10px;" />
+          </div>
+          
+          <div class="section serviceboxes">
+             <h:outputLabel value="Description"/> 
+             <h:inputTextarea value="#{businessSetup.service.description}" name="servicedescription" id="ServiceDescription" styleClass="medium servicedescription" required = "true" requiredMessage="This information is required." validator = "#{businessSetup.validator.validateText}" >
+             <f:attribute name="minmax" value="5,100" />
+             <f:ajax event="blur"  render="serdes" />
+             </h:inputTextarea>
+             <h:message for="ServiceDescription" id="serdes" style="font-family:arial;color:red;font-size:10px;" />
+          </div>
+          
+           <div class="section serviceboxes">
+            <h:outputLabel value="Duration"/> 
+            <h:selectOneMenu  name="serviceduration" id="ServiceDuration" styleClass="chzn-select" value="#{businessSetup.service.duration}" required = "true" requiredMessage="Duration is required." >
+                <f:ajax event="change"  render="durationmsg" />
+	            <f:selectItems value="#{businessSetup.durationSelectItems}"/>  
+				</h:selectOneMenu>
+				
+				<h:message for="ServiceDuration" id="durationmsg" style="font-family:arial;color:red;font-size:10px;" />
+		  
+          </div>
+          
+     <div class="section serviceboxes">
+      <h:outputLabel value="Price"/>  
+     <h:inputText value="#{businessSetup.service.price}" id="Price"  name="serviceprice"  styleClass="xsmall price serviceprice"  required = "true" requiredMessage="Price is required." validator = "#{businessSetup.validator.validateNumeric}">
+     <f:attribute name="minmax" value="5,1000000" />
+     <f:ajax event="blur"  render="pricemsg" />
+     </h:inputText>
+     <h:message for="Price" id="pricemsg" style="font-family:arial;color:red;font-size:10px;" />
+     
+     </div>
+     
+     <div id="services" class="services"> 
+	      <div class="clear"></div>  	
+     </div>                              
+     <div class="clear"></div>			
+          
+	<div class="section last setps">
+       <div>
+       <h:commandLink value="Add" action="#{businessSetup.addService}" styleClass="addbtn buttonFinish uibutton" >
+       		<f:ajax execute="@form" render = "@form serviceTable"/>
+       </h:commandLink>
+       </div>
+    </div>     
+	
+	<h:panelGroup id = "serviceTable"> 
+	<div class="onecolumn" >
+      <div class="header">
+           <span ><span class="ico  gray random"></span> Dynamic Table </span>
+      </div><!-- End header -->	
+         <div class=" clear"></div>
+      <div class="content"  >
+        <div class="tableName">
+		<h:dataTable value="#{businessSetup.businessDetail.services}" var="o"
+    			styleClass="display"
+    			headerClass="th_wrapp">
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Service Name</f:facet>
+    			#{o.serviceName}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Service Description</f:facet>
+    			#{o.description}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Duration</f:facet>
+    			#{o.duration}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Price</f:facet>
+    			#{o.price}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Manage</f:facet>
+ 
+    			<h:commandButton value="Delete" action="#{businessSetup.deleteAction(o)}"	reRender="serviceTable"/>
+ 
+    		</h:column>
+ 
+    		</h:dataTable>
+		
+		<!-- <table id="servicetbl" class="display" >
+	       <thead>
+		       <tr>
+					<th width="20%"><div class="th_wrapp">Service Name</div></th>
+					<th width="40%"><div class="th_wrapp">Service Description</div></th>
+		            <th width="10%"><div class="th_wrapp">Duration</div></th>
+					<th width="10%"><div class="th_wrapp">Price</div></th>
+					<th width="20%"><div class="th_wrapp">Manage</div></th>
+			  </tr>
+	       </thead>
+	       <tbody> </tbody>
+          </table> -->
+        </div>
+            <div class="clear"></div>		
+            <div class="clear"></div>		
+     </div>
+   </div>
+</h:panelGroup>
+</h:form>             
+</div>
+        
+   
+   
+      <div class="section last setps">
+        <div>
+       		<h:form><h:commandLink value="Next" action="#{businessSetup.continueToBusinessSetupStep3}" styleClass="regi_submit buttonNext uibutton special icon next" /></h:form>
+       	</div>
+        </div>
+        <div class="clear"></div>	
+</div> 
+</div>
+      
+           <!--/END of Registration/-->
+          <div class="clear"/></div>                  
+          <div class="clear"></div>
+          <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span> </div>
+		  </div> <!--// End inner -->
+          </div><!--// End content --> 
+</h:body>
+</html>
