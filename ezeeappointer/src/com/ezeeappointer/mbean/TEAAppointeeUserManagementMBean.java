@@ -49,6 +49,7 @@ public String registerAppointeeUser(){
 			u = service.login(email, password);
 			if(u != null){
 				//getActiveUser().setApptUser(null);  nedd to change
+				// testing from git Hub web site
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("AUTH_KEY", u);
 				return "userappointment";
 			}
