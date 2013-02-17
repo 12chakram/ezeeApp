@@ -73,7 +73,7 @@ public class TEABusinessUserManagementMBean extends BaseMBean {
 			u = service.login(userId, password);
 			if(u != null){
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("AUTH_KEY", u);
-				if(u.getBusinessSetupFlag() == 'n')
+				if(u.getBusinessSetupFlag() == 'n') // need to check y
 					return "ezeedashboardn";
 				return "businesssetup1";
 			}
