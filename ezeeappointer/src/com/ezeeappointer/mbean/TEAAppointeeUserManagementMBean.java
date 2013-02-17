@@ -48,7 +48,7 @@ public String registerAppointeeUser(){
 			TEAAppointeeUserManagementService service = (TEAAppointeeUserManagementService)TEAServiceDelegate.getService("appointeeUserService");			
 			u = service.login(email, password);
 			if(u != null){
-				//getActiveUser().setApptUser(null);
+				//getActiveUser().setApptUser(null);  nedd to change
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("AUTH_KEY", u);
 				return "userappointment";
 			}
