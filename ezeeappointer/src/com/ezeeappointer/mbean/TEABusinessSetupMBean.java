@@ -23,8 +23,12 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 
 @ManagedBean(name="businessSetup")
 @RequestScoped
-	public class TEABusinessSetupMBean extends BaseMBean {
+	public class TEABusinessSetupMBean extends TEASecureMbean {
 		
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4450582646450241502L;
 		@ManagedProperty(value="#{teaBusinessDetail}")
 		private TEABusinessDetailMBean businessDetail;	
 		@ManagedProperty(value="#{teaServiceMBean}")
@@ -164,9 +168,8 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			businessDTO.setHrsBfrAppRemainderNotification(businessDetail.getHrsBfrAppRemainderNotification());
 			
 			TEABusinessDetailService service= (TEABusinessDetailService) getBackendService("businessService");
-			long userid = ((TEABusinessUserDTO)((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getSession().getAttribute("AUTH_KEY")).getId();
-			service.createBusiness(businessDTO, userid);
-			return "ezeedashboardn";
+			service.createBusiness(businessDTO, getActiveUser().getBusnUser().getId());
+			return "ezeedashboard";
 		}
 		
 		/**

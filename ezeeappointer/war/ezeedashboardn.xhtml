@@ -135,7 +135,8 @@ background-clip: padding-box;
  </style>
            
 </h:head>       
-        <h:body>        
+        <h:body>
+          <h:form id="ezeedashBoardId">        
         <div id="alertMessage" class="error"></div> 
                        
         <div id="header" >
@@ -143,9 +144,9 @@ background-clip: padding-box;
                     <img src="images/avatar.png" alt="Online" class="avatar" ></img>
                    <div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">John Doe</b><img src="images/gear.png" class="gear"  alt="Profile Setting" ></img>
                    </div>
-					<div class="logout" title="Disconnect"><b >Logout</b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" ></img>
-					</div> 
-                
+                   
+					<!-- <div class="logout" title="Disconnect"><b >Logout</b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" ></img></div>  -->
+                	 <h:commandLink id="logout_id" value="Logout" action="#{logoutBean.logoutMethod}" />
                 </div>
              
             </div> <!--//  header -->
@@ -321,5 +322,6 @@ background-clip: padding-box;
                     <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Zice Admin" >Your Company Name</a> </span> </div>
                 </div> <!--// End inner -->
             </div> <!--// End content --> 
+           </h:form> 
 	</h:body>          
 </html>

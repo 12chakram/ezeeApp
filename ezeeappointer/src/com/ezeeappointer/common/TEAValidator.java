@@ -103,7 +103,7 @@ public class TEAValidator {
 		String frmTime = (String) value;
 		String field = toValidate.getId().replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
 		validateForEmpty(field, frmTime);
-		String TIME12HOURS_PATTERN = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
+		String TIME12HOURS_PATTERN = "(0[1-9]|1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)|(AM|PM)";
 		Pattern pattern = Pattern.compile(TIME12HOURS_PATTERN);
 		Matcher matcher = pattern.matcher(frmTime);
 		if (!matcher.matches()) {

@@ -102,4 +102,20 @@ public class TEABusinessUserManagementDAO {
 //		else
 //			return user.get(0);
 	}
+	
+	/**
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	public void updateBusinessSetupFlag(long userId){
+			
+			EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
+			StringBuffer queryString = new StringBuffer("select bu from BusinessUser bu where bu.id="+userId);
+			em.getTransaction().begin();
+			Query q = em.createQuery(queryString.toString());
+			BusinessUser bUser= (BusinessUser)q.getSingleResult();
+			bUser.setBusinessSetupFlag("y");
+			em.getTransaction().commit();
+	}
 }

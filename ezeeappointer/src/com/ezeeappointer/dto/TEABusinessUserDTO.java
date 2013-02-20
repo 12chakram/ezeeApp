@@ -26,7 +26,7 @@ public class TEABusinessUserDTO implements Serializable{
 	private String city;
 	private String country;
 	private String typeOfBusiness;
-	private char businessSetupFlag = 'n';
+	private String businessSetupFlag = "n";
 	private long id;
 	
 	
@@ -111,14 +111,14 @@ public class TEABusinessUserDTO implements Serializable{
 	/**
 	 * @return the businessSetupFlag
 	 */
-	public char getBusinessSetupFlag() {
+	public String getBusinessSetupFlag() {
 		return businessSetupFlag;
 	}
 	/**
 	 * @param businessSetupFlag the businessSetupFlag to set
 	 */
-	public void setBusinessSetupFlag(char businessSetupFlag) {
+	public void setBusinessSetupFlag(String businessSetupFlag) {
 		this.businessSetupFlag = businessSetupFlag;
 	}
-
+	
 }

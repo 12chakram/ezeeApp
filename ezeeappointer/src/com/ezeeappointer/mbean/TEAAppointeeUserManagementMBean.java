@@ -12,6 +12,11 @@ import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 @ManagedBean(name="apptUserMngmntBean")
 @RequestScoped
 public class TEAAppointeeUserManagementMBean extends TEAAppointeeSecureMbean {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6830570917493952262L;
 	private String email;
 	private String password;
 	private String cfrmPassword;
@@ -48,8 +53,7 @@ public String registerAppointeeUser(){
 			TEAAppointeeUserManagementService service = (TEAAppointeeUserManagementService)TEAServiceDelegate.getService("appointeeUserService");			
 			u = service.login(email, password);
 			if(u != null){
-				//getActiveUser().setApptUser(null);  nedd to change
-				// testing from git Hub web site
+				//getActiveUser().setApptUser(u);
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("AUTH_KEY", u);
 				return "userappointment";
 			}

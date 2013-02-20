@@ -42,7 +42,7 @@ public interface TEABusinessUserManagementService {
 	/**
 	 * @param userId
 	 */
-	public void updateUserBusinessSetupFlag(String userId);
+	public void updateUserBusinessSetupFlag(long userId);
 
 }
 	

@@ -23,6 +23,10 @@ import org.richfaces.model.UploadedFile;
 @SessionScoped
 public class TEABusinessDetailMBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3911083464901222573L;
 	private String companyName;
 	private String aboutCompany;
 	private String tag;

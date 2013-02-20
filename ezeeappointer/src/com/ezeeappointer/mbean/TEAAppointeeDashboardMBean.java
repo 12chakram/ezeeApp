@@ -24,6 +24,10 @@ import com.ezeeappointer.utilities.TEADateUtility;
 @RequestScoped
 public class TEAAppointeeDashboardMBean extends TEASecureMbean{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8764024606973100033L;
 	private String today;
 	private List<TEAAppointeeDashboardDTO> apdbDTOs;
 	private TEAAppointmentService aptService;

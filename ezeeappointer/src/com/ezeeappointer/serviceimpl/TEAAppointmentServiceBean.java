@@ -6,11 +6,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
@@ -18,13 +16,11 @@ import com.ezeeappointer.dao.TEAAppointmentDAO;
 import com.ezeeappointer.data.AppointeeDashboard;
 import com.ezeeappointer.data.Appointment;
 import com.ezeeappointer.data.Service;
-import com.ezeeappointer.data.Staff;
 import com.ezeeappointer.dto.TEAAppointeeDashboardDTO;
 import com.ezeeappointer.dto.TEAAppointmentDTO;
 import com.ezeeappointer.dto.TEAAppointmentSlotDTO;
 import com.ezeeappointer.dto.TEADayAndTimeDTO;
 import com.ezeeappointer.dto.TEAServiceDTO;
-import com.ezeeappointer.dto.TEAStaffDTO;
 import com.ezeeappointer.dto.TEAUIStaffDTO;
 import com.ezeeappointer.service.TEAAppointmentService;
 import com.ezeeappointer.utilities.TEADateUtility;
@@ -32,6 +28,10 @@ import com.ezeeappointer.utilities.TEATimePeriodUtility;
 
 public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean implements TEAAppointmentService{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6480131191612552716L;
 	private Mapper mapper = new DozerBeanMapper();
 	
 	public List<TEAServiceDTO> retrieveAvailableServicesForBusiness(long businessId){

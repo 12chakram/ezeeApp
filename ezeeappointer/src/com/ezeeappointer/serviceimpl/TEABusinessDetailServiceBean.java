@@ -100,7 +100,7 @@ public class TEABusinessDetailServiceBean extends TEABasicAbstractServiceBean im
 		
 		TEABusinessDetailDAO dao = getTeaDAOFactory().getTEABusinessDetailDAO();
 		dao.addBusiness(business);		
-		teaBusinessUserService.updateUserBusinessSetupFlag("y");
+		teaBusinessUserService.updateUserBusinessSetupFlag(userId);
 	}
 
 	/**

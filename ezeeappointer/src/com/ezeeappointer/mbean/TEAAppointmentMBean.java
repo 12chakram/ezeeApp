@@ -10,17 +10,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIInput;
-import javax.faces.component.UISelectItems;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
-import org.apache.commons.lang.time.DateUtils;
-import org.primefaces.component.radiobutton.RadioButton;
 
 import com.ezeeappointer.common.TEAServiceDelegate;
-import com.ezeeappointer.data.AppointeeUser;
 import com.ezeeappointer.dto.TEAAppointeeUserDTO;
 import com.ezeeappointer.dto.TEAAppointmentDTO;
 import com.ezeeappointer.dto.TEAAppointmentSlotDTO;
@@ -28,13 +22,16 @@ import com.ezeeappointer.dto.TEAServiceDTO;
 import com.ezeeappointer.dto.TEAUIStaffDTO;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 import com.ezeeappointer.service.TEAAppointmentService;
-import com.ezeeappointer.service.TEABusinessDetailService;
 import com.ezeeappointer.utilities.TEADateUtility;
 
 @ManagedBean(name="appointmentbean")
 @RequestScoped
 public class TEAAppointmentMBean extends TEASecureMbean {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7965565902076459195L;
 	private String selectedStaffIndex;
 	private List<SelectItem> serviceSelectItems;
 	@ManagedProperty(value="#{appointmentDtlBean}")
@@ -107,7 +104,7 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 			if(u != null){
 				saveAppintmentDetails(u.getId());
 				getActiveUser().setApptUser(u);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("APPT_USER", u);
-				return "appointmentbooked ";
+				return "appointmentbooked";
 			}
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Invalid credentials."));

@@ -3,6 +3,9 @@
  */
 package com.ezeeappointer.serviceimpl;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+
 import com.ezeeappointer.dao.TEABusinessUserManagementDAO;
 import com.ezeeappointer.data.BusinessUser;
 import com.ezeeappointer.dto.TEABusinessUserDTO;
@@ -14,26 +17,14 @@ import com.ezeeappointer.service.TEABusinessUserManagementService;
  */
 public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServiceBean implements TEABusinessUserManagementService {
 
+	private Mapper mapper = new DozerBeanMapper();
 	/* (non-Javadoc)
 	 * @see com.ezeeappointer.service.TEABusinessUserManagementService#register(com.ezeeappointer.dto.TEABusinessUserDTO)
 	 */
 	public boolean register(TEABusinessUserDTO userDTO) {
-		
-		BusinessUser user = new BusinessUser();
-		user.setId(getTeaSeqGenService().generateNextSequenceNumber("BusinessUser"));
-		user.setUserId(userDTO.getUserId());
-		user.setPassword(userDTO.getPassword());
-		user.setEmail(userDTO.getEmail());
-		user.setFirstName(userDTO.getFirstName());
-		user.setLastName(userDTO.getLastName());
-		user.setPhoneNumber(userDTO.getPhoneNumber());
-		user.setAddress(userDTO.getAddress());
-		user.setCity(userDTO.getCity());
-		user.setCountry(userDTO.getCountry());
-		user.setTypeOfBusiness(userDTO.getTypeOfBusiness());
-		
+		userDTO.setId(getTeaSeqGenService().generateNextSequenceNumber("BusinessUser"));		
 		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();		
-		return dao.addBusinessUser(user);
+		return dao.addBusinessUser(mapper.map(userDTO, BusinessUser.class));
 	}
 
 	/* (non-Javadoc)
@@ -69,19 +60,10 @@ public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServic
 		
 		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();
 		BusinessUser user = dao.findBusinessUser(userId, password);	
-		TEABusinessUserDTO userDTO = new TEABusinessUserDTO();
-		userDTO.setId(user.getId());
-		userDTO.setUserId(user.getUserId());
-		userDTO.setPassword(user.getPassword());
-		userDTO.setEmail(user.getEmail());
-		userDTO.setFirstName(user.getFirstName());
-		userDTO.setLastName(user.getLastName());
-		userDTO.setPhoneNumber(user.getPhoneNumber());
-		userDTO.setAddress(user.getAddress());
-		userDTO.setCity(user.getCity());
-		userDTO.setCountry(user.getCountry());
-		userDTO.setTypeOfBusiness(user.getTypeOfBusiness());
-		return userDTO;
+		if(user != null)
+			return mapper.map(user, TEABusinessUserDTO.class);
+		else
+			return null;
 	}
 	
 	
@@ -89,7 +71,8 @@ public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServic
 	/* (non-Javadoc)
 	 * @see com.ezeeappointer.service.TEABusinessUserManagementService#updateUserBusinessSetupFlag(java.lang.String)
 	 */
-	public void updateUserBusinessSetupFlag(String userId){
-		
+	public void updateUserBusinessSetupFlag(long userId){
+		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();
+		dao.updateBusinessSetupFlag(userId);
 	}
 }

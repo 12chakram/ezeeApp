@@ -21,6 +21,10 @@ import com.ezeeappointer.service.TEARetrieveDashboardDetailService;
 @RequestScoped
 public class TEADashboardDetailMBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2006431210595571857L;
 	private String apptDate;
 	
 	private TEARetrieveDashboardDetailService getTEARetrieveDashboardDetailService(){	

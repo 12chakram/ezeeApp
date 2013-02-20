@@ -11,6 +11,10 @@ import javax.faces.bean.ManagedProperty;
  */
 public class TEASecureMbean extends BaseMBean{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8029173905979628375L;
 	@ManagedProperty("#{teaActiveUser}")
     private TEAActiveUser activeUser;
 

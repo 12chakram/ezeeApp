@@ -1102,6 +1102,16 @@ $(function() {
             previousPoint = null;
         }
     });
+    
+    $('.state-available').live('click', function(){
+		$(".tablecontainerrow .state-select").html('Available');										 
+		$(".tablecontainerrow div").removeClass('state-select');
+		$(this).addClass('state-select');
+		$(this).html('Selected');
+		var selectdtime = $(this).attr("id");
+		//alert(selectdtime);
+		$(".selectedtime").attr("value",selectdtime);
+ 	});	
 	
 	
 	});		

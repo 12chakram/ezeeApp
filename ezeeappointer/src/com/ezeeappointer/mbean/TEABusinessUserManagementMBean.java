@@ -20,8 +20,12 @@ import com.ezeeappointer.service.TEABusinessUserManagementService;
 
 @ManagedBean(name="busnUserMngmntBean")
 @RequestScoped
-public class TEABusinessUserManagementMBean extends BaseMBean {
+public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4850861653651843128L;
 	private String userId;
 	private String password;
 	private String cfrmPassword;
@@ -72,8 +76,8 @@ public class TEABusinessUserManagementMBean extends BaseMBean {
 			TEABusinessUserManagementService service = (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");			
 			u = service.login(userId, password);
 			if(u != null){
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("AUTH_KEY", u);
-				if(u.getBusinessSetupFlag() == 'n') // need to check y
+				getActiveUser().setBusnUser(u);
+				if(u.getBusinessSetupFlag().equals("y"))
 					return "ezeedashboardn";
 				return "businesssetup1";
 			}
@@ -82,6 +86,8 @@ public class TEABusinessUserManagementMBean extends BaseMBean {
 		loginErrorMsg = "Invalid credentials.";
 		return "index";
 	}
+	
+	
 	
    public String getUserId() {
 		return userId;

@@ -21,6 +21,10 @@ import org.richfaces.model.UploadedFile;
 @RequestScoped
 public class TEAStaffMBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8796643989564824914L;
 	private String staffName;
 	private String userName;
 	private String password;
