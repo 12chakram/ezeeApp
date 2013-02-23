@@ -1,5 +1,6 @@
 package com.ezeeappointer.common;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,8 +12,13 @@ import javax.faces.validator.ValidatorException;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 
-public class TEAValidator {
+public class TEAValidator implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1833170294540539170L;
+
 	public void validateText(FacesContext context,UIComponent toValidate,Object value) throws ValidatorException {
 		String fieldStr = (String) value;
 		String field = toValidate.getId().replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");

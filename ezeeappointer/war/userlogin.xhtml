@@ -72,11 +72,14 @@ html {
         	  <div style="float:right;padding:2px 0px ;">
               <div> 
                 <ul class="uibutton-group">
-              		<li><h:commandButton id="but_login" styleClass="but_login uibutton normal" value="login" action="#{apptUserMngmntBean.doLogin}" /></li> 
-				   <li><h:commandButton id="forgetpass" styleClass="uibutton normal" value="forpassword"/></li>
+                <!--    <li><a class="uibutton normal" href="#"  id="but_login" >Login</a></li>-->
+                    <li><h:commandButton  id="but_login" styleClass="but_login" value="login" action="#{apptUserMngmntBean.doLogin}" /></li> 
+				   <li><h:commandButton id="forgetpass" styleClass="uibutton normal" value="forpassword"/>
+				  <!--   <a class="uibutton  normal" href="#" id="forgetpass">forpassword</a>
+				  --></li>
                </ul>
               </div>
-              <span><h:link outcome="usersignup.xhtml">New User? Register...</h:link></span>
+              <span><a href="user_register.html">New User? Register...</a></span>
             </div>
 </div>
 

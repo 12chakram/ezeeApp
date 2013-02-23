@@ -1,4 +1,13 @@
-<!-- Indices written at Thu, 21 Feb 2013 01:48:55 IST -->
+<!-- Indices written at Sat, 23 Feb 2013 14:47:09 IST -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="APPOINTMENT_DETAIL" ancestor="false" source="auto">
+        <property name="apptSts" direction="asc"/>
+        <property name="busnId" direction="asc"/>
+        <property name="staffId" direction="asc"/>
+        <property name="apptDate" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

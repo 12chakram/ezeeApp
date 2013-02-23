@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
@@ -19,7 +20,7 @@ import com.ezeeappointer.dto.TEABusinessUserDTO;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 
 @ManagedBean(name="busnUserMngmntBean")
-@RequestScoped
+@SessionScoped
 public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
 	/**
@@ -78,7 +79,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 			if(u != null){
 				getActiveUser().setBusnUser(u);
 				if(u.getBusinessSetupFlag().equals("y"))
-					return "ezeedashboardn";
+					return "ezeedashboard";
 				return "businesssetup1";
 			}
 			
@@ -86,8 +87,6 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		loginErrorMsg = "Invalid credentials.";
 		return "index";
 	}
-	
-	
 	
    public String getUserId() {
 		return userId;
