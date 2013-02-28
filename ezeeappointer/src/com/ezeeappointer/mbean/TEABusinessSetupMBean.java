@@ -133,6 +133,8 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			businessDTO.setCompanyAddress(businessDetail.getCompanyAddress());
 			businessDTO.setState(businessDetail.getState());
 			businessDTO.setCity(businessDetail.getCity());
+			businessDTO.setStartingTime(businessDetail.getStartingTime());
+			businessDTO.setEndingTime(businessDetail.getEndingTime());
 			businessDTO.setProfilePicture(businessDetail.getProfilePicture());
 			for(TEAServiceMBean srvMBean: businessDetail.getServices()){
 				TEAServiceDTO s = new TEAServiceDTO();

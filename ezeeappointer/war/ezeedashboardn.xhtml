@@ -136,7 +136,8 @@ background-clip: padding-box;
  </style>
            
 </h:head>       
-        <h:body>        
+        <h:body>   
+       <h:form>      
         <div id="alertMessage" class="error"></div> 
                        
         <div id="header" >
@@ -146,7 +147,7 @@ background-clip: padding-box;
                    </div>
 					<div class="logout" title="Disconnect"><b >Logout</b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" ></img>
 					</div> 
-                
+                	<h:commandLink id="logout_id" value="Logout" action="#{logoutBean.logoutMethod}"  />
                 </div>
              
             </div> <!--//  header -->
@@ -258,7 +259,7 @@ background-clip: padding-box;
                                     <td>Health Checkup</td>
                                     <td>Nov 23 - 10:30am</td>
                                     <td>
-                                      <input type="checkbox" id="approve" name="approve"   class="approve" />
+                                      <input type="checkbox" id="approve1" name="approve"   class="approve" />
                                         </td>
                                   </tr>
                                 </tbody>
@@ -322,5 +323,6 @@ background-clip: padding-box;
                     <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Zice Admin" >Your Company Name</a> </span> </div>
                 </div> <!--// End inner -->
             </div> <!--// End content --> 
+            </h:form>
 	</h:body>          
 </html>

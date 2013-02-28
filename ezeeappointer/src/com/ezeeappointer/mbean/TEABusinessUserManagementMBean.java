@@ -79,7 +79,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 			if(u != null){
 				getActiveUser().setBusnUser(u);
 				if(u.getBusinessSetupFlag().equals("y"))
-					return "ezeedashboard";
+					return "ezeedashboardn";
 				return "businesssetup1";
 			}
 			
