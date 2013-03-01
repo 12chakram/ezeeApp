@@ -1,8 +1,8 @@
-<!-- Indices written at Sat, 23 Feb 2013 14:47:09 IST -->
+<!-- Indices written at Fri, 1 Mar 2013 09:39:12 IST -->
 
 <datastore-indexes>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 6 times in query history -->
     <datastore-index kind="APPOINTMENT_DETAIL" ancestor="false" source="auto">
         <property name="apptSts" direction="asc"/>
         <property name="busnId" direction="asc"/>
