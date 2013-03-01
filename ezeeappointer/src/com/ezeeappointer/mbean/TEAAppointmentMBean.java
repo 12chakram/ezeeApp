@@ -143,7 +143,7 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 	 */
 	public List<SelectItem> getServiceSelectItems() {
 		TEAAppointmentService service= (TEAAppointmentService) getBackendService("appointmentService");
-		List<TEAServiceDTO> dtos = service.retrieveAvailableServicesForBusiness(10001);
+		List<TEAServiceDTO> dtos = service.retrieveAvailableServicesForBusiness();
 		serviceSelectItems = new ArrayList<SelectItem>();
 		serviceSelectItems.add(new SelectItem(null, "Choose a Service"));
 		for(TEAServiceDTO dto: dtos){

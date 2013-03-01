@@ -31,10 +31,10 @@ public class TEAAppointmentDAO {
 			em.close();		
 		}
 		
-		public List<Service> retrieveServicesByBusinessId(long busnId){
+		public List<Service> retrieveServicesByBusinessId(){
 			EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
 			em.getTransaction().begin();
-			Query q = em.createQuery("select s from Service s where s.businessId="+busnId);
+			Query q = em.createQuery("select s from Service s");
 			List<Service> s = q.getResultList();
 			em.getTransaction().commit();
 			em.close();	

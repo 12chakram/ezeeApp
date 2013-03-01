@@ -28,6 +28,7 @@ public class TEALogoutMBean
 		{
 			session.invalidate();
 			
+			
 			return "index";
 		}
 		else

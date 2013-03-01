@@ -34,9 +34,9 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 	private static final long serialVersionUID = -6480131191612552716L;
 	private Mapper mapper = new DozerBeanMapper();
 	
-	public List<TEAServiceDTO> retrieveAvailableServicesForBusiness(long businessId){
+	public List<TEAServiceDTO> retrieveAvailableServicesForBusiness(){
 		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
-		List<Service> srvcs = dao.retrieveServicesByBusinessId(businessId);
+		List<Service> srvcs = dao.retrieveServicesByBusinessId();
 		List<TEAServiceDTO> srvcDTOs = new ArrayList<TEAServiceDTO>();
 		for(Service srvc:srvcs){
 			srvcDTOs.add(mapper.map(srvc, TEAServiceDTO.class));
