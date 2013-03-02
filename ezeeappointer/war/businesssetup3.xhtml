@@ -264,7 +264,7 @@
 					 
 					 
 					 
-					 	<h:panelGroup id = "staffTable"> 
+	<h:panelGroup id = "staffTable"> 
 	<div class="onecolumn" >
       <div class="header">
            <span ><span class="ico  gray random"></span> Dynamic Table </span>
@@ -301,9 +301,11 @@
  
     			<f:facet name="header">Manage</f:facet>
  
-    			<a4j:commandButton value="Delete" action="#{businessSetup.deleteAction(o)}"	reRender="staffTable"/>
+ 				<a4j:commandButton value="Delete" action="#{businessSetup.deleteStaff}" render="staffTable" immediate="true">
+ 				   <f:setPropertyActionListener target="#{businessSetup.staff}" value="#{o}" />
+ 			</a4j:commandButton>
  
-    		</h:column>
+ 		</h:column>
  
     		</h:dataTable>
 		

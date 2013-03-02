@@ -167,12 +167,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	}
 
    
-	public Map<String, String> getCountries() {
-		countries.put("india", "india");
-		countries.put("india1", "india1");
-		countries.put("india2", "india2");
-		return countries;
-	}
+	
 
 
 	public void setCountries(Map<String, String> countries) {

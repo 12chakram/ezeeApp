@@ -12,7 +12,7 @@ import com.ezeeappointer.dto.TEAUIStaffDTO;
 
 public interface TEAAppointmentService extends Serializable {
 	
-	public List<TEAServiceDTO> retrieveAvailableServicesForBusiness();
+	public List<TEAServiceDTO> retrieveAvailableServicesForBusiness(Long busnId);
 	public List<TEAUIStaffDTO> searchForStaffDetailsByServiceId(long busnId, long serviceId, Date appointmentDate);
 	public void saveAppintmentDetails(TEAAppointmentDTO dto);
 	public List<TEAAppointeeDashboardDTO> retrieveAppointeeeDashboardDetails(long userId);
