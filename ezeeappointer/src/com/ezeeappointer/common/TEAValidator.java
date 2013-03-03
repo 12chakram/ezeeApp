@@ -12,12 +12,12 @@ import javax.faces.validator.ValidatorException;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 
-public class TEAValidator implements Serializable {
+public class TEAValidator  implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1833170294540539170L;
+	private static final long serialVersionUID = 1L;
 
 	public void validateText(FacesContext context,UIComponent toValidate,Object value) throws ValidatorException {
 		String fieldStr = (String) value;

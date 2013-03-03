@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 import com.ezeeappointer.common.TEAServiceDelegate;
@@ -152,6 +154,21 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 		return serviceSelectItems;
 	}
 
+	
+	public String logoutMethod()
+	{
+		HttpServletRequest requestObj = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session=requestObj.getSession();
+		if(null!=session)
+		{
+			session.invalidate();
+			return "index";
+		}
+		else
+		{
+			return "index";
+		}
+	}
 
 	/**
 	 * @return the aptSlots

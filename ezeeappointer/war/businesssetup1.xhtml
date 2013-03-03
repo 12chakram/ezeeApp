@@ -10,9 +10,26 @@
   <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/fileupload.js"></script>
   <title>Business Setup - Ezee Appointer</title>        <!-- Link css-->
         <link rel="stylesheet" type="text/css" href="css/zice.style.css"/>
-        <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />    
-    	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
-    
+        <link rel="stylesheet" type="text/css" href="css/icon.css"/>
+        <link rel="stylesheet" type="text/css" href="css/ui-custom.css"/>
+        <link rel="stylesheet" type="text/css" href="css/timepicker.css"  />
+        <link rel="stylesheet" type="text/css" href="components/colorpicker/css/colorpicker.css"  />
+        <link rel="stylesheet" type="text/css" href="components/elfinder/css/elfinder.css" />
+        <link rel="stylesheet" type="text/css" href="components/datatables/dataTables.css"  />
+        <link rel="stylesheet" type="text/css" href="components/validationEngine/validationEngine.jquery.css" />
+         
+        <link rel="stylesheet" type="text/css" href="components/jscrollpane/jscrollpane.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="components/fancybox/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="components/tipsy/tipsy.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="components/editor/jquery.cleditor.css"  />
+        <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />
+        <link rel="stylesheet" type="text/css" href="components/confirm/jquery.confirm.css" />
+        <link rel="stylesheet" type="text/css" href="components/sourcerer/sourcerer.css"/>
+        <link rel="stylesheet" type="text/css" href="components/fullcalendar/fullcalendar.css"/>
+        <link rel="stylesheet" type="text/css" href="components/Jcrop/jquery.Jcrop.css"  />
+   		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'></link>
+        
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
         <script type="text/javascript" src="components/ui/jquery.ui.min.js"></script> 
         <script type="text/javascript" src="components/ui/jquery.autotab.js"></script>
         <script type="text/javascript" src="components/ui/timepicker.js"></script>
@@ -40,6 +57,7 @@
         <script type="text/javascript" src="components/flot/flot.pie.min.js"></script>
         <script type="text/javascript" src="components/flot/flot.resize.min.js"></script>
         <script type="text/javascript" src="components/flot/graphtable.js"></script>
+
         <script type="text/javascript" src="components/uploadify/swfobject.js"></script>
         <script type="text/javascript" src="components/uploadify/uploadify.js"></script>        
         <script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
@@ -53,7 +71,9 @@
 		<script type="text/javascript" src="components/dualListBox/dualListBox.js"  ></script>
 		<script type="text/javascript" src="components/smartWizard/jquery.smartWizard.min.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>        
+    <script type="text/javascript" src="js/scripts.js"></script>    
+    
+    
     
       <style type="text/css">
 	      body.dashborad{
@@ -168,47 +188,53 @@
    <h:outputLabel value="State"/>   
      <div>
      <h:selectOneMenu value="#{businessSetup.businessDetail.state}" id="State" styleClass="chzn-select"  required = "true" requiredMessage="Please select state." validator = "#{businessSetup.validator.validateSelect}">
-        <f:ajax event="change"  render="statemsg" />
+        <a4j:ajax  event="change"  render="statemsg cityregion" />
         <f:selectItems value="#{businessSetup.stateSelectItems}"/>        
 		</h:selectOneMenu>
 		<h:message for="State" id="statemsg" style="font-family:arial;color:red;font-size:10px;" />
           	
 		 </div>
   </div>
-	
-          
-			
-			
-  <div class="section">
+ <a4j:outputPanel id="cityregion" ajaxRendered="true" >
+	<div class="section">
     <h:outputLabel value="City"/>   
 	<div>
-	
-	<h:selectOneMenu value="#{businessSetup.businessDetail.city}" id="City" styleClass="chzn-select" required = "true" requiredMessage="Please select city." validator = "#{businessSetup.validator.validateSelect}"  >
-		<f:ajax event="change"  render="citymsg" />	
-	<f:selectItems value="#{businessSetup.citySelectItems}"/> 
-		</h:selectOneMenu>
-	   
+	<h:selectOneMenu  value="#{businessSetup.businessDetail.city}" id="City" styleClass="chzn-select" required = "true" requiredMessage="Please select city." validator = "#{businessSetup.validator.validateSelect}"  >
+		 <f:selectItems value="#{businessSetup.citySelectItems}"/> 
+		<f:ajax event="change"  render="citymsg @this" />	
+	   </h:selectOneMenu>
 	<h:message for="City" id="citymsg" style="font-family:arial;color:red;font-size:10px;" />
 </div>
-  </div>   
-    
-  
-  <div class="section ">
-         <h:outputLabel value="Bussiness Starting Time"/>   
-        <div> 
-        <h:inputText value="#{businessSetup.businessDetail.startingTime}" id="StartingTime" >
-        </h:inputText>
-        </div>
-      </div>   
-      
-      <div class="section ">
-         <h:outputLabel value="Bussiness Ending Time"/>   
-        <div> 
-        <h:inputText value="#{businessSetup.businessDetail.endingTime}" id="EndingTime" >
-        </h:inputText>
-        </div>
-      </div>   
-    
+  </div>  
+  </a4j:outputPanel> 
+   <div class="clear"></div>
+ 
+ <div class="stafftime">
+             <div class="grid2">
+                        	<div class="section">
+                            <h:outputLabel value="From"/>  
+			       <div> 
+			       <h:inputText id="FromTime" styleClass="timepicker" value="#{businessSetup.businessDetail.startingTime}" name="timepicker" >
+			           <f:ajax event="blur" render="frmtimemessage" />			           
+			       </h:inputText>
+			       <h:message for="FromTime" id="frmtimemessage" style="font-family:arial;color:red;font-size:10px;"/>
+			       </div>
+				</div>
+                </div>  
+                <div class="grid2">
+                        	<div class="section">
+                               <h:outputLabel value="To"/>
+                                <div>
+                                <h:inputText id = "ToTime" styleClass="timepicker2" name="timepicker2" value="#{businessSetup.businessDetail.endingTime}">
+                                	<f:ajax event="blur" render="totimemessage" />
+                                </h:inputText>
+			           			<h:message for="ToTime" id="totimemessage" style="font-family:arial;color:red;font-size:10px;"/>
+			           </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                     </div>  
+                 
  <div class="section ">
    <h:outputLabel value="Profile Picture"><small>Choose</small></h:outputLabel>   
    <div > 

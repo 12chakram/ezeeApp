@@ -171,7 +171,7 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			
 			TEABusinessDetailService service= (TEABusinessDetailService) getBackendService("businessService");
 			service.createBusiness(businessDTO, getActiveUser().getBusnUser().getId());
-			return "ezeedashboard";
+			return "ezeedashboardn";
 		}
 		
 		/**

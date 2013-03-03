@@ -33,6 +33,8 @@ public class TEABusinessDetailServiceBean extends TEABasicAbstractServiceBean im
 		business.setCompanyAddress(businessDTO.getCompanyAddress());
 		business.setState(businessDTO.getState());
 		business.setCity(businessDTO.getCity());
+		business.setStartingTime(businessDTO.getStartingTime());
+		business.setEndingTime(businessDTO.getEndingTime());
 		business.setProfilePicture(businessDTO.getProfilePicture());
 		//List<Service> services = new ArrayList<Service>();
 		long serviceSeq = getTeaSeqGenService().generateNextSequenceNumber("Service");
