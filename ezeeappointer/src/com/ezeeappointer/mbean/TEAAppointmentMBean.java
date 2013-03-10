@@ -21,6 +21,7 @@ import com.ezeeappointer.dto.TEAAppointeeUserDTO;
 import com.ezeeappointer.dto.TEAAppointmentDTO;
 import com.ezeeappointer.dto.TEAAppointmentSlotDTO;
 import com.ezeeappointer.dto.TEAServiceDTO;
+import com.ezeeappointer.dto.TEAStaffDTO;
 import com.ezeeappointer.dto.TEAUIStaffDTO;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 import com.ezeeappointer.service.TEAAppointmentService;
@@ -35,7 +36,16 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 	 */
 	private static final long serialVersionUID = 7965565902076459195L;
 	private String selectedStaffIndex;
+	private String selectedServiceIndex;
+	
+	
+
 	private List<SelectItem> serviceSelectItems;
+	
+	private List<SelectItem> staffSelectItems;
+	
+	
+
 	@ManagedProperty(value="#{appointmentDtlBean}")
 	private TEAApointmentDetailsMBean aptDtlsMbean;
 	private List<TEAAppointmentSlotDTO> aptSlots;
@@ -65,6 +75,23 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 		aptDtlsMbean.setSelectedUIStaffDTO(uiStaffDTO);
 		return null;
 	}
+	
+	
+	
+public String searchForService() throws ParseException{
+		
+		SimpleDateFormat dateFormate = new SimpleDateFormat("dd-MM-yyyy");
+		aptDtlsMbean.setUiStaffDTO(aptService.searchForStaffDetailsByStaffId(10001,Long.parseLong(aptDtlsMbean.getSelectedStaff()), dateFormate.parse(aptDtlsMbean.getSearchDate())));
+		TEAUIStaffDTO uiStaffDTO = aptDtlsMbean.getUiStaffDTO();
+		selectedStaffIndex = Long.toString(uiStaffDTO.getStaffId());
+		aptSlots = uiStaffDTO.getAptSlots();
+		busnHours = uiStaffDTO.getBusnHours();
+		aptDtlsMbean.setDisplayApptDtls( true);
+		aptDtlsMbean.setSelectedTime(null);
+		aptDtlsMbean.setSelectedUIStaffDTO(uiStaffDTO);
+		return null;
+	}
+	
 	
 	public void changeSelectedStaff(){
 		
@@ -154,6 +181,22 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 		return serviceSelectItems;
 	}
 
+	
+	public List<SelectItem> getStaffSelectItems() {
+		
+		TEAAppointmentService service= (TEAAppointmentService) getBackendService("appointmentService");
+		List<TEAStaffDTO> dtos = service.retrieveAvailableStaffForBusiness((long) 10001);
+		staffSelectItems = new ArrayList<SelectItem>();
+		staffSelectItems.add(new SelectItem(null, "Choose a Service"));
+		for(TEAStaffDTO dto: dtos){
+			staffSelectItems.add(new SelectItem(dto.getId(), dto.getStaffName()));
+		}
+		return staffSelectItems;
+	}
+	
+public void setStaffSelectItems(List<SelectItem> staffSelectItems) {
+		this.staffSelectItems = staffSelectItems;
+	}
 	
 	public String logoutMethod()
 	{
@@ -254,4 +297,12 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 		this.slotNotSelectedMsg = slotNotSelectedMsg;
 	}
 
+	
+	public String getSelectedServiceIndex() {
+		return selectedServiceIndex;
+	}
+
+	public void setSelectedServiceIndex(String selectedServiceIndex) {
+		this.selectedServiceIndex = selectedServiceIndex;
+	}
 }

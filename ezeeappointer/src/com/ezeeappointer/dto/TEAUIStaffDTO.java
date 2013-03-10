@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ezeeappointer.data.Service;
+
 /**
  * @author dreddy
  *
@@ -22,7 +24,9 @@ public class TEAUIStaffDTO implements Serializable {
 	private String staffProfilePicture;
 	private String staffDescription;
 	private long staffId;
-	private List<String> servieNames;
+	private List<TEAServiceDTO> services;
+	
+	
 	private List<TEAAppointmentSlotDTO> aptSlots; 
 	private List<String> busnHours;
 	private List<TEADayAndTimeDTO> dayTime;
@@ -74,18 +78,8 @@ public class TEAUIStaffDTO implements Serializable {
 	public void setStaffDescription(String staffDescription) {
 		this.staffDescription = staffDescription;
 	}
-	/**
-	 * @return the servieNames
-	 */
-	public List<String> getServieNames() {
-		return servieNames;
-	}
-	/**
-	 * @param servieNames the servieNames to set
-	 */
-	public void setServieNames(List<String> servieNames) {
-		this.servieNames = servieNames;
-	}
+	
+	
 	/**
 	 * @return the aptSlots
 	 */
@@ -135,6 +129,12 @@ public class TEAUIStaffDTO implements Serializable {
 		this.dayTime = dayTime;
 	}
 	
+	public List<TEAServiceDTO> getServices() {
+		return services;
+	}
+	public void setServices(List<TEAServiceDTO> services) {
+		this.services = services;
+	}
 	
 	
 }

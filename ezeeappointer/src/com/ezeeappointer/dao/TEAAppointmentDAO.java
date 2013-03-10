@@ -7,6 +7,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.beanutils.BeanToPropertyValueTransformer;
+import org.apache.commons.collections.CollectionUtils;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.AppointeeDashboard;
 import com.ezeeappointer.data.Appointment;
@@ -14,12 +19,8 @@ import com.ezeeappointer.data.DayAndTime;
 import com.ezeeappointer.data.Service;
 import com.ezeeappointer.data.Staff;
 import com.ezeeappointer.dto.TEADayAndTimeDTO;
+import com.ezeeappointer.dto.TEAServiceDTO;
 import com.ezeeappointer.dto.TEAUIStaffDTO;
-
-import org.apache.commons.beanutils.BeanToPropertyValueTransformer;
-import org.apache.commons.collections.CollectionUtils;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 
 public class TEAAppointmentDAO {
 		
@@ -36,10 +37,25 @@ public class TEAAppointmentDAO {
 			em.getTransaction().begin();
 			Query q = em.createQuery("select s from Service s where s.businessId="+busnId);
 			List<Service> s = q.getResultList();
+			
 			em.getTransaction().commit();
 			em.close();	
 			return s;
 		}
+		
+	public List<Staff> retrieveStaffByBusinessId(long busnId){
+			EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
+			em.getTransaction().begin();
+			Query q = em.createQuery("select s from Staff s where s.businessId="+busnId);
+			List<Staff> s = q.getResultList();
+			System.out.println(s.size());
+			for(Staff st:s)
+				st.getDayTimes();
+			em.getTransaction().commit();
+			em.close();	
+			return s;
+		}
+		
 		
 		public List<Appointment> retrieveExistingAppointments(long busnId, long staffId, Date fromDate, Date toDate){
 			EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
@@ -69,10 +85,10 @@ public class TEAAppointmentDAO {
 			for(Staff sf: staff){
 				List<Long> serviceIds = (List<Long>) CollectionUtils.collect(sf.getSrvcStaffXref(), 
 	                    new BeanToPropertyValueTransformer("serviceId"));
-				Query q2 = em.createQuery("select s.serviceName from Service s where s.id=:id");
+				Query q2 = em.createQuery("select from Service s where s.id=:id");
 				q2.setParameter("id", serviceIds);
-				List<String> services = q2.getResultList();
-				List<String> services2 = new ArrayList<String> ();
+				List<Service> services = q2.getResultList();
+				List<Service> services2 = new ArrayList<Service> ();
 				services2.addAll(services);
 				TEAUIStaffDTO dto = new TEAUIStaffDTO();
 				List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
@@ -81,7 +97,11 @@ public class TEAAppointmentDAO {
 				dto.setDayTime(ldt);
 				dto.setStaffName(sf.getStaffName());
 				dto.setStaffId(sf.getId());
-				dto.setServieNames(services2);
+				
+				List<TEAServiceDTO> sdt = new ArrayList<TEAServiceDTO>();
+				for(Service sr: services2)
+					sdt.add(mapper.map(sr,  TEAServiceDTO.class));
+				dto.setServices(sdt);
 				dto.setStaffDescription("No description yet.");
 				uiStaffDTOs.add(dto);
 				
@@ -91,6 +111,38 @@ public class TEAAppointmentDAO {
 			em.close();
 			System.out.println("Size of the result set: "+staff.size());
 			return uiStaffDTOs;
+		}
+		
+		
+		public TEAUIStaffDTO retrieveServiceDetailsByStaffId(long staffId){
+			EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
+			 Mapper mapper = new DozerBeanMapper();
+			em.getTransaction().begin();
+			Query q1 = em.createQuery("select from Staff s where s.id="+staffId);		 
+			  Staff sf = (Staff) q1.getSingleResult();
+			List<Long> serviceIds = (List<Long>) CollectionUtils.collect(sf.getSrvcStaffXref(), new BeanToPropertyValueTransformer("serviceId"));
+				Query q2 = em.createQuery("select from Service s where s.id=:id");
+				q2.setParameter("id", serviceIds);
+				List<Service> services = q2.getResultList();
+				List<Service> services2 = new ArrayList<Service> ();
+				services2.addAll(services);
+				TEAUIStaffDTO dto = new TEAUIStaffDTO();
+				List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
+				for(DayAndTime dt: sf.getDayTimes())
+					ldt.add(mapper.map(dt,  TEADayAndTimeDTO.class));
+				dto.setDayTime(ldt);
+				dto.setStaffName(sf.getStaffName());
+				dto.setStaffId(sf.getId());
+				
+				List<TEAServiceDTO> sdt = new ArrayList<TEAServiceDTO>();
+				for(Service sr: services2)
+					sdt.add(mapper.map(sr,  TEAServiceDTO.class));
+				
+				dto.setServices(sdt);
+				dto.setStaffDescription("No description yet.");
+				em.getTransaction().commit();
+			em.close();
+		   return dto;
 		}
 		
 		public List<AppointeeDashboard> retrieveAppointmetsByUserId(long userId){

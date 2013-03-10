@@ -16,11 +16,13 @@ import com.ezeeappointer.dao.TEAAppointmentDAO;
 import com.ezeeappointer.data.AppointeeDashboard;
 import com.ezeeappointer.data.Appointment;
 import com.ezeeappointer.data.Service;
+import com.ezeeappointer.data.Staff;
 import com.ezeeappointer.dto.TEAAppointeeDashboardDTO;
 import com.ezeeappointer.dto.TEAAppointmentDTO;
 import com.ezeeappointer.dto.TEAAppointmentSlotDTO;
 import com.ezeeappointer.dto.TEADayAndTimeDTO;
 import com.ezeeappointer.dto.TEAServiceDTO;
+import com.ezeeappointer.dto.TEAStaffDTO;
 import com.ezeeappointer.dto.TEAUIStaffDTO;
 import com.ezeeappointer.service.TEAAppointmentService;
 import com.ezeeappointer.utilities.TEADateUtility;
@@ -45,32 +47,49 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		return srvcDTOs;
 	}
 	
+	
+	public List<TEAStaffDTO> retrieveAvailableStaffForBusiness(Long busnId){
+		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
+		List<Staff> srvcs = dao.retrieveStaffByBusinessId(busnId);
+		List<TEAStaffDTO> staffDTOs = new ArrayList<TEAStaffDTO>();
+		for(Staff srvc:srvcs){
+			staffDTOs.add(mapper.map(srvc, TEAStaffDTO.class));
+		}
+		return staffDTOs;
+	}
+	
+	
+	
+	
+	
 	public List<TEAUIStaffDTO> searchForStaffDetailsByServiceId(long busnId, long serviceId, Date appointmentDate){
 		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
 		List<TEAUIStaffDTO> uiStaff = dao.retrieveStaffDetailsByServiceId(serviceId);
 		for(TEAUIStaffDTO staff:uiStaff){
-//			long startDateTime = new Date().getTime();
-//		    long endDateTime = appointmentDate.getTime();
-//		    long milPerDay = 1000*60*60*24; 
-//		    int numOfDays = (int) ((endDateTime - startDateTime) / milPerDay);
-//	    	Calendar startDate = Calendar.getInstance();
-//	    	startDate.setTime(new Date());
-//	    	Calendar endDate = Calendar.getInstance();
-//	    	List<TEAAppointmentSlotDTO> aptSlots = new ArrayList<TEAAppointmentSlotDTO>();
-//		    if(numOfDays > 5){
-//		    	startDate.setTime(appointmentDate);
-//		    	startDate.add(Calendar.DATE, -5);
-//		    	endDate.setTime(appointmentDate);
-//		    	endDate.add(Calendar.DATE, 5);    	
-//		    }else{
-//		    	endDate.setTime(new Date());
-//		    	endDate.add(Calendar.DATE, 10);
-//		    }
-			Calendar startDate = Calendar.getInstance();
+			populateAppointmentDetailsForStaff(staff, appointmentDate, busnId, 7);
+		}
+	    
+		return uiStaff;
+	}
+	
+	private List<String> getAllBookedSlotsByDate(List<Appointment> appts, Date date){
+		List<String> bookedSlots = new ArrayList<String>();
+		for(int i = appts.size()-1; i >= 0; i--){
+			if(appts.get(i).getApptDate().equals(date)){
+				bookedSlots.add(appts.get(i).getApptTime());
+				appts.remove(i);
+			}				
+		}
+		return bookedSlots;
+	}
+	
+	private void populateAppointmentDetailsForStaff(TEAUIStaffDTO staff, Date appointmentDate, long busnId, int noOfDays){		
+		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
+		Calendar startDate = Calendar.getInstance();
 			startDate.setTime(appointmentDate);
 			Calendar endDate = Calendar.getInstance();
 			endDate.setTime(appointmentDate);
-			endDate.add(Calendar.DATE, 7);
+			endDate.add(Calendar.DATE, noOfDays);
 			Calendar today = Calendar.getInstance();
 			today.setTime(new Date());
 			Calendar tomorrow = Calendar.getInstance();
@@ -78,7 +97,7 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 			tomorrow.add(Calendar.DATE, 1);
 			List<TEAAppointmentSlotDTO> aptSlots = new ArrayList<TEAAppointmentSlotDTO>();
 		    staff.setBusnHours( TEATimePeriodUtility.createAllTimePeriods("08:00 am", "05:00 pm"));
-		  List<Appointment> appts = dao.  retrieveExistingAppointments(busnId, staff.getStaffId(), startDate.getTime(), endDate.getTime());
+		  List<Appointment> appts = dao.retrieveExistingAppointments(busnId, staff.getStaffId(), startDate.getTime(), endDate.getTime());
 		    for(;endDate.after(startDate); startDate.add(Calendar.DATE, 1)){
 		    	TEAAppointmentSlotDTO slot = new TEAAppointmentSlotDTO();
 		    	String dayMonth = new SimpleDateFormat("dd/MM").format(startDate.getTime());
@@ -117,20 +136,7 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		    	aptSlots.add(slot);
 		    }
 		    staff.setAptSlots(aptSlots);
-		}
-	    
-		return uiStaff;
-	}
-	
-	private List<String> getAllBookedSlotsByDate(List<Appointment> appts, Date date){
-		List<String> bookedSlots = new ArrayList<String>();
-		for(int i = appts.size()-1; i >= 0; i--){
-			if(appts.get(i).getApptDate().equals(date)){
-				bookedSlots.add(appts.get(i).getApptTime());
-				appts.remove(i);
-			}				
-		}
-		return bookedSlots;
+		
 	}
 	
 	public void saveAppintmentDetails(TEAAppointmentDTO dto){
@@ -165,6 +171,15 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		dao.updateAppointmentStatus(apptNo, sts);
 	}
 
+	
+	
+	public TEAUIStaffDTO searchForStaffDetailsByStaffId(long busnId, long staffId,Date appointmentDate){
+		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
+		TEAUIStaffDTO  staff = dao.retrieveServiceDetailsByStaffId(staffId);		
+		populateAppointmentDetailsForStaff(staff, appointmentDate, busnId ,7);
+		return staff;
+	}
+	
 	
 
 }

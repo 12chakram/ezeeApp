@@ -29,6 +29,10 @@ public class TEAApointmentDetailsMBean implements Serializable{
 	private String selectedStaff;
 	private TEAUIStaffDTO selectedUIStaffDTO;
 	private List<TEAUIStaffDTO> uiStaffDTOs;
+	private TEAUIStaffDTO uiStaffDTO;
+	
+	
+	
 	private boolean displayApptDtls;
 	/**
 	 * @return the selectedService
@@ -108,5 +112,13 @@ public class TEAApointmentDetailsMBean implements Serializable{
 	public void setSelectedStaff(String selectedStaff) {
 		this.selectedStaff = selectedStaff;
 	}
+	
+	public TEAUIStaffDTO getUiStaffDTO() {
+		return uiStaffDTO;
+	}
+	public void setUiStaffDTO(TEAUIStaffDTO uiStaffDTO) {
+		this.uiStaffDTO = uiStaffDTO;
+	}
+	
 	
 }

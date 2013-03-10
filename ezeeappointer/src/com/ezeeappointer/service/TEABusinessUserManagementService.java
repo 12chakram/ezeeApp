@@ -5,8 +5,9 @@
  */
 package com.ezeeappointer.service;
 
-import com.ezeeappointer.data.BusinessUser;
 import com.ezeeappointer.dto.TEABusinessUserDTO;
+import com.ezeeappointer.dto.TEAUIBussinessDashboardDTO;
+import com.google.appengine.api.datastore.Key;
 
 /**
  * @author sairam
@@ -43,6 +44,17 @@ public interface TEABusinessUserManagementService {
 	 * @param userId
 	 */
 	public void updateUserBusinessSetupFlag(long userId);
+	
+	/*
+	 * @param bid
+	 */
+	
+	public TEAUIBussinessDashboardDTO getDashboardApptDetails(long bid);
+	
+	public boolean updateDashboardPendingApnt(long k);
+	
+	public int getPendingAptcount(long id);
+	
 
 }
 	

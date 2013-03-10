@@ -24,6 +24,9 @@ public class TEAStaffDTO  implements Serializable{
 	private String cPassword;
 	private String staffProfilePicture;
 	private String[] services;
+	private long id;
+	
+
 	private List<TEADayAndTimeDTO> dayTimes = new ArrayList<TEADayAndTimeDTO>();
 	
 	/**
@@ -111,6 +114,12 @@ public class TEAStaffDTO  implements Serializable{
 		this.services = services;
 	}
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 }
 	
 	

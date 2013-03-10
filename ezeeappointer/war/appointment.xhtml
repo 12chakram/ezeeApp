@@ -203,7 +203,7 @@ div#tablecontainer .firstcol{
                  <h:message for="DateOfAppt" id="datemsg" style="font-family:arial;color:red;font-size:10px;" />
                  
               <div>
-                <h:commandLink id = "searchAppt" value="Search" action="#{appointmentbean.searchForStaff}" styleClass="addbtn buttonFinish uibutton">
+                <h:commandLink id = "searchAppt" value="SearchByService" action="#{appointmentbean.searchForStaff}" styleClass="addbtn buttonFinish uibutton">
        		               			<f:ajax execute="Service DateOfAppt" render = ":apptDtls :slotform"/>
                  </h:commandLink>
               </div>
@@ -234,8 +234,8 @@ div#tablecontainer .firstcol{
                 <p>#{item.staffDesignation}</p>	
                 <div class="services_handled"> <span class="tag_icon"></span>
                   <ul class="servicelist">
-                  	<ui:repeat value="#{item.servieNames}" var="serviceItem">
-                    <li><a href="#">#{serviceItem}</a></li>
+                  	<ui:repeat value="#{item.services}" var="serviceItem">
+                    <li><a href="#">#{serviceItem.serviceName}</a></li>
                     </ui:repeat>
                   </ul>
                 </div>
@@ -250,8 +250,8 @@ div#tablecontainer .firstcol{
                 <p>#{item.staffDesignation}</p>
                 <div class="services_handled"> <span class="tag_icon"></span>
                   <ul class="servicelist">
-                  	<ui:repeat value="#{item.servieNames}" var="serviceItem">
-                    <li><a href="#">#{serviceItem}</a></li>
+                  	<ui:repeat value="#{item.services}" var="serviceItem">
+                    <li><a href="#">#{serviceItem.serviceName}</a></li>
                     </ui:repeat>
                   </ul>
                 </div>
@@ -307,26 +307,42 @@ div#tablecontainer .firstcol{
             <div class="clear"></div>
           </div>
           
-<h:form>          
-          <div id="tab2" class="tab_content">
-            <div class="grid2">
-              <div class="boxtitle min">Select Doctor</div>
-              <div class="section">
+<div id="tab2" class="tab_content">
+         <h:form>   
+           <div class="grid2">
+              <div class="boxtitle min">Select a Service</div>
+              
                 <div>
-                <h:selectManyListbox value="#{appointmentbean.aptDtlsMbean.selectedStaff}"  styleClass="chzn-select multi-select" multiple = "true" tabindex="2">
-	            <f:selectItems value="#{appointmentbean.aptDtlsMbean.selectedStaff}"/>        
-			    </h:selectManyListbox>
-	           </div>
-              </div>
-            </div>
-            <div class="grid2">
+                <h:selectOneMenu value="#{appointmentbean.aptDtlsMbean.selectedStaff}" id="staff"  styleClass="chzn-select multi-select" multiple = "true" tabindex="2">
+                	<f:ajax event="blur"  render="servicemsg" />
+                 	<f:selectItems value="#{appointmentbean.staffSelectItems}"/>
+			    </h:selectOneMenu> 
+			   <h:message for="staff" id="servicemsg" style="font-family:arial;color:red;font-size:10px;" />
+                 </div>
+            </div>      
+    
+   
+   <div class="grid2">
               <div class="boxtitle min">Select Date of your appointment</div>
               <div>
-                <h:inputText  id="datepick" class="datepicker" readonly="readonly" name="datepicker"  />
+                <h:inputText  id="datepick" class="datepicker" readonly="readonly" name="datepicker" value="#{appointmentbean.aptDtlsMbean.searchDate}" >
+                  <f:ajax event="blur"  render="datepickdatemsg" />
+                </h:inputText>
+                  <h:message for="datepick" id="datepickdatemsg" style="font-family:arial;color:red;font-size:10px;" />
+               <div>
+                <h:commandLink id = "searchser" value="SearchByStaff" action="#{appointmentbean.searchForService}" styleClass="addbtn buttonFinish uibutton">
+       		               			<f:ajax execute="staff datepick" render = ":apptDtls1 :slotform1"/>
+                 </h:commandLink>
+                </div>
               </div>
             </div>
-            <div class="clear"></div>
-            <h3>List of Available Slots</h3>
+ </h:form>
+<div class="clear"></div>
+            <h:panelGroup id = "apptDtls1">            
+            <h:panelGroup rendered = "#{appointmentbean.aptDtlsMbean.displayApptDtls}"> 
+            <h:form id="slotform1">
+             <input type="hidden" id="selectedtime" name="selectedtime" class="selectedtime" />
+            <h3>List of Available Slots by Staff</h3>
             <div class="services_list">
               <div class="staff_pro activestf staff_pro_w360">
                 <h:selectOneRadio name="staff" id="staff1" value="1"  class="ck"  checked="checked"/>
@@ -336,219 +352,58 @@ div#tablecontainer .firstcol{
                 <p>Staff Bio or short Description</p>
                 <div class="services_handled"> 
                 <h5>Select Service</h5>
-                <h:selectOneMenu value="#{appointmentbean.aptDtlsMbean.selectedService}"  styleClass="chzn-select multi-select">
-				 <f:selectItem itemValue="India" itemLabel="india" />	
-                 <f:selectItem itemValue="us" itemLabel="us" />   
-                 <f:selectItem itemValue="chaina" itemLabel="chaina" />
-					    
-					 </h:selectOneMenu> 
-              <!--      <select  class="chzn-select multi-select" multiple tabindex="3">
-                    <option value=""></option>
-                    <option value="0">Select Specialty</option>
-                    <option value="267">Service Name 1</option>
-                    <option value="264">Service Name 2</option>
-                    <option value="342">Service Name 3</option>
-                    <option value="265">Service Name 4</option>
-                    <option value="372">Service Name 4</option>
-                  </select> -->
-                </div>
+         <h:selectOneMenu  value="#{appointmentbean.aptDtlsMbean.selectedService}" >
+              <f:selectItems value="#{appointmentbean.aptDtlsMbean.uiStaffDTO.services}" var="ns"
+            	   itemValue="#{ns.id}" itemLabel="#{ns.serviceName}" >
+              </f:selectItems>
+            </h:selectOneMenu>
+            </div>
               </div>
             </div>
-            <table class="display fc-border-separate timetbl" id="static">
-              <thead>
-                <tr class="fc-first fc-last">
-                  <th class="fc-sun fc-widget-header fc-first" width="20%">Timings</th>
-                  <th class="fc-sun fc-widget-header" width="11%">Sun 7/15</th>
-                  <th class="fc-mon fc-widget-header" width="11%">Mon 7/16</th>
-                  <th class="fc-tue fc-widget-header" width="11%">Tue 7/17</th>
-                  <th class="fc-wed fc-widget-header" width="11%">Wed 7/18</th>
-                  <th class="fc-thu fc-widget-header" width="11%">Thu 7/19</th>
-                  <th class="fc-fri fc-widget-header" width="11%">Fri 7/20</th>
-                  <th class="fc-sat fc-widget-header">Sat 7/21</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="fc-week0 fc-first fc-last">
-                  <td class="fc-sun fc-widget-content fc-day0 fc-first"><div>
-                      <div class="fc-day-content">
-                        <div style="position: relative; height: 0px;">8:00am - 8:30am</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-mon fc-widget-content fc-day1 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-tue fc-widget-content fc-day2 fc-state-highlight state-available fc-today"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-wed fc-widget-content state-available fc-day3"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-thu fc-widget-content fc-day4 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-fri fc-widget-content fc-day5 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                    <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">&nbsp;</div>
-                      </div>
-                    </div></td>
-                </tr>
-                <tr class="fc-week0 fc-first fc-last">
-                  <td class="fc-sun fc-widget-content fc-day0 fc-first"><div>
-                      <div class="fc-day-content">
-                        <div style="position: relative; height: 0px;">8:30am - 9:00am</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-mon fc-widget-content fc-day1 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-tue fc-widget-content fc-day2 state-available fc-state-highlight fc-today"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-wed fc-widget-content state-available fc-day3"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-thu fc-widget-content fc-day4 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                     <td class="fc-fri fc-widget-content state-available fc-day5 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td> 
-                    <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                </tr>
-                <tr class="fc-week0 fc-first fc-last">
-                  <td class="fc-sun fc-widget-content fc-day0 fc-first"><div>
-                      <div class="fc-day-content">
-                        <div style="position: relative; height: 0px;">9:00am - 9:30am</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-mon fc-widget-content fc-day1 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-tue fc-widget-content fc-day2 state-available fc-state-highlight fc-today"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-wed fc-widget-content state-available fc-day3"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-thu fc-widget-content fc-day4 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-fri fc-widget-content fc-day5 state-available fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                    <td class="fc-sat fc-widget-content fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">&nbsp;</div>
-                      </div>
-                    </div></td>
-                </tr>
-                <tr class="fc-week0 fc-first fc-last">
-                  <td class="fc-sun fc-widget-content fc-day0 fc-first"><div>
-                      <div class="fc-day-content">
-                        <div style="position: relative; height: 0px;">9:30am - 10:00am</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-mon fc-widget-content fc-day1 state-available fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-tue fc-widget-content fc-day2 state-available fc-state-highlight fc-today"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-wed fc-widget-content state-available fc-day3"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-thu fc-widget-content fc-day4 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td>
-                  <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                     <td class="fc-fri fc-widget-content state-available fc-day5 fc-state-booked"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Booked</div>
-                      </div>
-                    </div></td> 
-                    <td class="fc-sat fc-widget-content state-available fc-day6"><div>
-                      <div class="fc-day-content">
-                        <div style="position:relative">Available</div>
-                      </div>
-                    </div></td>
-                </tr>
-               
-              </tbody>
-            </table>
+            <div class="clear"></div>
+                 <div id="tablecontainer">
+      	 <div class="tablecontainerrow firstcol">
+            <div class="topheader headtxt">Timings</div>
+             <ui:repeat value="#{appointmentbean.busnHours}" var="timings" varStatus="loop">
+            	<div class="headtxt">#{timings}</div>
+            </ui:repeat>
+       </div>
             
+    <ui:repeat value="#{appointmentbean.aptSlots}" var="item" varStatus="loop">
+       <div  class="tablecontainerrow">
+		<div class="topheader">#{item.apptDay} #{item.apptDate}</div>
+			<ui:repeat value="#{appointmentbean.busnHours}" var="timings" varStatus="loop">
+                     <ui:fragment rendered="#{item.apptSlots[timings] eq null}">
+                 <div class="column fc-state-notavi">Not Available</div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{item.apptSlots[timings] eq 'AVL'}">
+                		 <div class="column state-available" id="#{item.apptFullDate}|#{timings}">Available</div>
+                    </ui:fragment> 		
+                     <ui:fragment rendered="#{item.apptSlots[timings] eq 'BK'}">
+                  		<div class="column fc-state-booked" >Booked</div>
+                    </ui:fragment>
+               </ui:repeat>   
+            </div>
+      </ui:repeat>
+     <div class="clear"></div>
+</div> 
+          
+          
+           <p:messages id="messages" showDetail="true"  />
            <div class="bottom rightflt">
-              <h:commandLink value="Book Appointment" action="#{appointmentbean.bookAppointment}" styleClass="addbtn buttonFinish uibutton" >
-       				<f:ajax execute="@form"/>
-       		  </h:commandLink>
+       	
+       	<p:commandButton id="btn" value="Book Appointment"  action="#{appointmentbean.bookAppointment}" update=":popuparea :loginForm :forgotForm :registerForm :basicInfoForm messages"/> 
+            </div>
+          
+            </h:form>
+       	</h:panelGroup>
+       	</h:panelGroup>
+       
             <!--   <a class="uibutton icon next" href="user_register.html">Nextt</a> -->
             </div>
             <div class="clear"></div>
           </div>
-          </h:form>
+       
         </div>
         <div class="clear"></div>
     
@@ -558,7 +413,7 @@ div#tablecontainer .firstcol{
  
   <div class="clear"></div>
   <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span> </div>
-</div>
+
 <!--// End inner -->
 
 

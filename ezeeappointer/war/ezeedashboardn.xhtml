@@ -4,7 +4,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich">
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:p="http://primefaces.org/ui">
     
 <h:head>
 
@@ -199,73 +200,111 @@ background-clip: padding-box;
                           
                             <div class="boxtitle min">Notifications</div>
                             <div class="grid1">
-                            	<div class="shoutcutBox green"> <span class="ico color chat-exclamation"></span> <strong>23</strong> <em>Total Appointments</em> </div>
+                            	<div class="shoutcutBox green"> <span class="ico color chat-exclamation"></span> <strong>#{bsDashboardBean.totalAptnts}</strong> <em>Total Appointments</em> </div>
                             </div>
+                             <h:panelGrid  id="pendingAptCountGrid">
                             <div class="grid1">
-                            	<div class="shoutcutBox yellow"> <span class="ico color chat-exclamation"></span> <strong>2</strong> <em>Pending for Approval</em> </div>
+                            	<div class="shoutcutBox yellow"> <span class="ico color chat-exclamation"></span> <strong>#{bsDashboardBean.pendingAptnts}</strong> <em>Pending for Approval</em> </div>
                             </div>
-                            <div class="grid1">
-                            	<div class="shoutcutBox"> <span class="ico color chat-exclamation"></span> <strong>23</strong> <em>Total Appointments</em> </div>
-                            </div>
-                             <div class="grid1">
-                            	<div class="shoutcutBox"> <span class="ico color chat-exclamation"></span> <strong>23</strong> <em>Total Appointments</em> </div>
-                            </div>
+                            </h:panelGrid>
+                           
                             <div class="clear"></div>
                            <div class="boxtitle min">Staff Appointments</div>
-                            <div class="grid2">
+                            <ui:repeat value="#{bsDashboardBean.stafAptntList}" var="staffObj" varStatus="index">   
+		                            <div class="grid2">
+		                            	<div class="notificationbox tip"> <div class="notification_left"><strong>#{staffObj.staffName}</strong> - <em>#{staffObj.serviceName}</em><br />
+												<span class="small">has #{bsDashboardBean.individualCounts[staffObj.staffId]}</span></div>
+		                                        <div class="notification_right"> <a href="#" class="atip" original-title="Print Appointments"><span class="ico color print ico-right"></span></a> <a href="#" class="atip" original-title="View Appointments"><span class="ico color notepad ico-right"></span></a>
+		                                        </div>
+		                                        <div class="clear"></div>
+		                                        </div>
+		                            </div>
+                            </ui:repeat>
+                            <!-- <div class="grid2">
                             	<div class="notificationbox tip"> <div class="notification_left"><strong>Sai Ram</strong> - <em>Service Name</em><br />
 										<span class="small">has 23 Appointments</span></div>
                                         <div class="notification_right"> <a href="#" class="atip" original-title="Print Appointments"><span class="ico color print ico-right"></span></a> <a href="#" class="atip" original-title="View Appointments"><span class="ico color notepad ico-right"></span></a>
                                         </div>
                                         <div class="clear"></div>
                                         </div>
-                            </div>
-                            <div class="grid2">
-                            	<div class="notificationbox tip"> <div class="notification_left"><strong>Sai Ram</strong> - <em>Service Name</em><br />
-										<span class="small">has 23 Appointments</span></div>
-                                        <div class="notification_right"> <a href="#" class="atip" original-title="Print Appointments"><span class="ico color print ico-right"></span></a> <a href="#" class="atip" original-title="View Appointments"><span class="ico color notepad ico-right"></span></a>
-                                        </div>
-                                        <div class="clear"></div>
-                                        </div>
-                            </div>
+                            </div> -->
                             <div class="clear"></div>
+                             
                             
                             <h3>Appointments waiting for Approval</h3>
-                            <table class="display static " id="static">
-                                <thead>
-                                  <tr>
-                                    <th width="10%" >Sl.No</th>
-                                    <th width="25%" align="left">Staff Name</th>
-                                    <th width="25%" >Service</th>
-                                    <th width="20%" >Time</th>
-                                    <th width="20%" >Approve/Disapprove</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                              
-                                  <tr>
-                                    <td>1</td>
-                                    <td  align="left">Dr. Sai Ram</td>
-                                    <td>Health Checkup</td>
-                                    <td>Nov 23 - 10:30am</td>
-                                    <td>
-                                      <input type="checkbox" id="approve" name="approve"   class="approve" />
-                                        </td>
-                                  </tr>
+                            <h:outputText id="approveAptMsg123" value="Your Slot for appointment is pproved !!!" style="display:none;"/>
+                             <h:panelGrid columns="1" cellpadding="5" id="reRenderGrid" style="#{bsDashboardBean.status?'display:block':'display:none'}">
+		                                 	<h:outputText id="approveAptMsg" value="#{bsDashboardBean.statusMsg?'Your Slot for appointment is approved !!!':'Please try again later!!!'}" />
+		                     </h:panelGrid>
+                            <input type="hidden" id="keyValueObj" name="keyValueObj"/>
+                            <script type="text/javascript">
+                            	function showPopup(key,id)
+                            	{
+                                	var id=id;
+                                	var status=document.getElementById(id).checked;
+                                	if(status)
+                                    	{
+                                			document.getElementById(id).className="approve";
+                                			document.getElementById('keyValueObj').value=key;
+                            				confirmation.show();
+                                    	}
+                                }
 
-                                 <tr>
-                                    <td>2</td>
-                                    <td  align="left">Dr. Sai Ram</td>
-                                    <td>Health Checkup</td>
-                                    <td>Nov 23 - 10:30am</td>
-                                    <td>
-                                      <input type="checkbox" id="approve1" name="approve"   class="approve" />
-                                        </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            
-                            
+                                function displaySuccessText()
+                                {
+                                    alert('hi');
+                                    confirmation.hide();
+                                    //document.getElementById('ezeedashboardn:approveAptMsg').style.display = "block";
+                                 }
+                            </script>
+		                            <table class="display static " id="static">
+		                                <thead>
+		                                  <tr>
+		                                    <th width="10%" >Sl.No</th>
+		                                    <th width="25%" align="left">Staff Name</th>
+		                                    <th width="25%" >Service</th>
+		                                    <th width="20%" >Time</th>
+		                                    <th width="20%" >Approve/Disapprove</th>
+		                                  </tr>
+		                                </thead>
+		                                <tbody>
+		                              <ui:repeat value="#{bsDashboardBean.approveList}" var="apprveLstObj" varStatus="index1">    
+		                                  <tr>
+		                                    <td>#{index1.index +1}</td>
+		                                    <td  align="left">#{apprveLstObj.staffName}</td>
+		                                    <td>#{apprveLstObj.serviceName}</td>
+		                                    <td>#{apprveLstObj.apptDate} - #{apprveLstObj.apptTime}</td>
+		                                    <td>
+		                                    <h:panelGrid columns="1" cellpadding="5">  
+		                                    	<p:growl id="messages" /> 
+		                                      <input type="checkbox" id="approve#{index1.index +1}" name="approve#{index1.index +1}"  onclick="javscript:showPopup('#{apprveLstObj.id}',this.id);">
+                                     		 </input>
+		                                      </h:panelGrid>
+		                                     </td>
+		                                  </tr>
+									</ui:repeat>
+		                                <!--  <tr>
+		                                    <td>2</td>
+		                                    <td  align="left">Dr. Sai Ram</td>
+		                                    <td>Health Checkup</td>
+		                                    <td>Nov 23 - 10:30am</td>
+		                                    <td>
+		                                      <input type="checkbox" id="approve1" name="approve"   class="approve" />
+		                                        </td>
+		                                  </tr> -->
+		                                </tbody>
+		                              </table>
+		                               <h:panelGrid columns="1" cellpadding="5">  
+		                                    	<p:growl id="messages" showDetail="true"/> 
+		                                    	 </h:panelGrid>
+		                              <p:confirmDialog id="confirmDialog" message="Are you sure about destroying the world?"  
+												                header="Initiating destroy process" severity="alert" widgetVar="confirmation">  
+												                  
+												        <p:commandButton id="confirm" value="Yes Sure" action="#{bsDashboardBean.updateAppointments}"  update="pendingAptCountGrid reRenderGrid messages"   oncomplete="confirmation.hide();"  ajax="true" immediate="true"/>  
+												        <p:commandButton id="decline" value="Not Yet" onclick="confirmation.hide()" type="button" />   
+												                  
+									</p:confirmDialog>  
+                           
                            <div class="clear"></div> 
                            </div>
                            <div id="tab2" class="tab_content"> 
