@@ -69,11 +69,14 @@ public class TEABusinessUserDashboardBean extends TEASecureMbean
 	
 	public void updateAppointments()
 	{
+		
+		String whichbuttonclicked =(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("whichbuttonclicked");
+		
 		String keyValueObj=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("keyValueObj");
 		if(null==service)
 			service= (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");
-			boolean status1=service.updateDashboardPendingApnt(Long.valueOf(keyValueObj));
-			if(status1)
+		boolean status1=service.updateDashboardPendingApnt(Long.valueOf(keyValueObj),whichbuttonclicked);
+		if(status1)
 			{
 				statusMsg=true;
 				FacesMessage message = new FacesMessage(FacesMessage.FACES_MESSAGES,  "Your Slot for Appointmnet is approved");  

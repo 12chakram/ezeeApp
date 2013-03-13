@@ -237,7 +237,7 @@ public class TEABusinessUserManagementDAO {
 		return bDashboardValObj; 
 	}
 	
-	public boolean updateDashboardPendingApnt(long id)
+	public boolean updateDashboardPendingApnt(long id,String whichbuttonclicked)
 	{
 		EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
 		em.getTransaction().begin();
@@ -247,7 +247,16 @@ public class TEABusinessUserManagementDAO {
 		Appointment apt = (Appointment)q.getSingleResult();
 		if(null!=apt)
 		{
+			if(whichbuttonclicked.equalsIgnoreCase("confirm"))
+			{
 				apt.setApptSts("c");
+
+			}
+			else
+			{
+				apt.setApptSts("ca");	
+			}
+			
 				em.persist(apt); 
 				em.getTransaction().commit();
 				em.close();

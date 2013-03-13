@@ -93,14 +93,17 @@ public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServic
 		return dao.getDashboardApptDetails(bid);
 	}
 	
-	public boolean updateDashboardPendingApnt(long k)
+	public boolean updateDashboardPendingApnt(long k,String whichbuttonclicked)
 	{
 		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();
-		return dao.updateDashboardPendingApnt(k);
+		return dao.updateDashboardPendingApnt(k,whichbuttonclicked);
 	}
 	public int getPendingAptcount(long id)
 		{
 				TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();
 					return dao.getPendingAptcount(id);
 		}
+
+	
+	
 }

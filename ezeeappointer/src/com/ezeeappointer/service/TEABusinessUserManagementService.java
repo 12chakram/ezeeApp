@@ -51,7 +51,7 @@ public interface TEABusinessUserManagementService {
 	
 	public TEAUIBussinessDashboardDTO getDashboardApptDetails(long bid);
 	
-	public boolean updateDashboardPendingApnt(long k);
+	public boolean updateDashboardPendingApnt(long k, String whichbuttonclicked);
 	
 	public int getPendingAptcount(long id);
 	

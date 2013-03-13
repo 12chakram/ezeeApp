@@ -300,8 +300,13 @@ background-clip: padding-box;
 		                              <p:confirmDialog id="confirmDialog" message="Are you sure about destroying the world?"  
 												                header="Initiating destroy process" severity="alert" widgetVar="confirmation">  
 												                  
-												        <p:commandButton id="confirm" value="Yes Sure" action="#{bsDashboardBean.updateAppointments}"  update="pendingAptCountGrid reRenderGrid messages"   oncomplete="confirmation.hide();"  ajax="true" immediate="true"/>  
-												        <p:commandButton id="decline" value="Not Yet" onclick="confirmation.hide()" type="button" />   
+												        <p:commandButton id="confirm" value="Yes Sure" action="#{bsDashboardBean.updateAppointments}"  update="pendingAptCountGrid reRenderGrid messages"oncomplete="confirmation.hide();"  ajax="true" immediate="true">
+												        <f:param name="whichbuttonclicked" value="confirm"/>
+												        </p:commandButton>  
+												        <p:commandButton id="decline" value="Not Yet" action="#{bsDashboardBean.updateAppointments}"  update="pendingAptCountGrid reRenderGrid messages" oncomplete="confirmation.hide();"   ajax="true" immediate="true" >
+												        <f:param name="whichbuttonclicked" value="notconfirm"/>
+												        </p:commandButton> 
+												          
 												                  
 									</p:confirmDialog>  
                            
