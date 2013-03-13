@@ -60,7 +60,7 @@ public class TEAAppointmentDAO {
 		public List<Appointment> retrieveExistingAppointments(long busnId, long staffId, Date fromDate, Date toDate){
 			EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
 			em.getTransaction().begin();
-			Query q = em.createQuery("select a from Appointment a where a.busnId="+busnId +" and a.staffId=" + staffId +" and (apptSts='p' or apptSts='a') and apptDate>=:fromDate");
+			Query q = em.createQuery("select a from Appointment a where a.busnId="+busnId +" and a.staffId=" + staffId +" and (apptSts='p' or apptSts='c') and apptDate>=:fromDate");
 			q.setParameter("fromDate", fromDate);
 			q.setParameter("toDate", toDate);
 			List<Appointment> appts = q.getResultList();
