@@ -13,6 +13,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 import com.ezeeappointer.common.TEAServiceDelegate;
 import com.ezeeappointer.data.BusinessUser;
@@ -23,9 +24,7 @@ import com.ezeeappointer.service.TEABusinessUserManagementService;
 @SessionScoped
 public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4850861653651843128L;
 	private String userId;
 	private String password;
@@ -241,4 +240,29 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	public void setLoginErrorMsg(String loginErrorMsg) {
 		this.loginErrorMsg = loginErrorMsg;
 	}
+	
+	public String getData()
+	{
+		
+		TEABusinessUserDTO u = getActiveUser().getBusnUser();
+		if(u!=null)
+		{
+		
+		
+			this.address=u.getAddress();
+			this.password=u.getPassword();
+			this.cfrmPassword=u.getCfrmPassword();
+			this.city=u.getCity();
+			this.email=u.getEmail();
+			this.firstName=u.getFirstName();
+			this.lastName=u.getLastName();
+			this.phoneNumber=u.getPhoneNumber();
+			this.typeOfBusiness=u.getTypeOfBusiness();
+			
+		}
+		return "signup";
+	}
+	
+	
+	
 }
