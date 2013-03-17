@@ -1,11 +1,14 @@
 package com.ezeeappointer.mbean;
 
+import java.io.IOException;
+import java.nio.channels.SeekableByteChannel;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,15 +46,22 @@ public class TEABusinessUserDashboardBean extends TEASecureMbean
 	private boolean status;
 	private boolean statusMsg;
 	
+	TEAUIBussinessDashboardDTO bDashBoardObj;
+	
 	private HttpSession session=((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getSession();
 			
 
 	public TEABusinessUserDashboardBean()
 	{
 		if(null!=session && null==session.getAttribute("loadDashboard"))
+		
+			bDashBoardObj = (TEAUIBussinessDashboardDTO) session.getAttribute("bDashbirdobj");
+			
+		if(bDashBoardObj==null)
 		{
 			service= (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");
-			TEAUIBussinessDashboardDTO bDashBoardObj=service.getDashboardApptDetails(id);
+			bDashBoardObj=service.getDashboardApptDetails(id);
+			
 			if(null!=bDashBoardObj)
 			{
 				this.totalAptnts=bDashBoardObj.getTotalAptnts();
@@ -61,6 +71,7 @@ public class TEABusinessUserDashboardBean extends TEASecureMbean
 				this.individualCounts=bDashBoardObj.getIndividualCounts();
 				this.approveList=bDashBoardObj.getListToApprve();
 				session.setAttribute("loadDashboard", true);
+				session.setAttribute("bDashbirdobj", bDashBoardObj);
 			}
 			System.out.println("In Dashboard const");
 		}
@@ -216,7 +227,4 @@ public class TEABusinessUserDashboardBean extends TEASecureMbean
 		this.statusMsg = statusMsg;
 	}
 
-
-
-	
 }

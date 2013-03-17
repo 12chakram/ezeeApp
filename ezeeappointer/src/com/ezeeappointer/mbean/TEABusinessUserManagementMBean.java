@@ -3,6 +3,7 @@
  */
 package com.ezeeappointer.mbean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.ezeeappointer.common.TEAServiceDelegate;
@@ -41,10 +43,27 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	private List<SelectItem> countrySelectItems;
 	private List<SelectItem> typeOfBusinessSelectItems;
 	private String loginErrorMsg;
+	private boolean thispage;
 	
-	
+	 private TEABusinessUserDTO busnUser;
+
+
+
+
+
+
+	public TEABusinessUserDTO getBusnUser() {
+		return busnUser;
+	}
+
+
+	public void setBusnUser(TEABusinessUserDTO busnUser) {
+		this.busnUser = busnUser;
+	}
 
 	private Map<String,String> countries= new HashMap<String,String>();
+	
+	
 	
 	public String registerBusinessUser(){
 		
@@ -60,7 +79,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		userDTO.setCity(city);
 		userDTO.setCountry(country);
 		userDTO.setTypeOfBusiness(typeOfBusiness);
-		
+		userDTO.setId(getActiveUser().getBusnUser().getId());
 		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
 		boolean isSuccess = service.register(userDTO);
 		if(isSuccess)
@@ -70,6 +89,13 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	}	
 	
 	
+	public void  updateBusinessUser(){
+		
+		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
+		boolean isSuccess = service.updateBusinessUser(busnUser);
+	
+	}
+	
 	public String doLogin(){
 		TEABusinessUserDTO u = null;		
 		if(userId != null && password != null){
@@ -77,9 +103,11 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 			u = service.login(userId, password);
 			if(u != null){
 				getActiveUser().setBusnUser(u);
-				if(u.getBusinessSetupFlag().equals("y"))
-					return "ezeedashboardn";
-				return "businesssetup1";
+			
+				if(u.getBusinessSetupFlag().equals("y")) 
+					 return "ezeedashboardn";
+					 
+					return "businesssetup1";
 			}
 			
 		}
@@ -241,27 +269,47 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		this.loginErrorMsg = loginErrorMsg;
 	}
 	
-	public String getData()
-	{
-		
-		TEABusinessUserDTO u = getActiveUser().getBusnUser();
-		if(u!=null)
-		{
-		
-		
-			this.address=u.getAddress();
-			this.password=u.getPassword();
-			this.cfrmPassword=u.getCfrmPassword();
-			this.city=u.getCity();
-			this.email=u.getEmail();
-			this.firstName=u.getFirstName();
-			this.lastName=u.getLastName();
-			this.phoneNumber=u.getPhoneNumber();
-			this.typeOfBusiness=u.getTypeOfBusiness();
-			
-		}
-		return "signup";
+	
+	public boolean isThispage() {
+		return thispage;
 	}
+
+
+	public void setThispage(boolean thispage) {
+		this.thispage = thispage;
+	}
+	
+	
+	// this section for Edit/Update existing details 
+	
+	
+	
+	public String getAccountProfileData()
+	{
+		busnUser = getActiveUser().getBusnUser();
+	
+		this.thispage = true;
+		return "accountSetting";
+	}
+
+	public String gotoDashbord(){
+		
+		return "ezeedashboardn";
+	
+	}
+	
+public String getBusinesServiceseData(){
+		return "businesServices";
+	}
+	
+   public String getBusinessConfigurationData(){
+	   return "businesconfiguration";
+   }
+
+  public String  getBusinesStaffeData() {
+	
+	return "buserstaff";
+  }
 	
 	
 	

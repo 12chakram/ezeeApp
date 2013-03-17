@@ -28,9 +28,15 @@ public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServic
 	 * @see com.ezeeappointer.service.TEABusinessUserManagementService#register(com.ezeeappointer.dto.TEABusinessUserDTO)
 	 */
 	public boolean register(TEABusinessUserDTO userDTO) {
-		userDTO.setId(getTeaSeqGenService().generateNextSequenceNumber("BusinessUser"));		
-		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();		
+		 userDTO.setId(getTeaSeqGenService().generateNextSequenceNumber("BusinessUser"));
+	   TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();		
 		return dao.addBusinessUser(mapper.map(userDTO, BusinessUser.class));
+	}
+	
+	public boolean updateBusinessUser(TEABusinessUserDTO userDTO){
+		
+		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();		
+		return dao.updateBusinessUser(mapper.map(userDTO, BusinessUser.class));
 	}
 
 	/* (non-Javadoc)

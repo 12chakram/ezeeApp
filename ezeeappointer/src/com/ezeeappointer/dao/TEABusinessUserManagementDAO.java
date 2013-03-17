@@ -37,12 +37,54 @@ public class TEABusinessUserManagementDAO {
 		
 		EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
 		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
+		StringBuffer queryString = new StringBuffer("select bu from BusinessUser bu where bu.="+user.getId());
+		Query q = em.createQuery(queryString.toString());
+		BusinessUser  nuser = (BusinessUser) q.getSingleResult();
+		
+		System.out.println(nuser.getId());;
+		System.out.println(user.getId());
+		
+		nuser.setId(user.getId());
+		nuser.setPassword(user.getPassword());
+	    nuser.setEmail(user.getEmail());
+	    nuser.setFirstName(user.getFirstName());
+	    nuser.setLastName(user.getLastName());
+	    nuser.setPhoneNumber(user.getPhoneNumber());
+	    nuser.setCity(user.getCity());
+	    nuser.setAddress(user.getAddress());
+	    nuser.setCountry(user.getCountry());
+	    nuser.setTypeOfBusiness(user.getTypeOfBusiness());
+	    em.persist(nuser);
+	    em.getTransaction().commit();
 		em.close();	
 		return true; 
 	}
 	
+	
+	
+	
+	public boolean updateBusinessUser(BusinessUser user){
+		EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
+		em.getTransaction().begin();
+		BusinessUser ubu =(BusinessUser) em.find(BusinessUser.class, findBusinessUserByID(user.getId()).getKey());
+		
+		
+	  if(ubu.getPassword() != null) ubu.setAddress(user.getAddress());
+	  if(ubu.getFirstName()!=null) ubu.setFirstName(user.getFirstName());
+	  if(ubu.getLastName()!=null) ubu.setLastName(user.getLastName());
+	  if(ubu.getAddress()!=null) ubu.setAddress(user.getAddress());
+	  if(ubu.getCity()!=null) ubu.setCity(user.getCity());
+	  if(ubu.getUserId()!=null) ubu.setUserId(user.getUserId());
+	   if(ubu.getPhoneNumber()!=null) ubu.setPhoneNumber(user.getPhoneNumber());
+	  if(ubu.getId()!=0) ubu.setId(user.getId());
+	  em.persist(ubu);
+		 em.getTransaction().commit();
+			em.close();	
+			return true; 
+		
+	}
+	
+
 	/**
 	 * @param userId
 	 * @param password
@@ -65,6 +107,28 @@ public class TEABusinessUserManagementDAO {
 				return user.get(0);
 		}
 	
+	
+	public BusinessUser findBusinessUserByID(Long Id){
+		
+		EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
+		StringBuffer queryString = new StringBuffer("select bu from BusinessUser bu where bu.id="+Id);
+		em.getTransaction().begin();
+		Query q = em.createQuery(queryString.toString());
+		List<BusinessUser> user= q.getResultList();
+		em.getTransaction().commit();
+		findBusiness();
+		if(user.isEmpty())
+			return null;
+		else
+			return user.get(0);
+	}
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * @param email
 	 * @return
@@ -77,7 +141,7 @@ public class TEABusinessUserManagementDAO {
 			Query q = em.createQuery(queryString.toString());
 			List<BusinessUser> user= q.getResultList();
 			em.getTransaction().commit();
-			findBusiness();
+			//findBusiness();
 			if(user.isEmpty())
 				return null;
 			else
@@ -247,6 +311,7 @@ public class TEABusinessUserManagementDAO {
 		Appointment apt = (Appointment)q.getSingleResult();
 		if(null!=apt)
 		{
+			apt.setId(id);
 			if(whichbuttonclicked.equalsIgnoreCase("confirm"))
 			{
 				apt.setApptSts("c");
@@ -257,7 +322,7 @@ public class TEABusinessUserManagementDAO {
 				apt.setApptSts("ca");	
 			}
 			
-				em.persist(apt); 
+				em.merge(apt); 
 				em.getTransaction().commit();
 				em.close();
 				return true;

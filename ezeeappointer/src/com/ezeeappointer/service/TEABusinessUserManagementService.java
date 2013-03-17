@@ -55,6 +55,8 @@ public interface TEABusinessUserManagementService {
 	
 	public int getPendingAptcount(long id);
 	
+	public boolean updateBusinessUser(TEABusinessUserDTO userDTO);
+	
 
 }
 	

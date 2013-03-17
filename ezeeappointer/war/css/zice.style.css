@@ -1332,7 +1332,7 @@ label.iPhoneCheckLabelOff span {
 	-webkit-border-radius: 15px;
 	padding: 100px 20px 20px 20px;
 }
-#login .username_id, #login .password {
+#login #username_id, #login #password {
 	font-size: 25px;
 	background-repeat:no-repeat;
 	padding-left: 35px;
@@ -1347,10 +1347,10 @@ label.iPhoneCheckLabelOff span {
 #login #username_id:focus, #login #password:focus {
 	color:#000;
 }
-#login .username_id {
+#login #username_id {
 	background-image: url(../images/icon/user_.png);
 }
-#login .password {
+#login #password {
 	background-image: url(../images/icon/pass_.png);
 	font-size: 35px;
 }
@@ -1514,7 +1514,7 @@ label.iPhoneCheckLabelOff span {
 	list-style: none;
 	position: absolute;
 	left: 200px;
-	margin-left:10px;
+	margin-left:1px;
 	-webkit-box-shadow: 2px 2px 3px 2px #333333;
 	-moz-box-shadow: 2px 2px 3px 2px #333333;
 	box-shadow: 2px 2px 3px 2px #333333;
@@ -3461,15 +3461,6 @@ span.small{
 	font-size:11px;
 	font-weight:normal;
 	color:#999999;
-}
-
-
-@media only screen and (max-width: 1024px) {
-
-.boxMove {
- margin-top:0px;
-}
-
 }
 .services_list{
 	margin-bottom:20px;

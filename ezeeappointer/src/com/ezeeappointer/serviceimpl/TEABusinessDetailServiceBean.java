@@ -3,22 +3,27 @@ package com.ezeeappointer.serviceimpl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+
 import com.ezeeappointer.dao.TEABusinessDetailDAO;
 import com.ezeeappointer.data.Business;
+import com.ezeeappointer.data.DayAndTime;
 import com.ezeeappointer.data.Service;
 import com.ezeeappointer.data.ServiceAndStaffXREF;
 import com.ezeeappointer.data.Staff;
-import com.ezeeappointer.data.DayAndTime;
 import com.ezeeappointer.dto.TEABusinessDetailDTO;
+import com.ezeeappointer.dto.TEABusinessUserDTO;
+import com.ezeeappointer.dto.TEADayAndTimeDTO;
 import com.ezeeappointer.dto.TEAServiceDTO;
 import com.ezeeappointer.dto.TEAStaffDTO;
-import com.ezeeappointer.dto.TEADayAndTimeDTO;
 import com.ezeeappointer.service.TEABusinessDetailService;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 
 public class TEABusinessDetailServiceBean extends TEABasicAbstractServiceBean implements TEABusinessDetailService {
 	
 	private TEABusinessUserManagementService teaBusinessUserService;
+	private Mapper mapper = new DozerBeanMapper();
 	
 	/* (non-Javadoc)
 	 * @see com.ezeeappointer.service.TEABusinessDetailService#createBusiness(com.ezeeappointer.dto.TEABusinessDetailDTO)
@@ -121,8 +126,27 @@ public class TEABusinessDetailServiceBean extends TEABasicAbstractServiceBean im
 	}
 	
 	
+	//========================================================================================================
+	// this section for Edit/Update Existing details
+	
+	
+	
+	public TEABusinessDetailDTO getBusinessDetailsbyUserId(long userId){
+		
+		TEABusinessDetailDAO dao = getTeaDAOFactory().getTEABusinessDetailDAO();
+	
+		TEABusinessDetailDTO teaBusinessDetailDTO = new TEABusinessDetailDTO();
+		Business business = dao.getBusinessDetailsbyUserId(userId);
+		
+		teaBusinessDetailDTO.setCompanyName(business.getCompanyName());
+		teaBusinessDetailDTO.setAboutCompany(business.getAboutCompany());
+		teaBusinessDetailDTO.setTag(business.getTag());
+		teaBusinessDetailDTO.setCompanyAddress(business.getCompanyAddress());
+		teaBusinessDetailDTO.setState(business.getState());
+		teaBusinessDetailDTO.setCity(business.getCity());
+		return teaBusinessDetailDTO;
 
 }
 
 
-
+}

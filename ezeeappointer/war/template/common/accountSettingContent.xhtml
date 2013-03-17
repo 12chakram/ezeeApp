@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+
+
+	<h:body>  
+	 <h:form>
+	<div class="onecolumn">
+                        <div class="header"> <span ><span class="ico gray"></span> Business Profile</span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+        <div class="registration_form">
+        	
+        
+        <div class="formEl_b">
+     
+    	<fieldset>
+          	<div class="section">
+                <h:outputLabel value="Account Information"/> 
+					<div>
+						 <h:inputText  value="#{busnUserMngmntBean.busnUser.userId}" id="Domain" styleClass="validate[required,minSize[3],maxSize[20],] medium username" 
+						   required = "true" 
+						        requiredMessage="AccInformation is Required" >
+						      <f:attribute name="minmax" value="4,50"/>
+							  <f:ajax event="blur"  render="accmessage" />
+						 </h:inputText><label>.ezeeappointor.com</label>
+						  <h:message for="Domain" id="accmessage" style="font-family:arial;color:red;font-size:10px;" />
+                        <span class="f_help"> Username login or register. <br />Should be between 3 and not more than 20 characters.</span> 
+                    </div>
+                   
+                 <h:outputLabel value="Password"/>
+					<div>
+                         <h:inputSecret id="Password" value="#{busnUserMngmntBean.busnUser.password}" styleClass="validate[required,minSize[3]] medium password" required = "true" requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
+	                        	 <f:attribute name="minmax" value="4,50"/>
+	                        	 <f:ajax event="blur" render="passwordmessage" />
+                                 </h:inputSecret>
+                            <h:message for="Password" id="passwordmessage" style="font-family:arial;color:red;font-size:10px;"/>      
+                    </div>									  
+				<h:outputLabel value="Confirm Password"/>
+                    <div>
+                        <h:inputSecret value="#{busnUserMngmntBean.busnUser.cfrmPassword}" styleClass="validate[required,equals[password]] medium passwordCon"  id="CnfrmPassword" required = "true" requiredMessage="ConfirmPwd is Required" validator = "#{busnUserMngmntBean.validator.validateText}"  >
+	                        	 <f:attribute name="minmax" value="4,50"/>
+	                        	 <f:ajax event="blur" render="conpasswordmessage" />
+                                 </h:inputSecret>
+                        <span class="f_help"> Your password should be at least 6 characters.</span>
+					</div>
+					 <h:message for="CnfrmPassword" id="conpasswordmessage" style="font-family:arial;color:red;font-size:10px;"/>
+            </div>
+                                      
+			<div class="section ">
+				<h:outputLabel value="Email"/>   
+                    <div> 
+                        <h:inputText  value="#{busnUserMngmntBean.busnUser.email}" id="Email" styleClass="validate[required,custom[email]]  medium e_required" required = "true" requiredMessage="Email is required.">
+                        	 <f:attribute name="minmax" value="4,50"/>
+                        	<f:ajax event="blur"  render="emailmessage" />
+                            </h:inputText>
+                    </div>
+           		   <h:message for="Email" id="emailmessage" style="font-family:arial;color:red;font-size:10px;" />
+            </div>   
+
+			<div class="section textonly">
+				<h:outputLabel value="First Name"/>
+                    <div> 
+                       	<h:inputText value="#{busnUserMngmntBean.busnUser.firstName}" id="FirstName" styleClass="medium" required = "true" requiredMessage="First Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
+                        	 <f:attribute name="minmax" value="4,50"/>
+                        	<f:ajax event="blur"  render="fnamemessage" />
+                            </h:inputText>
+                    </div>
+                   <h:message for="FirstName" id="fnamemessage" style="font-family:arial;color:red;font-size:10px;" />  
+            </div>
+			<div class="section textonly">
+				 <h:outputLabel value="Last Name"/>   
+				<div> 
+					 <h:inputText value="#{busnUserMngmntBean.busnUser.lastName}" id="LastName" styleClass="medium" required = "true" requiredMessage="Last Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
+						  <f:attribute name="minmax" value="4,50"/>
+						 <f:ajax event="blur"  render="lnamemessage" />
+						 </h:inputText>
+				</div>
+				 <h:message for="LastName" id="lnamemessage" style="font-family:arial;color:red;font-size:10px;" />
+			</div>
+                                    
+            <div class="section numericonly">
+                <h:outputLabel value="Phone No."> <small>Mobile</small></h:outputLabel> 
+                <div> 
+                   <h:inputText value="#{busnUserMngmntBean.busnUser.phoneNumber}" id="PhoneNo" styleClass="medium" required = "true" requiredMessage="Phone no is required." validator = "#{busnUserMngmntBean.validator.validatePhone}" >
+                    	<f:ajax event="blur"  render="phnomessage" />
+					    </h:inputText>
+                </div>
+                <h:message for="PhoneNo" id="phnomessage" style="font-family:arial;color:red;font-size:10px;" />
+            </div>
+			<div class="section alphaonly">
+               <h:outputLabel value="Address"/>   
+                <div> 
+					 <h:inputText value="#{busnUserMngmntBean.busnUser.address}" id="Address" styleClass="medium"  required = "true" requiredMessage="Address is Required" validator = "#{busnUserMngmntBean.validator.validateText}">
+					      <f:attribute name="minmax" value="4,50"/>
+					     <f:ajax event="blur"  render="addrsmessage" />
+                         </h:inputText>
+                </div>
+                <h:message for="Address" id="addrsmessage" style="font-family:arial;color:red;font-size:10px;" />
+            </div>		
+			<div class="section alphaonly">
+                <h:outputLabel value="City"/> 
+                <div> 
+                   <h:inputText value="#{busnUserMngmntBean.busnUser.city}" id="City" styleClass="medium"  required = "true" requiredMessage="City is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
+                    	 <f:attribute name="minmax" value="4,50"/>
+                    	<f:ajax event="blur"  render="citymessage" />
+                        </h:inputText>
+				</div>
+				  <h:message for="City" id="citymessage" style="font-family:arial;color:red;font-size:10px;" />
+            </div> 
+			<div class="section">
+                  <h:outputLabel value="Country"/>   
+                <div>
+					<h:selectOneMenu id = "Country" label = "country"  value="#{busnUserMngmntBean.busnUser.country}" styleClass="chzn-select" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
+					    <f:ajax event="change"  render="countrymessage" />
+					     <f:selectItems value="#{busnUserMngmntBean.countrySelectItems}"/>        
+		              </h:selectOneMenu> 
+				</div>
+				 <h:message for="Country" id="countrymessage" style="font-family:arial;color:red;font-size:10px;" />
+            </div>
+			
+			<div class="section">
+                	<h:outputLabel value="Type of Business"/>   
+					<div>
+						<h:selectOneMenu value="#{busnUserMngmntBean.busnUser.typeOfBusiness}" id="TypeOfBusiness" styleClass="chzn-select" tabindex="2" required = "true" requiredMessage="select your  business" validator = "#{busnUserMngmntBean.validator.validateText}">
+					    <f:ajax event="change"  render="businessmsg" />
+					     <f:selectItems value="#{busnUserMngmntBean.typeOfBusinessSelectItems}"/>  
+					 </h:selectOneMenu> 
+                    </div>
+                    	<h:message for="TypeOfBusiness" id="businessmsg" style="font-family:arial;color:red;font-size:10px;" />  
+                    </div>
+						<div class="section last">
+                            <div>
+                              <h:commandButton styleClass="regi_submit uibutton normal" id="but_login" value="Update" action="#{busnUserMngmntBean.updateBusinessUser}" immediate="true"/>
+                            </div>
+                        </div>  
+                  </fieldset>              
+                    </div>
+       
+    </div> 
+    </div>
+      
+        <!--/END of Registration/-->
+        <div class="clear"/></div>                  
+   				 <!-- // End onecolumn -->
+		</h:form>
+ </h:body>
+  </ui:composition>

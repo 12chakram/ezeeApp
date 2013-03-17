@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.SessionScoped;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
+
+import com.ezeeappointer.common.TEAServiceDelegate;
+import com.ezeeappointer.dto.TEABusinessDetailDTO;
+import com.ezeeappointer.service.TEABusinessDetailService;
 
 /**
  * @author dreddy
@@ -322,4 +325,26 @@ public class TEABusinessDetailMBean implements Serializable{
 		this.serviceFlag = serviceFlag;
 	}
 	 
+	
+	public String getBusinessProfileData(){
+		
+		TEABusinessDetailService service = (TEABusinessDetailService)TEAServiceDelegate.getService("businessService");
+		
+		  TEABusinessDetailDTO teaBusinessDetailDTO  = service.getBusinessDetailsbyUserId(10001);
+		
+		  if(teaBusinessDetailDTO!=null){
+		    this.companyName =teaBusinessDetailDTO.getCompanyName();
+		    this.aboutCompany = teaBusinessDetailDTO.getAboutCompany();
+		    this.tag = teaBusinessDetailDTO.getTag();
+		    this.companyAddress = teaBusinessDetailDTO.getCompanyAddress();
+		    this.state = teaBusinessDetailDTO.getState();
+		    this.city = teaBusinessDetailDTO.getCity();
+		    this.profilePicture = teaBusinessDetailDTO.getProfilePicture();
+		}
+		  
+		
+		return "buserProfile";
+	}
+	
+	
 }//class

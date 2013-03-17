@@ -1,5 +1,6 @@
 package com.ezeeappointer.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -8,8 +9,12 @@ import javax.persistence.Id;
 
 import com.google.appengine.api.datastore.Key;
 
-public class BsLoginDashboard 
+public class BsLoginDashboard implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date  apptDate;
 	private String apptTime;
 	private long busnId;

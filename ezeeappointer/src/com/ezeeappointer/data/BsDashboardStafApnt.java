@@ -1,8 +1,14 @@
 package com.ezeeappointer.data;
 
-public class BsDashboardStafApnt
+import java.io.Serializable;
+
+public class BsDashboardStafApnt implements Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String StaffName;
 	private String ServiceName;
 	private long staffId;
