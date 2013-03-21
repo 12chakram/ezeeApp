@@ -37,27 +37,11 @@ public class TEABusinessUserManagementDAO {
 		
 		EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
 		em.getTransaction().begin();
-		StringBuffer queryString = new StringBuffer("select bu from BusinessUser bu where bu.="+user.getId());
-		Query q = em.createQuery(queryString.toString());
-		BusinessUser  nuser = (BusinessUser) q.getSingleResult();
-		
-		System.out.println(nuser.getId());;
-		System.out.println(user.getId());
-		
-		nuser.setId(user.getId());
-		nuser.setPassword(user.getPassword());
-	    nuser.setEmail(user.getEmail());
-	    nuser.setFirstName(user.getFirstName());
-	    nuser.setLastName(user.getLastName());
-	    nuser.setPhoneNumber(user.getPhoneNumber());
-	    nuser.setCity(user.getCity());
-	    nuser.setAddress(user.getAddress());
-	    nuser.setCountry(user.getCountry());
-	    nuser.setTypeOfBusiness(user.getTypeOfBusiness());
-	    em.persist(nuser);
-	    em.getTransaction().commit();
+		em.persist(user);
+		em.getTransaction().commit();
 		em.close();	
 		return true; 
+		
 	}
 	
 	

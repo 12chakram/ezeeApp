@@ -5,7 +5,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich">
-	<h:head>
+
+
+<h:head>
 	   
 	    <title>Signup - Ezee Appointer</title>
 	    <!-- Link shortcut icon-->
@@ -57,36 +59,40 @@
 			  background-image:none;
 		}
 		</style>   
-	</h:head> 
+	</h:head>
+
 	
-	<h:body>  
-		<div id="alertMessage" class="error"></div>
-	     
-		<div id="shadowhead"/>
+
+<h:body>        
+    <div id="alertMessage" class="error"></div> 
+                   
+   
+    
+	<div id="shadowhead"></div>
+    <div id="hide_panel"> 
+        <a class="butAcc" rel="0" id="show_menu"/>
+        <a class="butAcc" rel="1" id="hide_menu"/>
+        <a class="butAcc" rel="0" id="show_menu_icon"/>
+        <a class="butAcc" rel="1" id="hide_menu_icon"/>
+    </div>           
+
+	<div id="content" class="registrationpg">
+		<div class="inner">
+		<div class="topcolumn">
+		<div class="logo"></div>
+	</div>
+    <div class="clear"></div>
+        <div class="onecolumn" >
+        <div class="clear"></div>
+        <div class="content" >
+        <div class="registration_form">
+        <h2>Create your Account for Free</h2>
+        
+        <div class="formEl_b">
+        <h:form  id="validation"> 
+    	<fieldset>
 		
-	    <div id="hide_panel"> 
-	        <a class="butAcc" rel="0" id="show_menu"/>
-	        <a class="butAcc" rel="1" id="hide_menu"/>
-	        <a class="butAcc" rel="0" id="show_menu_icon"/>
-	        <a class="butAcc" rel="1" id="hide_menu_icon"/>
-	    </div> 
-	    
-	    <div id="content" class="registrationpg">
-			<div class="inner">
-			  <div class="topcolumn">
-			    <div class="logo"/>
-	    	 </div>
-		
-		    <div class="clear"/>
-        	<div class="onecolumn" >
-        	<div class="clear"/>
-        	  <div class="content" >
-        		<div class="registration_form">
-        		  <h2>Create your Account for Free</h2>
-        			<div class="formEl_b">
-        			 <h:form  id="validation"> 
-        				<fieldset>
-					     	<div class="section">                                                                  
+          		<div class="section">                                                                  
 			                     <h:outputLabel value="Account Information"/> 
 								 <div>
 								 <h:inputText  value="#{busnUserMngmntBean.userId}" id="Domain" styleClass="validate[required,minSize[3],maxSize[20],] medium username" required = "true" requiredMessage="AccInformation is Required" validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessUser}">
@@ -124,12 +130,12 @@
 	                        	 <span class="f_help"> Your password should be at least 6 characters.</span>
 								 </div>
             			  </div>
-            					
-            							
-            		   	 <div class="section ">
-							<h:outputLabel value="Email"/>   
-                    		<div> 
-                        	<h:inputText  value="#{busnUserMngmntBean.email}" id="Email" styleClass="validate[required,custom[email]]  medium e_required" required = "true" requiredMessage="Email is required." validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessEmail}">
+
+                         
+			<div class="section ">
+				<h:outputLabel value="Email"/>    
+                    <div> 
+                          <h:inputText  value="#{busnUserMngmntBean.email}" id="Email" styleClass="validate[required,custom[email]]  medium e_required" required = "true" requiredMessage="Email is required." validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessEmail}">
                         	 <f:attribute name="minmax" value="4,50"/>
                         	<f:ajax event="blur"  render="emailmessage" />
                             </h:inputText>
@@ -137,12 +143,13 @@
                             <h:message for="Email" id="emailmessage" style="font-family:arial;color:red;font-size:10px;" />
                             </div>
           	                </div>
-                          </div>   
-	
-						<div class="section textonly">
-					    	<h:outputLabel value="First Name"/>   
-                    		<div> 
-                        	<h:inputText value="#{busnUserMngmntBean.firstName}" id="FirstName" styleClass="medium" required = "true" requiredMessage="First Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
+                    </div>
+             
+
+			<div class="section textonly">
+				<h:outputLabel value="First Name"/>  
+                    <div> 
+                      <h:inputText value="#{busnUserMngmntBean.firstName}" id="FirstName" styleClass="medium" required = "true" requiredMessage="First Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
                         	 <f:attribute name="minmax" value="4,50"/>
                         	<f:ajax event="blur"  render="fnamemessage" />
                             </h:inputText>
@@ -150,13 +157,12 @@
                             <h:message for="FirstName" id="fnamemessage" style="font-family:arial;color:red;font-size:10px;" />
                             </div>
           	                </div>
-            		   </div>
-								
-										
-	        		   <div class="section textonly">
-						 <h:outputLabel value="Last Name"/>   
-						 <div> 
-						 <h:inputText value="#{busnUserMngmntBean.lastName}" id="LastName" styleClass="medium" required = "true" requiredMessage="Last Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
+                    </div>
+           
+			<div class="section textonly">
+				 <h:outputLabel value="Last Name"/>   
+				<div> 
+					 <h:inputText value="#{busnUserMngmntBean.lastName}" id="LastName" styleClass="medium" required = "true" requiredMessage="Last Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
 						  <f:attribute name="minmax" value="4,50"/>
 						 <f:ajax event="blur"  render="lnamemessage" />
 						 </h:inputText>
@@ -164,44 +170,44 @@
 						 <h:message for="LastName" id="lnamemessage" style="font-family:arial;color:red;font-size:10px;" />
 						 </div>
 						 </div>
-				      </div>
-				      
+				</div>
+			
                                     
-	     	          <div class="section numericonly">
-                		<h:outputLabel value="Phone No."> <small>Mobile</small></h:outputLabel>  
-                		<div> 
-                    	<h:inputText value="#{busnUserMngmntBean.phoneNumber}" id="PhoneNo" styleClass="medium" required = "true" requiredMessage="Phone no is required." validator = "#{busnUserMngmntBean.validator.validatePhone}" >
+            <div class="section numericonly">
+               <h:outputLabel value="Phone No."> <small>Mobile</small></h:outputLabel>    
+                <div> 
+                   <h:inputText value="#{busnUserMngmntBean.phoneNumber}" id="PhoneNo" styleClass="medium" required = "true" requiredMessage="Phone no is required." validator = "#{busnUserMngmntBean.validator.validatePhone}" >
                     	<f:ajax event="blur"  render="phnomessage" />
 					    </h:inputText>
 					    <div>
 						<h:message for="PhoneNo" id="phnomessage" style="font-family:arial;color:red;font-size:10px;" />
 						</div>
                 		</div>
-            		  </div>
-						
-					  <div class="section alphaonly">
-                		<h:outputLabel value="Address"/>   
-                		 <div> 
-					     <h:inputText value="#{busnUserMngmntBean.address}" id="Address" styleClass="medium"  required = "true" requiredMessage="Address is Required" validator = "#{busnUserMngmntBean.validator.validateText}">
+                </div>
+       
+			<div class="section alphaonly">
+               <h:outputLabel value="Address"/>  
+                <div> 
+					 <h:inputText value="#{busnUserMngmntBean.address}" id="Address" styleClass="medium"  required = "true" requiredMessage="Address is Required" validator = "#{busnUserMngmntBean.validator.validateText}">
 					      <f:attribute name="minmax" value="4,50"/>
 					     <f:ajax event="blur"  render="addrsmessage" />
                          </h:inputText>
                         <h:message for="Address" id="addrsmessage" style="font-family:arial;color:red;font-size:10px;" />
                 		 </div>
-            		  </div>		
-										
-					  <div class="section alphaonly">
-                		<h:outputLabel value="City"/>   
-                		<div> 
-                    	<h:inputText value="#{busnUserMngmntBean.city}" id="City" styleClass="medium"  required = "true" requiredMessage="City is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
+                </div>
+          
+			<div class="section alphaonly">
+               <h:outputLabel value="City"/>  
+                <div> 
+                   <h:inputText value="#{busnUserMngmntBean.city}" id="City" styleClass="medium"  required = "true" requiredMessage="City is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
                     	 <f:attribute name="minmax" value="4,50"/>
                     	<f:ajax event="blur"  render="citymessage" />
                         </h:inputText>
                         <h:message for="City" id="citymessage" style="font-family:arial;color:red;font-size:10px;" />
-          	            </div>
-            		 </div>
-            							
-            		<div class="section">
+				</div>
+            </div> 
+            
+		<div class="section">
                 	  <h:outputLabel value="Country"/>   
                 	  <div>
 					  <h:selectOneMenu id = "Country" label = "country"  value="#{busnUserMngmntBean.country}" disabled = "false" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
@@ -213,35 +219,36 @@
                   	  </div>    
      				</div>
      	 		</div>
-           							           							 			
-				<div class="section">
-            		<h:outputLabel value="Type of Business"/>   
+			
+			<div class="section">
+                <h:outputLabel value="Type of Business"/>     
 					<div>
-					<h:selectOneMenu value="#{busnUserMngmntBean.typeOfBusiness}" id="TypeOfBusiness" styleClass="chzn-select" tabindex="2" required = "true" requiredMessage="select your  business" validator = "#{busnUserMngmntBean.validator.validateText}">
+						<h:selectOneMenu value="#{busnUserMngmntBean.typeOfBusiness}" id="TypeOfBusiness" styleClass="chzn-select" tabindex="2" required = "true" requiredMessage="select your  business" validator = "#{busnUserMngmntBean.validator.validateText}">
 					    <f:ajax event="change"  render="businessmsg" />
 					     <f:selectItems value="#{busnUserMngmntBean.typeOfBusinessSelectItems}"/>  
 					 </h:selectOneMenu> 
 					 <div>
 					<h:message for="TypeOfBusiness" id="businessmsg" style="font-family:arial;color:red;font-size:10px;" />  
-					</div>    
-	                </div>
-	               </div>
-                    			
-	         <div class="section last">
-	            <div><h:commandButton styleClass="regi_submit uibutton normal" id="but_login" value="Register" action="#{busnUserMngmntBean.registerBusinessUser}"/>
-	            </div>
-	         </div>                
-	     	</fieldset>
-	        </h:form>    		
-	   </div> 
+					</div>
+                    </div>
+                    </div>
+						<div class="section last">
+                           <div><h:commandButton styleClass="regi_submit uibutton normal" id="but_login" value="Register" action="#{busnUserMngmntBean.registerBusinessUser}"/>
+	                    </div>
+                        </div>  
+               </fieldset>                       
+            </h:form>
+        </div> 
+        </div>
+      
+        <!--/END of Registration/-->
+        <div class="clear"/>
+        </div>                  
     </div>
-	    <div class="clear"/>
-	    </div>
-	    </div>
-	    <div class="clear"/>
-	    </div>
-	    </div>
-    	<div id="footer"> &amp;copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span>
-    	</div>		
-	</h:body>          
+    </div>
+	<div class="clear"></div>
+        <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span> </div>
+		</div> <!--// End inner -->
+         <!--// End content --> 
+</h:body>
 </html>

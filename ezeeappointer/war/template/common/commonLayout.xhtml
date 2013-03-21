@@ -105,7 +105,7 @@ background-clip: padding-box;
         <div id="header" >
                 <div id="account_info"> 
                     <img src="images/avatar.png" alt="Online" class="avatar" />
-					<div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">#{teaActiveUser.busnUser.firstName}</b><img src="images/gear.png" class="gear"  alt="Profile Setting" ></img></div>
+					<div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">#{teaActiveUser.busnUser.firstName}</b><span><a4j:commandLink  action="#{busnUserMngmntBean.getAccountProfileData}"/><img src="images/gear.png" class="gear"  alt="Profile Setting" ></img></span></div>
 					<div class="logout"  title="Disconnect"><b ><h:commandLink id="logout_id" action="#{logoutBean.logoutMethod}">Logout</h:commandLink></b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" /></div> 
                 </div>
             </div> <!--//  header -->
@@ -115,13 +115,13 @@ background-clip: padding-box;
         <h:form>         
                   <div id="left_menu">
                     <ul id="main_menu" class="main_menu">
-                      <li class="limenu select" ><h:commandLink action="#{busnUserMngmntBean.gotoDashbord}"><span class="ico gray shadow home" ></span><b>Dashboard</b></h:commandLink></li>
+                      <li class="limenu select" ><a4j:commandLink action="#{busnUserMngmntBean.gotoDashbord}"><span class="ico gray shadow home" ></span><b>Dashboard</b></a4j:commandLink></li>
                       <li class="limenu" ><a href="#" ><span class="ico gray shadow window"></span><b>Business Settings</b></a>
                         <ul>
-                          <li ><h:commandLink action="#{teaBusinessDetail.getBusinessProfileData}">Business Profile</h:commandLink></li>
-                          <li ><h:commandLink action="#{busnUserMngmntBean.getBusinesServiceseData}"> Services</h:commandLink></li>
-                          <li ><h:commandLink action="#{busnUserMngmntBean.getBusinesStaffeData}"> Staff</h:commandLink></li>
-                          <li ><h:commandLink action="#{busnUserMngmntBean.getBusinessConfigurationData}"> Configuration</h:commandLink></li>
+                          <li ><a4j:commandLink action="#{teaBusinessDetail.getBusinessProfileData}">Business Profile</a4j:commandLink></li>
+                          <li ><a4j:commandLink action="#{busnUserMngmntBean.getBusinesServiceseData}"> Services</a4j:commandLink></li>
+                          <li ><a4j:commandLink action="#{busnUserMngmntBean.getBusinesStaffeData}"> Staff</a4j:commandLink></li>
+                          <li ><a4j:commandLink action="#{busnUserMngmntBean.getBusinessConfigurationData}"> Configuration</a4j:commandLink></li>
                         </ul>
                       </li>
                       <li class="limenu" ><a href="#"><span class="ico gray  dimensions" ></span><b>Customers</b></a>
@@ -132,7 +132,7 @@ background-clip: padding-box;
                         </ul>
                       </li>
                       <li class="limenu" ><a href="table.html"><span class="ico gray shadow  spreadsheet"></span><b>Reports</b> </a></li>
-                      <li class="limenu" ><h:commandLink  action="#{busnUserMngmntBean.getAccountProfileData}"><span class="ico gray shadow pictures_folder"></span><b>Accounting </b></h:commandLink></li>   
+                      <li class="limenu" ><a4j:commandLink  action="#{busnUserMngmntBean.getAccountProfileData}"><span class="ico gray shadow pictures_folder"></span><b>Accounting </b></a4j:commandLink></li>   
                     </ul>
               </div>
           </h:form>

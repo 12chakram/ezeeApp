@@ -39,7 +39,9 @@
 	</style>
 </h:head>
 <h:body >
-         
+
+
+          	         
 	<div id="alertMessage" class="error"></div>
 	<div id="successLogin"></div>
 	<div class="text_success"><img src="images/loadder/loader_green.gif"  alt="ziceAdmin" /><span>Please wait</span></div>
@@ -51,8 +53,7 @@
   		<div class="userbox"></div>
   		<div class="formLogin">
   			
-  			<h:form  id="formLogin">
-          		
+  			<h:form  id="formLogin">	
           		<div class="tip">
           		 	<center><font color="red"><h:outputLabel value="#{busnUserMngmntBean.loginErrorMsg}"/></font></center>
           			<h:inputText id="username_id"  value="#{busnUserMngmntBean.userId}" styleClass="username_id" title="Username" >
@@ -76,22 +77,20 @@
             		<div style="float:left; padding:0px 0px 2px 0px ;">
            				<h:selectBooleanCheckbox id="on_off" name="remember" styleClass="on_off_checkbox on_off" value="1" >
            				</h:selectBooleanCheckbox>
-           				
-           	
-		            	<span class="f_help">Remember me</span>
+           		<span class="f_help">Remember me</span>
         	    </div>
          
 	          		<div style="float:right;padding:2px 0px ;">
     	          		<div> 
         	        		<ul class="uibutton-group">
         	        			<li><h:commandLink id="but_login" styleClass="uibutton normal but_login" value="login" action="#{busnUserMngmntBean.doLogin}"  /></li>
- <li><a class="uibutton normal" href="#" id="forgetpass">forpassword</a></li>
+                               <li><a class="uibutton normal" href="#" id="forgetpass">forpassword</a></li>
          	       		</ul>
               			</div>
               			<span><h:link outcome="signup.xhtml">New User? Register...</h:link></span>
             		</div>
 				</div>
-			</h:form>
+		</h:form>	
   		</div>
 	</div>
   	<div class="clear"/>
@@ -107,5 +106,6 @@
 	<script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
 	<script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
+
 </h:body>
 </html>

@@ -79,13 +79,14 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		userDTO.setCity(city);
 		userDTO.setCountry(country);
 		userDTO.setTypeOfBusiness(typeOfBusiness);
-		userDTO.setId(getActiveUser().getBusnUser().getId());
+		
 		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
 		boolean isSuccess = service.register(userDTO);
 		if(isSuccess)
 			return "signupsuccess";
 		else
 			return "signup";
+		
 	}	
 	
 	
