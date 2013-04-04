@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+	<h:head>
+	   
+	    <title>Signup - Ezee Appointer</title>
+	    <!-- Link shortcut icon-->
+	    <link rel="shortcut icon" type="image/ico" href="images/favicon2.html" /> 
+	    <!-- Link css-->
+	    <link rel="stylesheet" type="text/css" href="css/zice.style.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/icon.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/ui-custom.css"/>
+	    <link rel="stylesheet" type="text/css" href="components/validationEngine/validationEngine.jquery.css" />
+		<link rel="stylesheet" type="text/css" href="components/jscrollpane/jscrollpane.css" media="screen" />
+	    <link rel="stylesheet" type="text/css" href="components/tipsy/tipsy.css" media="all" />
+	    <link rel="stylesheet" type="text/css" href="components/editor/jquery.cleditor.css"  />
+	    <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />
+	    <link rel="stylesheet" type="text/css" href="components/confirm/jquery.confirm.css" />
+	    <link rel="stylesheet" type="text/css" href="components/sourcerer/sourcerer.css"/>
+	    <link rel="stylesheet" type="text/css" href="components/fullcalendar/fullcalendar.css"/>
+	    <link rel="stylesheet" type="text/css" href="components/Jcrop/jquery.Jcrop.css"  />
+	
+	    <script type="text/javascript" src="js/jquery.min.js"></script>
+	    <script type="text/javascript" src="components/ui/jquery.ui.min.js"></script> 
+	    <script type="text/javascript" src="components/ui/jquery.autotab.js"></script>
+	    <script type="text/javascript" src="components/ui/timepicker.js"></script>
+	    <script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+	    <script type="text/javascript" src="components/scrolltop/scrolltopcontrol.js"></script>
+	    <script type="text/javascript" src="components/fancybox/jquery.fancybox.js"></script>
+	    <script type="text/javascript" src="components/jscrollpane/mousewheel.js"></script>
+	    <script type="text/javascript" src="components/jscrollpane/mwheelIntent.js"></script>
+	    <script type="text/javascript" src="components/jscrollpane/jscrollpane.min.js"></script>
+	    <script type="text/javascript" src="components/spinner/ui.spinner.js"></script>
+	    <script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
+	    <script type="text/javascript" src="components/chosen/chosen.js"></script>
+	    <script type="text/javascript" src="components/confirm/jquery.confirm.js"></script>
+	    <script type="text/javascript" src="components/validationEngine/jquery.validationEngine.js" ></script>
+	    <script type="text/javascript" src="components/validationEngine/jquery.validationEngine-en.js" ></script>
+	    <script type="text/javascript" src="components/fullcalendar/fullcalendar.js"></script>
+	    <script type="text/javascript" src="components/uploadify/swfobject.js"></script>
+	    <script type="text/javascript" src="components/uploadify/uploadify.js"></script>        
+	    <script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
+	    <script type="text/javascript" src="components/effect/jquery-jrumble.js"></script>
+	    <script type="text/javascript" src="components/filestyle/jquery.filestyle.js" ></script>
+	    <script type="text/javascript" src="components/placeholder/jquery.placeholder.js" ></script>
+		<script type="text/javascript" src="components/dualListBox/dualListBox.js"></script>
+		<script type="text/javascript" src="components/smartWizard/jquery.smartWizard.min.js"></script>
+	    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+	    <script type="text/javascript" src="js/scripts.js"></script>    
+	    
+	    <style type="text/css">
+		body.dashboard{
+			  background-image:none;
+		}
+		</style>   
+	</h:head> 
+	
+	<h:body>  
+		<div id="alertMessage" class="error"></div>
+	     
+		<div id="shadowhead"/>
+		
+	    <div id="hide_panel"> 
+	        <a class="butAcc" rel="0" id="show_menu"/>
+	        <a class="butAcc" rel="1" id="hide_menu"/>
+	        <a class="butAcc" rel="0" id="show_menu_icon"/>
+	        <a class="butAcc" rel="1" id="hide_menu_icon"/>
+	    </div> 
+	    
+	    <div id="content" class="registrationpg">
+			<div class="inner">
+			  <div class="topcolumn">
+			    <div class="logo"/>
+	    	 </div>
+		
+		    <div class="clear"/>
+        	<div class="onecolumn" >
+        	<div class="clear"/>
+        	  <div class="content" >
+        		<div class="registration_form">
+        		  <h2>Create your Account for Free</h2>
+        			<div class="formEl_b">
+        			 <h:form  id="validation"> 
+        				<fieldset>
+					     	<div class="section">                                                                  
+			                     <h:outputLabel value="Account Information"/> 
+								 <div>
+								 <h:inputText  value="#{busnUserMngmntBean.userId}" id="Domain" styleClass="validate[required,minSize[3],maxSize[20],] medium username" required = "true" requiredMessage="AccInformation is Required" validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessUser}">
+								  <f:attribute name="minmax" value="4,50"/>
+								 <f:ajax event="blur"  render="accmessage" />
+								 </h:inputText><label>.ezeeappointor.com</label>
+								 <div>
+								 <h:message for="Domain" id="accmessage" style="font-family:arial;color:red;font-size:10px;" />
+								 </div>
+          	                     <span class="f_help"> Username login or register. <br />Should be between 3 and not more than 20 characters.</span> 
+	                    		 </div>
+	                    		 
+	                    		 
+	                			 <h:outputLabel value="Password"/>
+								 <div>
+	                        	 <h:inputSecret id="Password" value="#{busnUserMngmntBean.password}" styleClass="validate[required,minSize[3]] medium password" required = "true" requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
+	                        	 <f:attribute name="minmax" value="4,50"/>
+	                        	 <f:ajax event="blur" render="passwordmessage" />
+                                 </h:inputSecret>
+                                 <div>
+                                 <h:message for="Password" id="passwordmessage" style="font-family:arial;color:red;font-size:10px;"/>
+                                 </div>	
+	                    		 </div>	
+	                    		 
+	                    		 								  
+								 <h:outputLabel value="Confirm Password"/>
+	                    		 <div>
+	                        	 <h:inputSecret value="#{busnUserMngmntBean.cfrmPassword}" styleClass="validate[required,equals[password]] medium passwordCon"  id="CnfrmPassword" required = "true" requiredMessage="ConfirmPwd is Required" validator = "#{busnUserMngmntBean.validator.validateText}"  >
+	                        	 <f:attribute name="minmax" value="4,50"/>
+	                        	 <f:ajax event="blur" render="conpasswordmessage" />
+                                 </h:inputSecret>
+                                 <div>
+                                 <h:message for="CnfrmPassword" id="conpasswordmessage" style="font-family:arial;color:red;font-size:10px;"/>
+                                 </div>
+	                        	 <span class="f_help"> Your password should be at least 6 characters.</span>
+								 </div>
+            			  </div>
+            					
+            							
+            		   	 <div class="section ">
+							<h:outputLabel value="Email"/>   
+                    		<div> 
+                        	<h:inputText  value="#{busnUserMngmntBean.email}" id="Email" styleClass="validate[required,custom[email]]  medium e_required" required = "true" requiredMessage="Email is required." validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessEmail}">
+                        	 <f:attribute name="minmax" value="4,50"/>
+                        	<f:ajax event="blur"  render="emailmessage" />
+                            </h:inputText>
+                            <div>
+                            <h:message for="Email" id="emailmessage" style="font-family:arial;color:red;font-size:10px;" />
+                            </div>
+          	                </div>
+                          </div>   
+	
+						<div class="section textonly">
+					    	<h:outputLabel value="First Name"/>   
+                    		<div> 
+                        	<h:inputText value="#{busnUserMngmntBean.firstName}" id="FirstName" styleClass="medium" required = "true" requiredMessage="First Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
+                        	 <f:attribute name="minmax" value="4,50"/>
+                        	<f:ajax event="blur"  render="fnamemessage" />
+                            </h:inputText>
+                            <div>
+                            <h:message for="FirstName" id="fnamemessage" style="font-family:arial;color:red;font-size:10px;" />
+                            </div>
+          	                </div>
+            		   </div>
+								
+										
+	        		   <div class="section textonly">
+						 <h:outputLabel value="Last Name"/>   
+						 <div> 
+						 <h:inputText value="#{busnUserMngmntBean.lastName}" id="LastName" styleClass="medium" required = "true" requiredMessage="Last Name is required." validator = "#{busnUserMngmntBean.validator.validateText}"  >
+						  <f:attribute name="minmax" value="4,50"/>
+						 <f:ajax event="blur"  render="lnamemessage" />
+						 </h:inputText>
+						 <div>
+						 <h:message for="LastName" id="lnamemessage" style="font-family:arial;color:red;font-size:10px;" />
+						 </div>
+						 </div>
+				      </div>
+				      
+                                    
+	     	          <div class="section numericonly">
+                		<h:outputLabel value="Phone No."> <small>Mobile</small></h:outputLabel>  
+                		<div> 
+                    	<h:inputText value="#{busnUserMngmntBean.phoneNumber}" id="PhoneNo" styleClass="medium" required = "true" requiredMessage="Phone no is required." validator = "#{busnUserMngmntBean.validator.validatePhone}" >
+                    	<f:ajax event="blur"  render="phnomessage" />
+					    </h:inputText>
+					    <div>
+						<h:message for="PhoneNo" id="phnomessage" style="font-family:arial;color:red;font-size:10px;" />
+						</div>
+                		</div>
+            		  </div>
+						
+					  <div class="section alphaonly">
+                		<h:outputLabel value="Address"/>   
+                		 <div> 
+					     <h:inputText value="#{busnUserMngmntBean.address}" id="Address" styleClass="medium"  required = "true" requiredMessage="Address is Required" validator = "#{busnUserMngmntBean.validator.validateText}">
+					      <f:attribute name="minmax" value="4,50"/>
+					     <f:ajax event="blur"  render="addrsmessage" />
+                         </h:inputText>
+                        <h:message for="Address" id="addrsmessage" style="font-family:arial;color:red;font-size:10px;" />
+                		 </div>
+            		  </div>		
+										
+					  <div class="section alphaonly">
+                		<h:outputLabel value="City"/>   
+                		<div> 
+                    	<h:inputText value="#{busnUserMngmntBean.city}" id="City" styleClass="medium"  required = "true" requiredMessage="City is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
+                    	 <f:attribute name="minmax" value="4,50"/>
+                    	<f:ajax event="blur"  render="citymessage" />
+                        </h:inputText>
+                        <h:message for="City" id="citymessage" style="font-family:arial;color:red;font-size:10px;" />
+          	            </div>
+            		 </div>
+            							
+            		<div class="section">
+                	  <h:outputLabel value="Country"/>   
+                	  <div>
+					  <h:selectOneMenu id = "Country" label = "country"  value="#{busnUserMngmntBean.country}" disabled = "false" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
+					    <f:ajax event="change"  render="countrymessage" />
+					     <f:selectItems value="#{busnUserMngmntBean.countrySelectItems}"/>        
+		              </h:selectOneMenu> 
+		              <div>  
+                  	  <h:message for="Country" id="countrymessage" style="font-family:arial;color:red;font-size:10px;" />
+                  	  </div>    
+     				</div>
+     	 		</div>
+           							           							 			
+				<div class="section">
+            		<h:outputLabel value="Type of Business"/>   
+					<div>
+					<h:selectOneMenu value="#{busnUserMngmntBean.typeOfBusiness}" id="TypeOfBusiness" styleClass="chzn-select" tabindex="2" required = "true" requiredMessage="select your  business" validator = "#{busnUserMngmntBean.validator.validateText}">
+					    <f:ajax event="change"  render="businessmsg" />
+					     <f:selectItems value="#{busnUserMngmntBean.typeOfBusinessSelectItems}"/>  
+					 </h:selectOneMenu> 
+					 <div>
+					<h:message for="TypeOfBusiness" id="businessmsg" style="font-family:arial;color:red;font-size:10px;" />  
+					</div>    
+	                </div>
+	               </div>
+                    			
+	         <div class="section last">
+	            <div><h:commandButton styleClass="regi_submit uibutton normal" id="but_login" value="Register" action="#{busnUserMngmntBean.registerBusinessUser}"/>
+	            </div>
+	         </div>                
+	     	</fieldset>
+	        </h:form>    		
+	   </div> 
+    </div>
+	    <div class="clear"/>
+	    </div>
+	    </div>
+	    <div class="clear"/>
+	    </div>
+	    </div>
+    	<div id="footer"> &amp;copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span>
+    	</div>		
+	</h:body>          
+</html>

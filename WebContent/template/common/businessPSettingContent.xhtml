@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+<h:head>
+<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/fileupload.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/timepicker.css"  />
+ <script type="text/javascript" src="components/ui/timepicker.js"></script>
+
+</h:head>
+
+	<h:body>  
+       <h:form>
+		 <div class="onecolumn">
+                        <div class="header"> <span ><span class="ico gray"></span> Business Profile</span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+        <div class="registration_form">
+        	
+        
+        <div class="formEl_b">
+                     
+			<div class="section ">
+				 <h:outputLabel value="Company Name"/>   
+                    <div> 
+                       <h:inputText value="#{businessSetup.businessDetail.companyName}" id="CompanyName"  styleClass="medium e_required" required = "true" requiredMessage="Company Name is required." validator = "#{businessSetup.validator.validateText}" >
+				        	<f:attribute name="minmax" value="5,50" />
+				        	<f:ajax event="blur"  render="companynamemsg" />
+				        	</h:inputText>
+				        <h:message for="CompanyName" id="companynamemsg" style="font-family:arial;color:red;font-size:10px;" />
+                    </div>
+            </div>   
+
+			<div class="section textonly">
+				 <h:outputLabel value="About Company"/>    
+                    <div> 
+                        <h:inputTextarea  value="#{businessSetup.businessDetail.aboutCompany}" rows="4" cols="7" styleClass="medium" id="AboutCompany" required = "true" requiredMessage="This information is required." validator = "#{businessSetup.validator.validateText}">
+						      <f:attribute name="minmax" value="10,1000" />
+						      <f:ajax event="blur"  render="abtcompany" />
+					 	 </h:inputTextarea>
+      				<h:message for="AboutCompany" id="abtcompany" style="font-family:arial;color:red;font-size:10px;" />
+                    </div>
+            </div>
+			
+			<div class="section textonly">
+				 <h:outputLabel value="Tag"/>  
+				<div> 
+					<h:inputTextarea name="tag" value="#{businessSetup.businessDetail.tag}" id="Tag"  rows="4" cols="7" styleClass="medium" required = "true" requiredMessage="This information is required." validator = "#{businessSetup.validator.validateText}">
+				  	  <f:attribute name="minmax" value="5,100" />
+				  	  <f:ajax event="blur"  render="tagmsg" />
+     			 </h:inputTextarea>
+     			   <h:message for="Tag" id="tagmsg" style="font-family:arial;color:red;font-size:10px;" />
+				</div>
+			</div>
+			
+			<div class="section ">
+				<h:outputLabel value="Company Address"/>  
+                    <div> 
+                        <h:inputText value="#{businessSetup.businessDetail.companyAddress}" id="CompanyAddress"   styleClass="validate[required]  medium e_required" required = "true" requiredMessage="Company Address is required." validator = "#{businessSetup.validator.validateText}"  >
+						     <f:attribute name="minmax" value="5,50" />
+						     <f:ajax event="blur"  render="companyaddressmsg" />
+	 					</h:inputText>
+     				<h:message for="CompanyAddress" id="companyaddressmsg" style="font-family:arial;color:red;font-size:10px;" />
+                    </div>
+            </div>   
+
+    
+			<div class="section">
+                <h:outputLabel value="State"/>   
+                <div>
+					 <h:selectOneMenu value="#{businessSetup.businessDetail.state}" id="State" styleClass="chzn-select"  required = "true" requiredMessage="Please select state." validator = "#{businessSetup.validator.validateSelect}">
+				        <a4j:ajax  event="change"  render="statemsg cityregion" />
+				        <f:selectItems value="#{businessSetup.stateSelectItems}"/>        
+					</h:selectOneMenu>
+					<h:message for="State" id="statemsg" style="font-family:arial;color:red;font-size:10px;" />
+				</div>
+            </div>
+			<a4j:outputPanel id="cityregion" ajaxRendered="true" >
+			<div class="section">
+                <h:outputLabel value="City"/> 
+					<div>
+						<h:selectOneMenu  value="#{businessSetup.businessDetail.city}" id="City" styleClass="chzn-select" required = "true" requiredMessage="Please select city." validator = "#{businessSetup.validator.validateSelect}"  >
+							 <f:selectItems value="#{businessSetup.citySelectItems}"/> 
+							<f:ajax event="change"  render="citymsg @this" />	
+	   					</h:selectOneMenu>
+						<h:message for="City" id="citymsg" style="font-family:arial;color:red;font-size:10px;" />  
+                    </div>
+			</div>	
+			 </a4j:outputPanel>
+			  <div class="clear"></div>
+			 
+			  <div class="stafftime">
+             <div class="grid2">
+                        	<div class="section">
+                            <h:outputLabel value="From"/>  
+			       <div> 
+			       <h:inputText id="FromTime" styleClass="timepicker" value="#{businessSetup.businessDetail.startingTime}" name="timepicker" >
+			           <f:ajax event="blur" render="frmtimemessage" />			           
+			       </h:inputText>
+			       <h:message for="FromTime" id="frmtimemessage" style="font-family:arial;color:red;font-size:10px;"/>
+			       </div>
+				</div>
+                </div>  
+                <div class="grid2">
+                        	<div class="section">
+                               <h:outputLabel value="To"/>
+                                <div>
+                                <h:inputText id = "ToTime" styleClass="timepicker2" name="timepicker2" value="#{businessSetup.businessDetail.endingTime}">
+                                	<f:ajax event="blur" render="totimemessage" />
+                                </h:inputText>
+			           			<h:message for="ToTime" id="totimemessage" style="font-family:arial;color:red;font-size:10px;"/>
+			           </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                     </div>  
+			  	
+		<div class="section ">
+           <h:outputLabel value="Profile Picture"><small>Choose</small></h:outputLabel>      
+            <div> 
+                <h:inputText id="richtext" value="#{businessSetup.businessDetail.profilename}" styleClass="file fileupload" style="display: inline; color: rgb(102, 102, 102); font-size: 11px; width: 150px;" />
+    				<rich:fileUpload fileUploadListener="#{businessSetup.businessDetail.listener}" addLabel="browse" 
+                		id="upload" immediateUpload="true" autoclear="true" ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted')"
+                 		render="@this richtext" noDuplicate="false" acceptedTypes="jpg, gif, png, bmp" styleClass="fileupload" style="position: absolute; height: 30px; width: 203px; display: inline; cursor: pointer;opacity: 0; margin-left: -142px;">
+           		</rich:fileUpload>      
+            </div>
+        </div>
+		   
+		<div class="section last">
+            <div>
+				 <h:commandButton styleClass="regi_submit uibutton icon special forward" value="Save" action="#{businessSetup.continueToBusinessSetupStep2}"/>
+            </div>                
+       
+		
+      
+    </div> 
+    </div>
+      
+        <!--/END of Registration/-->
+        <div class="clear"/></div>                  
+    </div>
+                
+                    <!-- // End onecolumn -->
+</div>
+</h:form>
+    </h:body>
+  </ui:composition>

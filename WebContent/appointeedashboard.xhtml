@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	<f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Ezee Appointer	-	Appointee Dashboard</title>
+            </f:facet>
+	            <style type="text/css">
+	        		.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
+	            		 border: none;
+	        		}
+	        		.ui-datatable * {
+     border : 0px !important;
+}
+	        		body {
+    margin: 0px;
+    padding: 0;
+    font-size: 12px;
+    color: #616161;
+}
+.ui-layout-south, .ui-layout-unit-content{  
+        background: none;  
+        border: none;  
+        color: #000000;  
+        overflow: hidden;  
+        vertical-align: middle; 
+    }   
+    .ui-layout-north {  
+        background: none;  
+        background-image:url('/images/bg/pick_bg.jpg');
+        border: none;  
+        color: #000000;  
+        padding: 4px;  
+        overflow: hidden;  
+    }     
+    </style>
+		</h:head>
+      	<h:body>
+      	
+			<pe:layout fullPage="true" options = "#{layoutController.layoutOptions}">
+	
+		    	<p:layoutUnit position="north">
+		    	</p:layoutUnit>
+		
+			    <p:layoutUnit position="south" >
+			    </p:layoutUnit>
+			   
+			
+			    <p:layoutUnit position="center">			    
+				    <p:layout>
+	                        <p:layoutUnit position="west">
+	                             <h:form>	
+				           			<p:menu>  
+								        <p:submenu>  
+								            <p:menuitem value="My Appointments" actionListener="#{appointmentbean.today}" />
+								            <p:menuitem value="Take Appointment" actionListener="#{appointmentbean.today}"  />    
+								            <p:menuitem value="Account Settings" actionListener="#{appointmentbean.today}"  />
+								            <p:menuitem value="Reports" actionListener="#{appointmentbean.today}"  />
+								            <p:menuitem value="Logout" actionListener="#{appointmentbean.logoutMethod}"  />    
+								        </p:submenu>
+			    					</p:menu>  					
+				        		</h:form>
+	                       </p:layoutUnit>
+	                        <p:layoutUnit position="center">
+	                           <h1 class="title ui-widget-header ui-corner-all" style="margin-top:0px">#{appointeeDashboard.today} </h1>
+	                           <p:accordionPanel multiple="true" activeIndex="0,1,2">  
+					    <p:tab title="Upcoming Appointments: (#{fn:length(appointeeDashboard.apdbDTOs)})"> 
+					    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+					           <p:dataTable id="appts" var="appt" value="#{appointeeDashboard.apdbDTOs}" sortBy="#{appt.apptDate}">  					  
+												        <p:column headerText="Appt. No" sortBy="#{appt.apptNo}">  
+												            <h:outputText value="#{appt.apptNo}" />  
+												        </p:column>  
+												         <p:column headerText="Appt. Date" sortBy="#{appt.apptDate}" >  
+												            <h:outputText value="#{appt.apptDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column> 
+												           <p:column headerText="Booked Date" sortBy="#{appt.apptTakenDate}">  
+												            <h:outputText value="#{appt.apptTakenDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column>
+												        <p:column headerText="Status" sortBy="#{appt.apptSts}">  
+												            <h:outputText value="#{appt.apptSts}" />  
+												        </p:column> 							  
+												        <p:column headerText="Appointment Description" style="width:60%" sortBy="#{appt.apptDescr}">  
+												            <h:outputText value="#{appt.apptDescr}" />  
+												        </p:column>			  
+												  		  <p:column headerText="Action" style="width:8.25%">  
+												                <p:commandButton id="cancleButton" icon="ui-icon-cancel" title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}">  
+												                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
+												            </p:commandButton> 
+												            <p:commandButton id="changeButton" icon="ui-icon-update" title="Reschedule">  
+												            </p:commandButton>   
+												        </p:column>  					  
+								 </p:dataTable> 
+					    </p:tab>  
+    <p:tab title="Appointments History: (10)" >  
+         <p:dataTable id="appts1" var="appt" value="#{appointeeDashboard.apdbDTOs}" sortBy="#{appt.apptDate}">  					  
+												        <p:column headerText="Appt. No" sortBy="#{appt.apptNo}">  
+												            <h:outputText value="#{appt.apptNo}" />  
+												        </p:column>  
+												         <p:column headerText="Appt. Date" sortBy="#{appt.apptDate}" >  
+												            <h:outputText value="#{appt.apptDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column> 
+												           <p:column headerText="Booked Date" sortBy="#{appt.apptTakenDate}">  
+												            <h:outputText value="#{appt.apptTakenDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column>
+												        <p:column headerText="Status" sortBy="#{appt.apptSts}">  
+												            <h:outputText value="#{appt.apptSts}" />  
+												        </p:column> 							  
+												        <p:column headerText="Appointment Description" style="width:60%" sortBy="#{appt.apptDescr}">  
+												            <h:outputText value="#{appt.apptDescr}" />  
+												        </p:column>			  
+												  		  <p:column headerText="Action" style="width:8.25%">  
+												                <p:commandButton id="cancleButton" icon="ui-icon-cancel" title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}">  
+												                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
+												            </p:commandButton> 
+												            <p:commandButton id="changeButton" icon="ui-icon-update" title="Reschedule">  
+												            </p:commandButton>   
+												        </p:column>  					  
+								 </p:dataTable> 
+    </p:tab>  
+    <p:tab title="Appointments waiting for your feedback: (10)">  
+        <p:dataTable id="appts2" var="appt" value="#{appointeeDashboard.apdbDTOs}" sortBy="#{appt.apptDate}">  					  
+												        <p:column headerText="Appt. No" sortBy="#{appt.apptNo}">  
+												            <h:outputText value="#{appt.apptNo}" />  
+												        </p:column>  
+												         <p:column headerText="Appt. Date" sortBy="#{appt.apptDate}" >  
+												            <h:outputText value="#{appt.apptDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column> 
+												           <p:column headerText="Booked Date" sortBy="#{appt.apptTakenDate}">  
+												            <h:outputText value="#{appt.apptTakenDate}" >
+															    <f:convertDateTime pattern="dd MMM yyyy" />
+															</h:outputText>
+												        </p:column>
+												        <p:column headerText="Status" sortBy="#{appt.apptSts}">  
+												            <h:outputText value="#{appt.apptSts}" />  
+												        </p:column> 							  
+												        <p:column headerText="Appointment Description" style="width:60%" sortBy="#{appt.apptDescr}">  
+												            <h:outputText value="#{appt.apptDescr}" />  
+												        </p:column>			  
+												  		  <p:column headerText="Action" style="width:8.25%">  
+												                <p:commandButton id="cancleButton" icon="ui-icon-cancel" title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}">  
+												                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
+												            </p:commandButton> 
+												            <p:commandButton id="changeButton" icon="ui-icon-update" title="Reschedule">  
+												            </p:commandButton>   
+												        </p:column>  					  
+								 </p:dataTable> 
+    </p:tab>  
+</p:accordionPanel>
+					         	
+	                     </p:layoutUnit>	
+	                    </p:layout> 		   		 
+			       
+			    </p:layoutUnit>
+		
+			</pe:layout>
+                        
+		</h:body>
+
+    </f:view>	
+</html>

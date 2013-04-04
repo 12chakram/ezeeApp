@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Appointment Schedule - Ezee Appointer</title>
+		<!-- Link shortcut icon-->
+		<link rel="shortcut icon" type="image/ico" href="images/favicon2.html" />
+		<!-- Link css-->
+		<link rel="stylesheet" type="text/css" href="css/zice.style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/icon.css"/>
+		<link rel="stylesheet" type="text/css" href="css/ui-custom.css"/>
+		<link rel="stylesheet" type="text/css" href="css/timepicker.css"  />
+		<link rel="stylesheet" type="text/css" href="components/colorpicker/css/colorpicker.css"  />
+		<link rel="stylesheet" type="text/css" href="components/elfinder/css/elfinder.css" />
+		<link rel="stylesheet" type="text/css" href="components/datatables/dataTables.css"  />
+		<link rel="stylesheet" type="text/css" href="components/validationEngine/validationEngine.jquery.css" />
+		<link rel="stylesheet" type="text/css" href="components/jscrollpane/jscrollpane.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="components/fancybox/jquery.fancybox.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="components/tipsy/tipsy.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="components/editor/jquery.cleditor.css"  />
+		<link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />
+		<link rel="stylesheet" type="text/css" href="components/confirm/jquery.confirm.css" />
+		<link rel="stylesheet" type="text/css" href="components/sourcerer/sourcerer.css"/>
+		<link rel="stylesheet" type="text/css" href="components/fullcalendar/fullcalendar.css"/>
+		<link rel="stylesheet" type="text/css" href="components/Jcrop/jquery.Jcrop.css"  />
+		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'/>
+		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="components/ui/jquery.ui.min.js"></script>
+		<script type="text/javascript" src="components/ui/jquery.autotab.js"></script>
+		<script type="text/javascript" src="components/ui/timepicker.js"></script>
+		<script type="text/javascript" src="components/colorpicker/js/colorpicker.js"></script>
+		<script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+		<script type="text/javascript" src="components/elfinder/js/elfinder.full.js"></script>
+		<script type="text/javascript" src="components/datatables/dataTables.min.js"></script>
+		<script type="text/javascript" src="components/datatables/ColVis.js"></script>
+		<script type="text/javascript" src="components/scrolltop/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="components/fancybox/jquery.fancybox.js"></script>
+		<script type="text/javascript" src="components/jscrollpane/mousewheel.js"></script>
+		<script type="text/javascript" src="components/jscrollpane/mwheelIntent.js"></script>
+		<script type="text/javascript" src="components/jscrollpane/jscrollpane.min.js"></script>
+		<script type="text/javascript" src="components/spinner/ui.spinner.js"></script>
+		<script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
+		<script type="text/javascript" src="components/editor/jquery.cleditor.js"></script>
+		<script type="text/javascript" src="components/chosen/chosen.js"></script>
+		<script type="text/javascript" src="components/confirm/jquery.confirm.js"></script>
+		<script type="text/javascript" src="components/validationEngine/jquery.validationEngine.js" ></script>
+		<script type="text/javascript" src="components/validationEngine/jquery.validationEngine-en.js" ></script>
+		<script type="text/javascript" src="components/vticker/jquery.vticker-min.js"></script>
+		<script type="text/javascript" src="components/sourcerer/sourcerer.js"></script>
+		<script type="text/javascript" src="components/fullcalendar/fullcalendar.js"></script>
+		<script type="text/javascript" src="components/flot/flot.js"></script>
+		<script type="text/javascript" src="components/flot/flot.pie.min.js"></script>
+		<script type="text/javascript" src="components/flot/flot.resize.min.js"></script>
+		<script type="text/javascript" src="components/flot/graphtable.js"></script>
+		<script type="text/javascript" src="components/uploadify/swfobject.js"></script>
+		<script type="text/javascript" src="components/uploadify/uploadify.js"></script>
+		<script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
+		<script type="text/javascript" src="components/effect/jquery-jrumble.js"></script>
+		<script type="text/javascript" src="components/filestyle/jquery.filestyle.js" ></script>
+		<script type="text/javascript" src="components/placeholder/jquery.placeholder.js" ></script>
+		<script type="text/javascript" src="components/Jcrop/jquery.Jcrop.js" ></script>
+		<script type="text/javascript" src="components/imgTransform/jquery.transform.js" ></script>
+		<script type="text/javascript" src="components/webcam/webcam.js" ></script>
+		<script type="text/javascript" src="components/rating_star/rating_star.js"></script>
+		<script type="text/javascript" src="components/dualListBox/dualListBox.js"  ></script>
+		<script type="text/javascript" src="components/smartWizard/jquery.smartWizard.min.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="js/scripts.js"></script>
+		<style type="text/css">
+		body.dashborad {
+			background-image:none;
+		}
+		    
+        div#tablecontainer
+        {
+            width:810px;
+            border-top:1px solid #dddddd;
+			 border-right:1px solid #dddddd;
+			 margin-bottom:20px;
+        }
+
+        div.tablecontainerrow
+        {
+            overflow:hidden;
+            border:1px solid #dddddd;
+            border-top:none;
+			border-right:none;
+			float:left;
+			width:96px;
+        }
+
+        div#tablecontainer div.tablecontainerrow div
+        {
+            width: 80px;
+			display:inline-block;
+			padding:10px 8px;
+			border-bottom:1px solid #dddddd;
+			clear:both;
+			text-align:center;
+			height:18px;
+        }
+		div#tablecontainer div.topheader{
+			 background-color: #F2F2F2;
+			background-image: url("images/inner-shadow.png");
+			background-position: left top;
+			background-repeat: repeat-x;
+			text-shadow: 1px 1px 1px #FFFFFF;
+
+		}
+div#tablecontainer .headtxt, div#tablecontainer div.topheader{
+	font-size:12px;
+	font-weight:bold;
+}
+
+div#tablecontainer .fc-state-booked, .row .fc-state-booked:hover {
+    background: none repeat scroll 0 0 #FB7D17 !important;
+    box-shadow: 0 0 25px #FEBA43 inset !important;
+    color: #FFFFFF !important;
+    font-weight: bold;
+    opacity: 0.7;
+}
+div#tablecontainer .fc-state-notavi, .row .fc-state-notavi:hover {
+    background: none repeat scroll 0 0 #dddddd !important;
+    box-shadow: 0 0 25px #efefef inset !important;
+    color: #666 !important;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+
+div#tablecontainer .state-available {
+    color: #5EB515;
+    font-size: 12px;
+    font-weight: bold;
+}
+div#tablecontainer div.state-available:hover{
+	background: none repeat scroll 0 0 #EBF9A3;
+    box-shadow: 0 0 25px #CFE554 inset;
+    opacity: 0.7;
+}
+
+
+div#tablecontainer .state-select, div#tablecontainer .state-select:hover {
+    background: none repeat scroll 0 0 #1BBAFE !important;
+    box-shadow: 0 0 25px #62D1FE inset !important;
+    color: #FFFFFF !important;
+    font-weight: bold;
+    opacity: 0.7;
+}
+div#tablecontainer div.tablecontainerrow .headtxt{
+	width:116px;
+}
+div#tablecontainer .firstcol{
+	width:130px;
+}		
+		</style>
+		</h:head>
+		<h:body>
+		<div id="alertMessage" class="error"></div>
+		<div id="shadowhead"></div>
+		<div id="hide_panel"> <a class="butAcc" rel="0" id="show_menu"></a> <a class="butAcc" rel="1" id="hide_menu"></a> <a class="butAcc" rel="0" id="show_menu_icon"></a> <a class="butAcc" rel="1" id="hide_menu_icon"></a> </div>
+		<div id="content" class="registrationpg">
+		  <div class="inner">
+          <div class="topcolumn">
+          <div class="logo"></div>
+        </div>
+       <div class="clear"></div>
+       <div class="onecolumn usrappointment">
+       <div class="header"> <span > Step 1 -  Select you appointment preferences</span> </div>
+       <div class="clear"></div>
+       <div class="content" >
+        <ul class="tabs">
+          <li><a href="#tab1">Book Appointment By Service/Category</a></li>
+          <li><a href="#tab2">Book Appointment By Doctor</a></li>
+        </ul>
+        <div class="tab_container" >
+   
+          <div id="tab1" class="tab_content">
+          <h:form>
+            <div class="grid2">
+              <div class="boxtitle min">Select a Service</div>
+              
+                <div>
+                <h:selectOneMenu value="#{appointmentbean.aptDtlsMbean.selectedService}"  styleClass="chzn-select" id="Service" required="true" requiredMessage="Please select a service.">
+                	<f:ajax event="blur"  render="servicemsg" />
+                 	<f:selectItems value="#{appointmentbean.serviceSelectItems}"/>
+			    </h:selectOneMenu> 
+			   <h:message for="Service" id="servicemsg" style="font-family:arial;color:red;font-size:10px;" />
+                 </div>
+            </div>
+            <div class="grid2">
+              <div class="boxtitle min">Select Date of your appointment</div>
+              <div>
+                <h:inputText  id="DateOfAppt" styleClass="datepicker" value="#{appointmentbean.aptDtlsMbean.searchDate}" >
+                <f:ajax event="blur"  render="datemsg" />
+                </h:inputText>
+                 <h:message for="DateOfAppt" id="datemsg" style="font-family:arial;color:red;font-size:10px;" />
+                 
+              <div>
+                <h:commandLink id = "searchAppt" value="SearchByService" action="#{appointmentbean.searchForStaff}" styleClass="addbtn buttonFinish uibutton">
+       		               			<f:ajax execute="Service DateOfAppt" render = ":apptDtls :slotform"/>
+                 </h:commandLink>
+              </div>
+              </div>
+            </div>
+            </h:form>
+            <div class="clear"></div>
+            <h:panelGroup id = "apptDtls">            
+            <h:panelGroup rendered = "#{appointmentbean.aptDtlsMbean.displayApptDtls}"> 
+            <h:form id="slotform">
+             <input type="hidden" id="selectedtime" name="selectedtime" class="selectedtime" />
+            <h3>List of Available Slots</h3>
+            <div class="services_list">
+           <p:selectOneRadio id="staffRadio" value="#{appointmentbean.selectedStaffIndex}" layout="custom" onchange="document.getElementById('selectedtime').value=''">  
+			       <f:selectItems value="#{appointmentbean.aptDtlsMbean.uiStaffDTOs}"
+			       									var = "n"
+			       									itemValue="#{n.staffId}"
+                						 itemLabel="" />
+                <p:ajax listener="#{appointmentbean.changeSelectedStaff}" update = ":slotform:slotPanel" />
+		    </p:selectOneRadio>
+            <ui:repeat value="#{appointmentbean.aptDtlsMbean.uiStaffDTOs}" var="item" varStatus="loop">            
+              <ui:fragment rendered="#{loop.index eq 0}">
+              <div class="staff_pro">
+                <p:radioButton for=":slotform:staffRadio" styleClass="ck" itemIndex="#{loop.index}" /> 
+                <div class="staff_pic"> <img src="images/avar.png" alt="Doctor name"  /> </div>
+                <h3>#{item.staffName}</h3>
+                <h5>#{item.staffDesignation}</h5>
+                <p>#{item.staffDesignation}</p>	
+                <div class="services_handled"> <span class="tag_icon"></span>
+                  <ul class="servicelist">
+                  	<ui:repeat value="#{item.services}" var="serviceItem">
+                    <li><a href="#">#{serviceItem.serviceName}</a></li>
+                    </ui:repeat>
+                  </ul>
+                </div>
+              </div>
+              </ui:fragment>
+              <ui:fragment rendered="#{loop.index ne 0}">
+              <div class="staff_pro">
+                  <p:radioButton for=":slotform:staffRadio" styleClass="ck" itemIndex="#{loop.index}" /> 
+                <div class="staff_pic"> <img src="images/avartar3.png" alt="Doctor name"  /> </div>
+                <h3>#{item.staffName}</h3>
+                <h5>#{item.staffDesignation}</h5>
+                <p>#{item.staffDesignation}</p>
+                <div class="services_handled"> <span class="tag_icon"></span>
+                  <ul class="servicelist">
+                  	<ui:repeat value="#{item.services}" var="serviceItem">
+                    <li><a href="#">#{serviceItem.serviceName}</a></li>
+                    </ui:repeat>
+                  </ul>
+                </div>
+              </div>
+              </ui:fragment>
+              </ui:repeat>
+            
+            </div>
+            
+             <div class="clear"></div>
+  <h:panelGroup id="slotPanel">
+  <p:blockUI block=":slotform:slotPanel" trigger=":slotform:staffRadio">  
+        LOADING<br />  
+        <p:graphicImage value="/images/loadder/preloader.gif"/>  
+    </p:blockUI>
+<div id="tablecontainer">
+      	 <div class="tablecontainerrow firstcol">
+            <div class="topheader headtxt">Timings</div>
+             <ui:repeat value="#{appointmentbean.busnHours}" var="timings" varStatus="loop">
+            	<div class="headtxt">#{timings}</div>
+            </ui:repeat>
+       </div>
+            
+    <ui:repeat value="#{appointmentbean.aptSlots}" var="item" varStatus="loop">
+       <div  class="tablecontainerrow">
+		<div class="topheader">#{item.apptDay} #{item.apptDate}</div>
+			<ui:repeat value="#{appointmentbean.busnHours}" var="timings" varStatus="loop">
+                     <ui:fragment rendered="#{item.apptSlots[timings] eq null}">
+                 <div class="column fc-state-notavi">Not Available</div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{item.apptSlots[timings] eq 'AVL'}">
+                		 <div class="column state-available" id="#{item.apptFullDate}|#{timings}">Available</div>
+                    </ui:fragment> 		
+                     <ui:fragment rendered="#{item.apptSlots[timings] eq 'BK'}">
+                  		<div class="column fc-state-booked" >Booked</div>
+                    </ui:fragment>
+               </ui:repeat>   
+            </div>
+      </ui:repeat>
+     <div class="clear"></div>
+</div>         
+
+            <p:messages id="messages" showDetail="true"  />
+           <div class="bottom rightflt">
+       	
+       	<p:commandButton id="btn" value="Book Appointment"  action="#{appointmentbean.bookAppointment}" update=":popuparea :loginForm :forgotForm :registerForm :basicInfoForm messages"/> 
+            </div>
+            </h:panelGroup>
+            </h:form>
+            
+            </h:panelGroup>             
+            </h:panelGroup>
+            <div class="clear"></div>
+          </div>
+          
+<div id="tab2" class="tab_content">
+         <h:form>   
+           <div class="grid2">
+              <div class="boxtitle min">Select a Service</div>
+              
+                <div>
+                <h:selectOneMenu value="#{appointmentbean.aptDtlsMbean.selectedStaff}" id="staff"  styleClass="chzn-select multi-select" multiple = "true" tabindex="2">
+                	<f:ajax event="blur"  render="servicemsg" />
+                 	<f:selectItems value="#{appointmentbean.staffSelectItems}"/>
+			    </h:selectOneMenu> 
+			   <h:message for="staff" id="servicemsg" style="font-family:arial;color:red;font-size:10px;" />
+                 </div>
+            </div>      
+    
+   
+   <div class="grid2">
+              <div class="boxtitle min">Select Date of your appointment</div>
+              <div>
+                <h:inputText  id="datepick" class="datepicker" readonly="readonly" name="datepicker" value="#{appointmentbean.aptDtlsMbean.searchDate}" >
+                  <f:ajax event="blur"  render="datepickdatemsg" />
+                </h:inputText>
+                  <h:message for="datepick" id="datepickdatemsg" style="font-family:arial;color:red;font-size:10px;" />
+               <div>
+                <h:commandLink id = "searchser" value="SearchByStaff" action="#{appointmentbean.searchForService}" styleClass="addbtn buttonFinish uibutton">
+       		               			<f:ajax execute="staff datepick" render = ":apptDtls1 :slotform1"/>
+                 </h:commandLink>
+                </div>
+              </div>
+            </div>
+ </h:form>
+<div class="clear"></div>
+            <h:panelGroup id = "apptDtls1">            
+            <h:panelGroup rendered = "#{appointmentbean.aptDtlsMbean.displayApptDtls}"> 
+            <h:form id="slotform1">
+             <input type="hidden" id="selectedtime" name="selectedtime" class="selectedtime" />
+            <h3>List of Available Slots by Staff</h3>
+            <div class="services_list">
+              <div class="staff_pro activestf staff_pro_w360">
+                <h:selectOneRadio name="staff" id="staff1" value="1"  class="ck"  checked="checked"/>
+                <div class="staff_pic"> <img src="images/doc_pic.jpg" alt="Doctor name"  /> </div>
+                <h3>Staff Name</h3>
+                <h5>Staff Designation</h5>
+                <p>Staff Bio or short Description</p>
+                <div class="services_handled"> 
+                <h5>Select Service</h5>
+         <h:selectOneMenu  value="#{appointmentbean.aptDtlsMbean.selectedService}" >
+              <f:selectItems value="#{appointmentbean.aptDtlsMbean.uiStaffDTO.services}" var="ns"
+            	   itemValue="#{ns.id}" itemLabel="#{ns.serviceName}" >
+              </f:selectItems>
+            </h:selectOneMenu>
+            </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+                 <div id="tablecontainer">
+      	 <div class="tablecontainerrow firstcol">
+            <div class="topheader headtxt">Timings</div>
+             <ui:repeat value="#{appointmentbean.busnHours}" var="timings" varStatus="loop">
+            	<div class="headtxt">#{timings}</div>
+            </ui:repeat>
+       </div>
+            
+    <ui:repeat value="#{appointmentbean.aptSlots}" var="item" varStatus="loop">
+       <div  class="tablecontainerrow">
+		<div class="topheader">#{item.apptDay} #{item.apptDate}</div>
+			<ui:repeat value="#{appointmentbean.busnHours}" var="timings" varStatus="loop">
+                     <ui:fragment rendered="#{item.apptSlots[timings] eq null}">
+                 <div class="column fc-state-notavi">Not Available</div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{item.apptSlots[timings] eq 'AVL'}">
+                		 <div class="column state-available" id="#{item.apptFullDate}|#{timings}">Available</div>
+                    </ui:fragment> 		
+                     <ui:fragment rendered="#{item.apptSlots[timings] eq 'BK'}">
+                  		<div class="column fc-state-booked" >Booked</div>
+                    </ui:fragment>
+               </ui:repeat>   
+            </div>
+      </ui:repeat>
+     <div class="clear"></div>
+</div> 
+          
+          
+           <p:messages id="messages" showDetail="true"  />
+           <div class="bottom rightflt">
+       	
+       	<p:commandButton id="btn" value="Book Appointment"  action="#{appointmentbean.bookAppointment}" update=":popuparea :loginForm :forgotForm :registerForm :basicInfoForm messages"/> 
+            </div>
+          
+            </h:form>
+       	</h:panelGroup>
+       	</h:panelGroup>
+       
+            <!--   <a class="uibutton icon next" href="user_register.html">Nextt</a> -->
+            </div>
+            <div class="clear"></div>
+          </div>
+       
+        </div>
+        <div class="clear"></div>
+    
+      </div>
+    </div>
+  </div>
+ 
+  <div class="clear"></div>
+  <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span> </div>
+
+<!--// End inner -->
+
+
+<!--// End content -->
+ <script language="javascript">
+	 $(document).ready(function() {
+					
+		$('.state-available').live('click', function(){
+			$(".timetbl td.state-select").html('Available');										 
+			$(".timetbl td").removeClass('state-select');
+			$(this).addClass('state-select');
+			$(this).html('Selected');
+	 	});		
+
+	});
+
+	 </script> 
+	 <h:panelGroup id = "popuparea">         
+<p:dialog id="loginDialog" header="Login" widgetVar="loginDlg" visible="#{appointmentbean.loginRequired}"  modal="true" resizable="false" showEffect="clip">
+	<h:form id="loginForm">
+	<p:messages id="loginmessages" showDetail="true" autoUpdate="true"/>
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel for="loginemail" value="Email:" />
+			<p:inputText value="#{appointmentbean.appointee.email}" 
+					id="loginemail" required="true" label="email" requiredMessage="Email is required" />
+					
+			<h:outputLabel for="loginpassword" value="Password:" />
+			<p:password value="#{appointmentbean.appointee.password}" 
+					id="loginpassword" required="true" label="password" requiredMessage="Password is required"/>
+			<f:facet name="footer">
+				<p:commandButton id="loginButton" value="Login" 
+					action="#{appointmentbean.login}" />
+					<p:spacer width="75" height="10" /><p:commandLink value="Forgot Password?" onclick="loginDlg.hide();forgotDlg.show();" />
+					<p:spacer width="75" height="10" /><p:commandLink value="Register?" onclick="loginDlg.hide();registerDlg.show();" />
+			</f:facet>
+		</h:panelGrid>
+		
+	</h:form>
+</p:dialog>
+
+<p:dialog id="forgotDialog" header="Forgot Password" widgetVar="forgotDlg"  modal="true" resizable="false" showEffect="clip">
+	<h:form id="forgotForm">
+<p:messages id="forgotmessages" showDetail="true" autoUpdate="true"/>
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel for="email" value="Email:" />
+			<p:inputText value="#{appointmentbean.appointee.email}" 
+					id="email" required="true" label="email" />
+
+			<f:facet name="footer">
+					<p:commandButton id="sendEmailButton" value="Send" 
+					action="#{appointmentbean.register}" />
+					<p:spacer width="75" height="10" /><p:commandLink value="Back to Login" onclick="forgotDlg.hide();loginDlg.show();" />
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+</p:dialog>
+
+<p:dialog id="registerDialog" header="Register" widgetVar="registerDlg" modal="true" resizable="false" showEffect="clip">
+	<h:form id="registerForm">
+<p:messages id="registermessages" showDetail="true" autoUpdate="true"/>
+		<h:panelGrid columns="4" cellpadding="5">
+		<h:outputLabel for="firstname" value="First Name:" />
+			<p:inputText value="#{appointmentbean.appointee.firstName}" 
+					id="firstname" required="true" label="firstname" />
+		<h:outputLabel for="lastname" value="Last Name:" />
+			<p:inputText value="#{appointmentbean.appointee.lastName}" 
+					id="lastname" required="true" label="lastname" />
+			<h:outputLabel for="email" value="Email:" />
+			<p:inputText value="#{appointmentbean.appointee.email}" 
+					id="email" required="true" label="email" />
+			
+			<h:outputLabel for="password1" value="Password:" />
+			<p:password id="password1" value="#{appointmentbean.appointee.password}" match="password2" required="true"  label="password1"/>
+			<h:outputLabel for="password2" value="Confirm Password:" />
+            <p:password id="password2" value="#{appointmentbean.appointee.password}" required="true" label="password2" />
+            
+			
+			<f:facet name="footer">
+			<p:commandButton id="registerButton" value="Register" 
+					action="#{appointmentbean.register}" />
+					<p:spacer width="50" height="10" />
+				<p:commandLink value="Cancel" onclick="registerDlg.hide();loginDlg.show();" />
+			</f:facet>
+		</h:panelGrid>
+		
+	</h:form>
+</p:dialog>
+  			
+<p:dialog id="basicDialog" header="Basic Information Required" modal="true" visible="#{appointmentbean.basicInfoRequired}" resizable="false" showEffect="clip" hideEffect="clip">
+	<h:form id="basicInfoForm">
+<p:messages id="basicmessages" redisplay ="false" globalOnly="true" showDetail="true" autoUpdate="true"/>
+		<h:panelGrid columns="4" cellpadding="5">
+			<h:outputLabel for="firstname" value="First Name:" />
+			<p:inputText value="#{appointmentbean.appointee.firstName}" 
+					id="firstname" required="true" label="firstname" />
+			
+			<h:outputLabel for="lastname" value="Last Name:" />
+			<p:inputText value="#{appointmentbean.appointee.lastName}" 
+					id="lastname" required="true" label="lastname" />
+		<h:outputLabel for="email" value="Email:" />
+			<p:inputText value="#{appointmentbean.appointee.email}" 
+					id="email" required="true" label="email" />
+
+			
+			<f:facet name="footer">
+				<p:commandButton id="continueButton" value="Continue" 
+					action="#{appointmentbean.login}" />
+			</f:facet>
+		</h:panelGrid>
+		
+	</h:form>
+</p:dialog>  					
+</h:panelGroup>      
+</h:body>
+</html>

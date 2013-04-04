@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<h:body>  
+     
+   
+     	        <div class="onecolumn">
+                        <div class="header"> <span ><span class="ico gray"></span> Business Profile</span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+     <h:form>
+        <div class="registration_form">
+        <div class="formEl_b">
+                         
+			<div class="section ">
+				<h:outputLabel value="Staff Name"/>  
+                    <div> 
+                      <h:inputText value="#{businessSetup.staff.staffName}" name="staffname" id="StaffName"  styleClass="medium " required="true" requiredMessage="Staff Name is required." validator = "#{businessSetup.validator.validateText}" >
+					  	<f:attribute name="minmax" value="3,30"/>
+					  	<f:ajax event="blur"  render="staffmsg" />
+					  </h:inputText>
+					  <h:message for="StaffName" id="staffmsg" style="font-family:arial;color:red;font-size:10px;" />
+                    </div>
+            </div>   
+
+			
+			<div class="section">
+                <h:outputLabel value="User Name"/>
+					<div>
+						 <h:inputText value="#{businessSetup.staff.userName}" id="UserName"  name="staffusername"   styleClass="medium " required="true" requiredMessage="User Name is required." validator = "#{businessSetup.validator.validateText}">
+							<f:attribute name="minmax" value="3,20"/>
+						   <f:ajax event="blur"  render="usermessage" />
+				       </h:inputText>
+				    <h:message for="UserName" id="usermessage" style="font-family:arial;color:red;font-size:10px;" />
+                    <span class="f_help"> Username<br />Should be between 3 and not more than 20 characters.</span> 
+                    </div>
+                	 <h:outputLabel value="Password"/>
+					<div>
+                        <h:inputSecret value="#{businessSetup.staff.password}" id="Password"  name="password" styleClass="medium " required="true" requiredMessage="Password is required." validator = "#{businessSetup.validator.validateText}">
+		                   <f:attribute name="minmax" value="6,60"/>
+		                   <f:ajax event="blur" render="passwordmessage" />
+                  		</h:inputSecret>
+                  	<h:message for="Password" id="passwordmessage" style="font-family:arial;color:red;font-size:10px;"/>	
+                    </div>									  
+				 	<h:outputLabel value="Confirm Password"/>		
+                    <div>
+                        <span class="f_help"> Your password should be at least 6 characters.</span>
+						<h:inputSecret value="#{businessSetup.staff.cPassword}" id="ConfirmPassword" name="passwordCon" styleClass="medium"  required="true" requiredMessage="Confirm Password is required." validator = "#{businessSetup.validator.validateText}">
+                			<f:attribute name="minmax" value="6,60"/>
+                			<f:ajax event="blur" render="conpasswordmessage" />
+                	</h:inputSecret>
+                	<h:message for="ConfirmPassword" id="conpasswordmessage" style="font-family:arial;color:red;font-size:10px;"/>	
+                       
+					</div>
+            </div>
+            
+			<div class="section ">
+				<h:outputLabel value="Staff Profile Picture"><small>Choose</small></h:outputLabel> 
+            <div> 
+                <h:inputText id="profilename" value="#{businessSetup.staff.profileName}" styleClass="file fileupload" style="display: inline; color: rgb(102, 102, 102); font-size: 11px; width: 150px;" />
+    	         <rich:fileUpload fileUploadListener="#{businessSetup.staff.listener}" addLabel="browse" 
+                 id="upload" immediateUpload="true" autoclear="true" ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted')"
+                 render="@this profilename" noDuplicate="false" acceptedTypes="jpg, gif, png, bmp" styleClass="fileupload" style="position: absolute; height: 30px; width: 203px; display: inline; cursor: pointer;opacity: 0; margin-left: -142px;">
+                </rich:fileUpload>
+            </div>
+        </div>
+          <div class="clear"></div>
+        <div class="section">
+                              <h:outputLabel value="Services"> <small>Select Services from dropdown</small></h:outputLabel>  
+                              <div> 
+                                <h:selectManyListbox value="#{businessSetup.staff.services}" id="Services" styleClass="chzn-select multi-select" multiple = "true" tabindex="4" required="true" requiredMessage="Atleast one service is required.">
+						             <f:ajax event="change" render="servicemessage" />
+						            <f:selectItems value="#{businessSetup.servicesSelectItems}"/>                 	     
+								 </h:selectManyListbox>
+								    <h:message for="Services" id="servicemessage" style="font-family:arial;color:red;font-size:10px;"/>
+						        </div>
+                             </div>
+                     
+                     <div class="timeblocks" style="background:#f8f8f8; border:1px solid #dddddd; padding:5px 10px;">
+                     <div class="days">
+                     	   <h4>Select Day and Time</h4>
+                          			 <div id="days">
+                                          <h:selectManyCheckbox id = "Days" value="#{businessSetup.dayTime.days}" styleClass="ck" required = "true" requiredMessage = "Atleast one check box must be selected">
+                  							<f:ajax event="change" render="daysmessage" />
+                 							<f:selectItems value="#{businessSetup.weekDaysSelectItems}"/>
+               							</h:selectManyCheckbox>
+              						 <h:message for="Days" id="daysmessage" style="font-family:arial;color:red;font-size:10px;"/>       
+                                      </div>
+                           
+                        <div class="clear"></div>
+                     </div>
+                     <div class="stafftime">
+                     	<div class="grid2">
+                        	<div class="section">
+                               <h:outputLabel value="From"><small>Select Start Time</small></h:outputLabel>     
+                                <div>
+                                	 <h:inputText id="FromTime" styleClass="timepicker" value="#{businessSetup.dayTime.fromTime}" name="timepicker" required="true" requiredMessage="From Time is required." validator = "#{businessSetup.validator.validateTime}">
+			           					<f:ajax event="blur" render="frmtimemessage" />			           
+			      					 </h:inputText>
+			      					 <h:message for="FromTime" id="frmtimemessage" style="font-family:arial;color:red;font-size:10px;"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="grid2">
+                        	<div class="section">
+                                <h:outputLabel value="To"><small>Select End Time</small></h:outputLabel>  
+                                <div>
+                                <h:inputText id = "ToTime" styleClass="timepicker2" name="timepicker2" value="#{businessSetup.dayTime.toTime}" required="true" requiredMessage="To Time is required." validator = "#{businessSetup.validator.checkTimeDifference}">
+                                	<f:ajax event="blur" render="totimemessage" />
+                                </h:inputText>
+			           			<h:message for="ToTime" id="totimemessage" style="font-family:arial;color:red;font-size:10px;"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="clear"></div>
+                     </div> 
+                     <div>
+                           <h:commandLink id = "addTimeBut" value="Add Time" action="#{businessSetup.addDayTime}" styleClass="addbtn buttonFinish uibutton">
+       		               			<f:ajax execute="Days FromTime ToTime" render = "Days FromTime ToTime dayTimeTable"/>
+                           </h:commandLink>
+					</div>   
+                      <div class="clear"></div>
+                      
+                      <div id="staffblocks" class="staffblocks">
+                       <h:panelGroup id = "dayTimeTable">
+					  	<ui:repeat var="dayTime" value="#{businessSetup.businessDetail.dayTimes}">
+							<div class="grid2"><div class="shoutcutBox_noani"><span class="ico color clock"></span> <strong>1</strong><em><h:outputText value = "#{dayTime.daysStr}"/><br/>From:<h:outputText value = "#{dayTime.fromTime}"/> - To:<h:outputText value = "#{dayTime.toTime}"/></em><span class="ico gray trash_can ico-right"/></div></div>
+					  </ui:repeat>
+					  </h:panelGroup>
+                        
+                      </div>
+                     
+                       <div class="clear"></div>
+                     </div>        
+                     <div class="clear" style="height:10px;"></div> 
+                     <div class="rightflt">
+                      	<h:commandLink value ="Add Staff" styleClass="addbtn buttonFinish uibutton" action="#{businessSetup.addStaff}">
+						<f:ajax execute="StaffName UserName Password ConfirmPassword profilename Services" render = "@form staffTable"/>
+                     </h:commandLink>
+                     </div>
+        </div>
+        
+        <h:panelGroup id = "staffTable"> 
+        <div class="onecolumn" >
+                    <div class="header">
+                    <span ><span class="ico  gray random"></span> Dynamic Table </span>
+                    </div><!-- End header -->	
+                    <div class=" clear"></div>
+                    <div class="content"  >
+                  
+					<div class="tableName">
+					
+					<h:dataTable value="#{businessSetup.businessDetail.staff}" var="o"
+    			styleClass="display"
+    			headerClass="th_wrapp">
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Staff Name</f:facet>
+    			#{o.staffName}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Staff username</f:facet>
+    			#{o.userName}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Staff Services</f:facet>
+    			#{o.services}
+ 
+    		</h:column>
+ 
+    		<h:column>
+ 
+    			<f:facet name="header">Manage</f:facet>
+ 
+ 				<a4j:commandButton value="Delete" action="#{businessSetup.deleteStaff}" render="staffTable" immediate="true">
+ 				   <f:setPropertyActionListener target="#{businessSetup.staff}" value="#{o}" />
+ 			</a4j:commandButton>
+ 
+ 		</h:column>
+ 
+    		</h:dataTable>
+		</div>
+         <div class="clear"></div>		
+        <div class="clear"></div>		
+      </div>
+   </div>
+  </h:panelGroup> 
+       
+    </div>
+   </h:form> 
+     <div class="clear"/></div>     
+          <div class="rightflt">
+        <div class="clear" style="height:10px; border-top:"></div> 
+            <div>
+				<h:form><h:commandLink value="Next"  styleClass="regi_submit buttonNext uibutton special icon next" action="#{businessSetup.continueToBusinessSetupStep4}" /></h:form>				
+            </div>
+    	 </div>
+    <!--/END of Registration/-->
+        <div class="clear"/></div>
+
+   <!-- // End onecolumn -->
+ 
+  </h:body>
+ </ui:composition>

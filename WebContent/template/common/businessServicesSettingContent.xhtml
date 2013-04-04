@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<h:body>
+	<h:form>  
+       <div class="onecolumn">
+                        <div class="header"> <span ><span class="ico gray"></span> Business Profile</span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+        <div class="registration_form">
+        	
+        
+        <div class="formEl_b">
+       
+		<div class="section serviceboxes">
+      		 <h:outputLabel value="Service Name"/>
+              <h:inputText value="#{businessSetup.service.serviceName}"  name="servicename" id="ServiceName"  styleClass="medium e_required servicename" required = "true" requiredMessage="Service Name is required." validator = "#{businessSetup.validator.validateText}" >
+              <f:attribute name="minmax" value="4,50"/>
+              <f:ajax event="blur"  render="servicemsg" />
+              </h:inputText>
+              <h:message for="ServiceName" id="servicemsg" style="font-family:arial;color:red;font-size:10px;" />
+        </div>
+        <div class="section serviceboxes">
+             <h:outputLabel value="Description"/>
+             <h:inputTextarea value="#{businessSetup.service.description}" name="servicedescription" id="ServiceDescription" styleClass="medium servicedescription" required = "true" requiredMessage="This information is required." validator = "#{businessSetup.validator.validateText}" >
+             <f:attribute name="minmax" value="5,100" />
+             <f:ajax event="blur"  render="serdes" />
+             </h:inputTextarea>
+             <h:message for="ServiceDescription" id="serdes" style="font-family:arial;color:red;font-size:10px;" />
+        </div>
+        <div class="section serviceboxes">
+            <h:outputLabel value="Duration"/> 
+            <h:selectOneMenu  name="serviceduration" id="ServiceDuration" styleClass="chzn-select" value="#{businessSetup.service.duration}" required = "true" requiredMessage="Duration is required." >
+                <f:ajax event="change"  render="durationmsg" />
+	            <f:selectItems value="#{businessSetup.durationSelectItems}"/>  
+				</h:selectOneMenu>
+				
+				<h:message for="ServiceDuration" id="durationmsg" style="font-family:arial;color:red;font-size:10px;" />
+        </div>
+        <div class="section serviceboxes">
+            <h:outputLabel value="Price"/> 
+             <h:inputText value="#{businessSetup.service.price}" id="Price"  name="serviceprice"  styleClass="xsmall price serviceprice"  required = "true" requiredMessage="Price is required." validator = "#{businessSetup.validator.validateNumeric}">
+     			<f:attribute name="minmax" value="5,1000000" />
+     			<f:ajax event="blur"  render="pricemsg" />
+    		 </h:inputText>
+    		 <h:message for="Price" id="pricemsg" style="font-family:arial;color:red;font-size:10px;" />
+      </div>
+       <div id="services" class="services"> 
+		
+	
+       
+        <div class="clear"></div>  	
+        </div>                              
+		<div class="clear"></div>			
+          
+		<div class="section last setps">
+            <div>
+      	 <h:commandLink value="Add" action="#{businessSetup.addService}" styleClass="addbtn buttonFinish uibutton" >
+       		<f:ajax execute="@form" render = "@form serviceTable"/>
+       	</h:commandLink>
+      </div>
+          </div>     
+                    
+        </div> 
+       <h:panelGroup id = "serviceTable"> 
+        <div class="onecolumn" >
+                    <div class="header">
+                    <span ><span class="ico  gray random"></span> Dynamic Table </span>
+                    </div><!-- End header -->	
+                    <div class=" clear"></div>
+                    <div class="content"  >
+                  
+					<div class="tableName">
+					<h:dataTable value="#{businessSetup.businessDetail.services}" var="o" styleClass="display" headerClass="th_wrapp">
+ 
+			    		<h:column>
+			 
+			    			<f:facet name="header">Service Name</f:facet>
+			    			#{o.serviceName}
+			 
+			    		</h:column>
+			 
+			    		<h:column>
+			 
+			    			<f:facet name="header">Service Description</f:facet>
+			    			#{o.description}
+			 
+			    		</h:column>
+			 
+			    		<h:column>
+			 
+			    			<f:facet name="header">Duration</f:facet>
+			    			#{o.duration}
+			 
+			    		</h:column>
+			 
+			    		<h:column>
+			 
+			    			<f:facet name="header">Price</f:facet>
+			    			#{o.price}
+			 
+			    		</h:column>
+			 
+			    		<h:column>
+			 		<f:facet name="header">Manage</f:facet>
+			 			<a4j:commandButton value="Delete" action="#{businessSetup.deleteAction}" 	render="serviceTable" immediate="true">
+			 				<f:setPropertyActionListener target="#{businessSetup.service}" value="#{o}" />
+			 			</a4j:commandButton>
+			 		</h:column>
+ 		</h:dataTable>
+		 </div> <!-- tableNameEnd -->
+                    <div class="clear"></div>		
+                    <div class="clear"></div>		
+          </div>
+             </div>
+ </h:panelGroup>       
+    </div>
+      
+      <div class="section last setps">
+        <div>
+       		<h:form><h:commandLink value="Next" action="#{businessSetup.continueToBusinessSetupStep3}" styleClass="regi_submit buttonNext uibutton special icon next" /></h:form>
+       	</div>
+        </div>
+        <div class="clear"></div>	
+      
+        <!--/END of Registration/-->
+        <div class="clear"/></div>                  
+    </div>
+       </h:form>     
+            </h:body>
+       
+  </ui:composition>
