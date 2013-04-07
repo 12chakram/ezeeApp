@@ -21,6 +21,8 @@
 <mapping class="com.ezeeappointer.data.DayAndTime" />
 <mapping class="com.ezeeappointer.data.ServiceAndStaffXREF" />
  
+ <mapping class="com.ezeeappointer.data.Appointment"/>
+ <mapping class="com.ezeeappointer.data.AppointeeUser"/>
  
  </session-factory>
 </hibernate-configuration>

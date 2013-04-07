@@ -16,6 +16,8 @@ import org.hibernate.Session;
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.AppointeeDashboard;
 import com.ezeeappointer.data.Appointment;
+import com.ezeeappointer.data.Business;
+import com.ezeeappointer.data.BusinessUser;
 import com.ezeeappointer.data.DayAndTime;
 import com.ezeeappointer.data.Service;
 import com.ezeeappointer.data.Staff;
@@ -30,30 +32,42 @@ public class TEAAppointmentDAO {
 			em.getTransaction().begin();
 			em.persist(app);
 			em.getTransaction().commit();
-			em.close();		
+			
 		}
 		
 		public List<Service> retrieveServicesByBusinessId(long busnId){
 			Session em = TEAEntityManagerFactory.get();
 			em.getTransaction().begin();
-			Query q = (Query) em.createQuery("select s from Service s where s.businessId="+busnId);
-			List<Service> s = q.getResultList();
+			
+			String queryString2 = "select s from Service s where s.business="+busnId;
+			 
+			 org.hibernate.Query q2 =  em.createQuery(queryString2.toString());
+			 
+			List<Service> s =(List<Service>)q2.list();
 			
 			em.getTransaction().commit();
-			em.close();	
+			
 			return s;
 		}
 		
 	public List<Staff> retrieveStaffByBusinessId(long busnId){
-		     Session em = TEAEntityManagerFactory.get();
-			em.getTransaction().begin();
-			Query q = (Query) em.createQuery("select s from Staff s where s.businessId="+busnId);
-			List<Staff> s = q.getResultList();
-			System.out.println(s.size());
-			for(Staff st:s)
-				st.getDayTimes();
+		    
+		Session em = TEAEntityManagerFactory.get();
+		em.getTransaction().begin();
+		
+		 String queryString2 = "select s from Staff s where s.business="+busnId;
+		 
+		 org.hibernate.Query q2 =  em.createQuery(queryString2.toString());
+		 
+		List<Staff> s =(List<Staff>)q2.list();
+		 
+		 for(Staff st:s){
+			 List<DayAndTime> dayTimes = (List<DayAndTime>) em.get(DayAndTime.class,st.getId() );
+			 st.setDayTimes(dayTimes);
+		 }
+		 
 			em.getTransaction().commit();
-			em.close();	
+			
 			return s;
 		}
 		
@@ -61,57 +75,49 @@ public class TEAAppointmentDAO {
 		public List<Appointment> retrieveExistingAppointments(long busnId, long staffId, Date fromDate, Date toDate){
 			Session em = TEAEntityManagerFactory.get();
 			em.getTransaction().begin();
-			Query q = (Query) em.createQuery("select a from Appointment a where a.busnId="+busnId +" and a.staffId=" + staffId +" and (apptSts='p' or apptSts='c') and apptDate>=:fromDate");
+			
+			 org.hibernate.Query q = (org.hibernate.Query) em.createQuery("select a from Appointment a where a.busnId="+busnId +" and a.staffId=" + staffId +" and apptSts='p' or apptSts='c' and apptDate>=:fromDate and apptDate<=:toDate");
 			q.setParameter("fromDate", fromDate);
 			q.setParameter("toDate", toDate);
-			List<Appointment> appts = q.getResultList();
-			appts = new ArrayList<Appointment>(appts);
-			for(int i = appts.size()-1; i >= 0; i--){
-				if(appts.get(i).getApptDate().compareTo(toDate) > 0)
-					appts.remove(i);
-			}
+			
+			
+			List<Appointment> appts = q.list();
+//			appts = new ArrayList<Appointment>(appts);
+//			for(int i = appts.size()-1; i >= 0; i--){
+//				if(appts.get(i).getApptDate().compareTo(toDate) > 0)
+//					appts.remove(i);
+//			}
 			em.getTransaction().commit();
-			em.close();	
+			
 			return appts;
 		}
 		
-		public List<TEAUIStaffDTO> retrieveStaffDetailsByServiceId(long serviceId){
+		public List<Staff> retrieveStaffDetailsByServiceId(long serviceId){
 			Session em = TEAEntityManagerFactory.get();
 			 Mapper mapper = new DozerBeanMapper();
 			em.getTransaction().begin();
-			org.hibernate.Query q1 = em.createQuery("select from Staff s JOIN s.srvcStaffXref sxs where sxs.serviceId="+serviceId);		 
-			List<Staff> staff = ((Query) q1).getResultList();
 			
-			List<TEAUIStaffDTO> uiStaffDTOs = new ArrayList<TEAUIStaffDTO>();
-			for(Staff sf: staff){
-				//List<Long> serviceIds = (List<Long>) CollectionUtils.collect(sf.getSrvcStaffXref(), 
-	                   // new BeanToPropertyValueTransformer("serviceId"));
-				org.hibernate.Query q2 = em.createQuery("select from Service s where s.id=:id");
-			//	q2.setParameter("id", serviceIds);
-				List<Service> services = ((Query) q2).getResultList();
-				List<Service> services2 = new ArrayList<Service> ();
-				services2.addAll(services);
-				TEAUIStaffDTO dto = new TEAUIStaffDTO();
-				List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
-				for(DayAndTime dt: sf.getDayTimes())
-					ldt.add(mapper.map(dt,  TEADayAndTimeDTO.class));
-				dto.setDayTime(ldt);
-				dto.setStaffName(sf.getStaffName());
-				dto.setStaffId(sf.getId());
-				
-				List<TEAServiceDTO> sdt = new ArrayList<TEAServiceDTO>();
-				for(Service sr: services2)
-					sdt.add(mapper.map(sr,  TEAServiceDTO.class));
-				dto.setServices(sdt);
-				dto.setStaffDescription("No description yet.");
-				uiStaffDTOs.add(dto);
-				
-			}		
+			Service service = (Service) em.get(Service.class, serviceId);
+			    List<Staff> staff = service.getStaffs();
+			    
 			
-			em.getTransaction().commit();
-			em.close();
-			System.out.println("Size of the result set: "+staff.size());
-			return uiStaffDTOs;
+			   for(Staff sf: staff){
+					   sf.getServices();
+					   
+					     String queryString2 = "select s from DayAndTime s where s.staff="+sf.getId();
+					     org.hibernate.Query q2 =  em.createQuery(queryString2.toString());
+					     List<DayAndTime> dt = (List<DayAndTime>) q2.list();
+					    
+					    sf.setDayTimes(dt);
+				    	  System.out.println("kkkk");
+				 }
+			   
+			    em.getTransaction().commit();
+			  
+			    System.out.println("kkkk");
+			   return staff;
+			
+			
 		}
 		
 		
@@ -142,7 +148,7 @@ public class TEAAppointmentDAO {
 				dto.setServices(sdt);
 				dto.setStaffDescription("No description yet.");
 				em.getTransaction().commit();
-			em.close();
+	
 		   return dto;
 		}
 		
@@ -169,7 +175,7 @@ public class TEAAppointmentDAO {
 				apptDbs.add(apptDb);
 			}
 			em.getTransaction().commit();
-			em.close();	
+			
 			return apptDbs;
 		}
 		
@@ -181,6 +187,6 @@ public class TEAAppointmentDAO {
 			Appointment appt  = (Appointment)q.getSingleResult();
 			appt.setApptSts("c");
 			em.getTransaction().commit();
-			em.close();	
+	
 		}
 }

@@ -1,5 +1,6 @@
 package com.ezeeappointer.data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,14 +17,33 @@ import javax.persistence.Table;
 public class AppointeeUser {
 	
 	
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="first_name")
 	private String firstName;
+	
+	@Column(name="last_name")
 	private String lastName;
+	
+	@Column(name="phone_number")
 	private String phoneNo;
+	
+	@Column(name="address")
 	private String address;
+	
+	@Column(name="city")
 	private String city;
+	
+	@Column(name="country")
 	private String country;
+	
+	@Id
+	@Column(name="appointment_user_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
 	/*@Id

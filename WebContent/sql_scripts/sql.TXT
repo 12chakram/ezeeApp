@@ -1,0 +1,228 @@
+CREATE TABLE `appointment_detail` (
+  `appointment_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `appt_date` datetime DEFAULT NULL,
+  `appt_taken_date` datetime DEFAULT NULL,
+  `search_date` datetime DEFAULT NULL,
+  `staff_detail_id` bigint(20) DEFAULT NULL,
+  `appt_time` varchar(45) DEFAULT NULL,
+  `business_detail_id` bigint(20) DEFAULT NULL,
+  `appt_sts` varchar(45) DEFAULT NULL,
+  `service_detail_id` bigint(20) DEFAULT NULL,
+  `appointment_user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`appointment_detail_id`),
+  KEY `busn_detail_appt_fk_idx` (`business_detail_id`),
+  KEY `staff_detail_appt_fk_idx` (`staff_detail_id`),
+  KEY `service_detail_appt_fk_idx` (`service_detail_id`),
+  KEY `appt_user_appt_fk_idx` (`appointment_user_id`),
+  CONSTRAINT `appt_user_appt_fk` FOREIGN KEY (`appointment_user_id`) REFERENCES `appointment_user` (`appointment_user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `busn_detail_appt_fk` FOREIGN KEY (`business_detail_id`) REFERENCES `business_detail` (`business_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `service_detail_appt_fk` FOREIGN KEY (`service_detail_id`) REFERENCES `service_detail` (`service_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `staff_detail_appt_fk` FOREIGN KEY (`staff_detail_id`) REFERENCES `staff_detail` (`staff_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+============================================= 
+
+CREATE TABLE `appointment_user` (
+  `appointment_user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) DEFAULT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`appointment_user_id`)
+)
+
+=================================================== 
+
+CREATE TABLE `staff_detail` (
+  `staff_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `business_detail_id` bigint(20) NOT NULL,
+  `staff_user_name` varchar(45) DEFAULT NULL,
+  `staff_user_password` varchar(45) DEFAULT NULL,
+  `staff_profile_picture` varchar(45) DEFAULT NULL,
+  `staff_designation` varchar(45) DEFAULT NULL,
+  `staff_description` varchar(45) DEFAULT NULL,
+  `staff_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`staff_detail_id`),
+  KEY `busn_detail_satff_fk_idx` (`business_detail_id`),
+  CONSTRAINT `busn_detail_satff_fk` FOREIGN KEY (`business_detail_id`) REFERENCES `business_detail` (`business_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) 
+
+=================================
+
+CREATE TABLE `staff_daytime_detail` (
+  `staff_daytime_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `staff_detail_id` bigint(20) NOT NULL,
+  `staff_week_days` varchar(45) DEFAULT NULL,
+  `staff_from_time` varchar(45) DEFAULT NULL,
+  `staff_to_time` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`staff_daytime_detail_id`),
+  KEY `staff_detail_daytime_fk_idx` (`staff_detail_id`),
+  CONSTRAINT `staff_detail_daytime_fk` FOREIGN KEY (`staff_detail_id`) REFERENCES `staff_detail` (`staff_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
+============================== 
+
+CREATE TABLE `service_staff_xref` (
+  `service_staff_xref_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `service_detail_id` bigint(20) NOT NULL,
+  `staff_detail_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`service_staff_xref_id`),
+  KEY `service_detail_ssxref_idx` (`service_detail_id`),
+  KEY `staff_detail_ssxref_idx` (`staff_detail_id`),
+  CONSTRAINT `service_detail_ssxref` FOREIGN KEY (`service_detail_id`) REFERENCES `service_detail` (`service_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `staff_detail_ssxref` FOREIGN KEY (`staff_detail_id`) REFERENCES `staff_detail` (`staff_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) 
+
+========================================= 
+
+
+CREATE TABLE `service_detail` (
+  `service_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `business_detail_id` bigint(20) NOT NULL,
+  `service_name` varchar(45) DEFAULT NULL,
+  `service_desr` varchar(45) DEFAULT NULL,
+  `service_duration` varchar(45) DEFAULT NULL,
+  `service_price` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`service_detail_id`),
+  KEY `busn_details_service_fk_idx` (`business_detail_id`),
+  CONSTRAINT `busn_details_service_fk` FOREIGN KEY (`business_detail_id`) REFERENCES `business_detail` (`business_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
+====================================== 
+
+CREATE TABLE `business_user` (
+  `business_user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `phone_number` bigint(20) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `type_of_business` varchar(45) DEFAULT NULL,
+  `business_setup_flag` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`business_user_id`)
+) 
+============================================== 
+
+CREATE TABLE `business_detail` (
+  `business_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(45) DEFAULT NULL,
+  `about_company` varchar(45) DEFAULT NULL,
+  `tag` varchar(45) DEFAULT NULL,
+  `company_address` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `open_time` varchar(45) DEFAULT NULL,
+  `close_time` varchar(45) DEFAULT NULL,
+  `profile_picture` varchar(45) DEFAULT NULL,
+  `enable_without_login` varchar(45) DEFAULT NULL,
+  `email_notifications` varchar(50) DEFAULT NULL,
+  `sms_notifications` varchar(50) DEFAULT NULL,
+  `hrs_bfr_appt_booked` varchar(45) DEFAULT NULL,
+  `hrs_bfr_appt_cancelled` varchar(45) DEFAULT NULL,
+  `days_bfr_adv_appt_booked` varchar(45) DEFAULT NULL,
+  `hrs_bfr_appt_remainder_notification` varchar(45) DEFAULT NULL,
+  `business_user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`business_detail_id`),
+  KEY `user_detail_fk_idx` (`business_user_id`),
+  CONSTRAINT `user_detail_fk` FOREIGN KEY (`business_user_id`) REFERENCES `business_user` (`business_user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) 
+
+==========================================
+
+CREATE TABLE `appointment_detail` (
+  `appointment_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `appt_date` datetime DEFAULT NULL,
+  `appt_taken_date` datetime DEFAULT NULL,
+  `search_date` datetime DEFAULT NULL,
+  `staff_detail_id` bigint(20) DEFAULT NULL,
+  `appt_time` varchar(45) DEFAULT NULL,
+  `business_detail_id` bigint(20) DEFAULT NULL,
+  `appt_sts` varchar(45) DEFAULT NULL,
+  `service_detail_id` bigint(20) DEFAULT NULL,
+  `appointment_user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`appointment_detail_id`),
+  KEY `busn_detail_appt_fk_idx` (`business_detail_id`),
+  KEY `staff_detail_appt_fk_idx` (`staff_detail_id`),
+  KEY `service_detail_appt_fk_idx` (`service_detail_id`),
+  KEY `appt_user_appt_fk_idx` (`appointment_user_id`),
+  CONSTRAINT `appt_user_appt_fk` FOREIGN KEY (`appointment_user_id`) REFERENCES `appointment_user` (`appointment_user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `busn_detail_appt_fk` FOREIGN KEY (`business_detail_id`) REFERENCES `business_detail` (`business_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `service_detail_appt_fk` FOREIGN KEY (`service_detail_id`) REFERENCES `service_detail` (`service_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `staff_detail_appt_fk` FOREIGN KEY (`staff_detail_id`) REFERENCES `staff_detail` (`staff_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
+==================================
+
+CREATE TABLE `appointment_user` (
+  `appointment_user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) DEFAULT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`appointment_user_id`)
+)
+
+================================ 
+CREATE TABLE `service_detail` (
+  `service_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `business_detail_id` bigint(20) NOT NULL,
+  `service_name` varchar(45) DEFAULT NULL,
+  `service_desr` varchar(45) DEFAULT NULL,
+  `service_duration` varchar(45) DEFAULT NULL,
+  `service_price` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`service_detail_id`),
+  KEY `busn_details_service_fk_idx` (`business_detail_id`),
+  CONSTRAINT `busn_details_service_fk` FOREIGN KEY (`business_detail_id`) REFERENCES `business_detail` (`business_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+=================================================== 
+
+CREATE TABLE `service_staff_xref` (
+  `service_staff_xref_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `service_detail_id` bigint(20) NOT NULL,
+  `staff_detail_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`service_staff_xref_id`),
+  KEY `service_detail_ssxref_idx` (`service_detail_id`),
+  KEY `staff_detail_ssxref_idx` (`staff_detail_id`),
+  CONSTRAINT `service_detail_ssxref` FOREIGN KEY (`service_detail_id`) REFERENCES `service_detail` (`service_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `staff_detail_ssxref` FOREIGN KEY (`staff_detail_id`) REFERENCES `staff_detail` (`staff_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+======================================== 
+
+CREATE TABLE `staff_daytime_detail` (
+  `staff_daytime_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `staff_detail_id` bigint(20) NOT NULL,
+  `staff_week_days` varchar(45) DEFAULT NULL,
+  `staff_from_time` varchar(45) DEFAULT NULL,
+  `staff_to_time` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`staff_daytime_detail_id`),
+  KEY `staff_detail_daytime_fk_idx` (`staff_detail_id`),
+  CONSTRAINT `staff_detail_daytime_fk` FOREIGN KEY (`staff_detail_id`) REFERENCES `staff_detail` (`staff_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
+==================================== 
+
+CREATE TABLE `staff_detail` (
+  `staff_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `business_detail_id` bigint(20) NOT NULL,
+  `staff_user_name` varchar(45) DEFAULT NULL,
+  `staff_user_password` varchar(45) DEFAULT NULL,
+  `staff_profile_picture` varchar(45) DEFAULT NULL,
+  `staff_designation` varchar(45) DEFAULT NULL,
+  `staff_description` varchar(45) DEFAULT NULL,
+  `staff_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`staff_detail_id`),
+  KEY `busn_detail_satff_fk_idx` (`business_detail_id`),
+  CONSTRAINT `busn_detail_satff_fk` FOREIGN KEY (`business_detail_id`) REFERENCES `business_detail` (`business_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) 
+=====================================================

@@ -15,6 +15,7 @@ import org.dozer.Mapper;
 import com.ezeeappointer.dao.TEAAppointmentDAO;
 import com.ezeeappointer.data.AppointeeDashboard;
 import com.ezeeappointer.data.Appointment;
+import com.ezeeappointer.data.DayAndTime;
 import com.ezeeappointer.data.Service;
 import com.ezeeappointer.data.Staff;
 import com.ezeeappointer.dto.TEAAppointeeDashboardDTO;
@@ -27,6 +28,7 @@ import com.ezeeappointer.dto.TEAUIStaffDTO;
 import com.ezeeappointer.service.TEAAppointmentService;
 import com.ezeeappointer.utilities.TEADateUtility;
 import com.ezeeappointer.utilities.TEATimePeriodUtility;
+import com.ezeeappointer.data.DayAndTime;
 
 public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean implements TEAAppointmentService{
 	
@@ -64,12 +66,43 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 	
 	public List<TEAUIStaffDTO> searchForStaffDetailsByServiceId(long busnId, long serviceId, Date appointmentDate){
 		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
-		List<TEAUIStaffDTO> uiStaff = dao.retrieveStaffDetailsByServiceId(serviceId);
-		for(TEAUIStaffDTO staff:uiStaff){
+		List<Staff> staffs = dao.retrieveStaffDetailsByServiceId(serviceId);
+		
+		List<TEAUIStaffDTO> uiStaffDTOs = new ArrayList<TEAUIStaffDTO>();
+		for(Staff sf: staffs){
+			
+			
+			TEAUIStaffDTO dto = new TEAUIStaffDTO();
+			List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
+			String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
+		
+			TEADayAndTimeDTO tdt = new TEADayAndTimeDTO();
+			for(DayAndTime dt: sf.getDayTimes()){
+				
+				tdt.setFromTime(dt.getFromTime());
+				tdt.setToTime(dt.getToTime());
+				tdt.setDayss(days);
+				
+				ldt.add(tdt);
+				
+				//  dt.setDays(days);
+				//ldt.add(mapper.map(dt,TEADayAndTimeDTO.class));
+			}
+			dto.setDayTime(ldt);
+			dto.setStaffName(sf.getStaffName());
+			dto.setStaffId(sf.getId());
+			
+			List<TEAServiceDTO> sdt = new ArrayList<TEAServiceDTO>();
+			for(Service sr: sf.getServices())
+			sdt.add(mapper.map(sr,  TEAServiceDTO.class));
+			dto.setServices(sdt);
+			dto.setStaffDescription("No description yet..");
+			uiStaffDTOs.add(dto);
+		}
+		for(TEAUIStaffDTO staff:uiStaffDTOs){
 			populateAppointmentDetailsForStaff(staff, appointmentDate, busnId, 7);
 		}
-	    
-		return uiStaff;
+		return uiStaffDTOs;
 	}
 	
 	private List<String> getAllBookedSlotsByDate(List<Appointment> appts, Date date){
@@ -109,7 +142,7 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		    	String endTime = null;
 		    	boolean isAvailable = false;
 		    	for(TEADayAndTimeDTO dt:staff.getDayTime()){
-		    		if(Arrays.asList(dt.getDays()).contains(fullDayName)){
+		    		if(Arrays.asList(dt.getDayss()).contains(fullDayName)){
 		    			startTime = ("00000000" + dt.getFromTime()).substring(dt.getFromTime().length());
 		    			endTime  =  ("00000000" + dt.getToTime()).substring(dt.getToTime().length());
 		    			isAvailable = true;

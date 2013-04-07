@@ -15,22 +15,11 @@ public class TEADayAndTimeDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 964678886999033996L;
-	private String[] days;
+	private String[] dayss;
 	private String fromTime;
 	private String toTime;
 	
-	/**
-	 * @return the days
-	 */
-	public String[] getDays() {
-		return days;
-	}
-	/**
-	 * @param days the days to set
-	 */
-	public void setDays(String[] days) {
-		this.days = days;
-	}
+	
 	/**
 	 * @return the fromTime
 	 */
@@ -54,6 +43,12 @@ public class TEADayAndTimeDTO implements Serializable{
 	 */
 	public void setToTime(String toTime) {
 		this.toTime = toTime;
+	}
+	public String[] getDayss() {
+		return dayss;
+	}
+	public void setDayss(String[] dayss) {
+		this.dayss = dayss;
 	}
 
 }

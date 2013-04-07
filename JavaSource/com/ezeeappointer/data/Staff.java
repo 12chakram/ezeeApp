@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -44,8 +46,9 @@ public class Staff {
 	private String staffProfilePicture;
 	
 	
-	@Basic
+	
 	@OneToMany(targetEntity=DayAndTime.class,mappedBy = "staff", cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private List<DayAndTime> dayTimes = new ArrayList<DayAndTime>();
 	
 	
@@ -53,7 +56,7 @@ public class Staff {
 	private List<ServiceAndStaffXREF> srvcStaffXref = new ArrayList<ServiceAndStaffXREF>();*/
 	
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="business_detail_id")
 	private Business business;
 	
@@ -63,7 +66,7 @@ public class Staff {
 	private long id;
 	
 	
-	@ManyToMany
+	@ManyToMany()
 	@JoinTable(name="SERVICE_STAFF_XREF",
 	 joinColumns={@JoinColumn(name="staff_detail_id")},
 	 inverseJoinColumns={@JoinColumn(name="service_detail_id")})

@@ -1,7 +1,6 @@
-package com.ezeeappointer.dao;
+package com.ezeeappointer.utilities;
 
 import java.util.List;
-
 
 import javax.persistence.Query;
 
@@ -9,22 +8,22 @@ import org.hibernate.Session;
 
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.AppointeeUser;
-import com.ezeeappointer.data.BusinessUser;
 
-public class TEAAppointeeUserManagementDAO {
+public class HibernateTest3 {
 
-	public boolean addAppointeeUser(AppointeeUser user) {
-		// TODO Auto-generated method stub
-		Session em = TEAEntityManagerFactory.get();
-		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
-	
-		return true; 
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		AppointeeUser appUser = findAppointeeUser("kumar.v18@gmail.com","123456");
 		
 	}
 
-	public AppointeeUser findAppointeeUser(String email, String password) {
+	
+	
+	
+public static AppointeeUser findAppointeeUser(String email, String password) {
 		
 		Session em = TEAEntityManagerFactory.get();
 		StringBuffer queryString = new StringBuffer("select au from AppointeeUser au where au.email='"+email+"'");
@@ -40,4 +39,6 @@ public class TEAAppointeeUserManagementDAO {
 			return user.get(0);
 	}
 
+	
+	
 }

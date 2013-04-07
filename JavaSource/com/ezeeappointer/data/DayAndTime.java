@@ -27,6 +27,9 @@ public class DayAndTime {
 	@Column(name="staff_week_days")
 	private String days;
 	
+	
+	
+	
 	@Column(name="staff_from_time")
 	private String fromTime;
 	
@@ -109,6 +112,8 @@ public class DayAndTime {
 	public void setDays(String days) {
 		this.days = days;
 	}
+	
+	
 	
 
 }
