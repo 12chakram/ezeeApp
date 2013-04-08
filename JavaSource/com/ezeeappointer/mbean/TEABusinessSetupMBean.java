@@ -155,7 +155,7 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 				st.setUserName(stffMBean.getUserName());
 				for(TEADayAndTimeMBean daytime: stffMBean.getDayTimes()){
 					TEADayAndTimeDTO dt = new TEADayAndTimeDTO();
-					dt.setDays(daytime.getDays());
+					dt.setDayss(daytime.getDays());
 					dt.setFromTime(daytime.getFromTime());
 					dt.setToTime(daytime.getToTime());
 					st.getDayTimes().add(dt);

@@ -12,6 +12,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.AppointeeDashboard;
@@ -29,9 +30,12 @@ public class TEAAppointmentDAO {
 		
 		public void addAppointment(Appointment app){
 			Session em = TEAEntityManagerFactory.get();
-			em.getTransaction().begin();
+			
+			Transaction transaction = em.beginTransaction();
+			
 			em.persist(app);
-			em.getTransaction().commit();
+			transaction.commit();
+			em.close();
 			
 		}
 		
@@ -93,15 +97,16 @@ public class TEAAppointmentDAO {
 		}
 		
 		public List<Staff> retrieveStaffDetailsByServiceId(long serviceId){
-			Session em = TEAEntityManagerFactory.get();
+		Session em = TEAEntityManagerFactory.get();
 			 Mapper mapper = new DozerBeanMapper();
+			 
+			 List<Staff> staffs = new ArrayList<Staff>();
+			 
 			em.getTransaction().begin();
 			
 			Service service = (Service) em.get(Service.class, serviceId);
 			    List<Staff> staff = service.getStaffs();
-			    
-			
-			   for(Staff sf: staff){
+			 for(Staff sf: staff){
 					   sf.getServices();
 					   
 					     String queryString2 = "select s from DayAndTime s where s.staff="+sf.getId();
@@ -109,13 +114,14 @@ public class TEAAppointmentDAO {
 					     List<DayAndTime> dt = (List<DayAndTime>) q2.list();
 					    
 					    sf.setDayTimes(dt);
-				    	  System.out.println("kkkk");
+					    staffs.add(sf);
+					    
 				 }
 			   
 			    em.getTransaction().commit();
 			  
-			    System.out.println("kkkk");
-			   return staff;
+			    System.out.println("kkkkk");
+			   return staffs;
 			
 			
 		}

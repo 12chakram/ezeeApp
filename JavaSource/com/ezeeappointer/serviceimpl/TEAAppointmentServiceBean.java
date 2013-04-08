@@ -111,6 +111,7 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 			if(appts.get(i).getApptDate().equals(date)){
 				bookedSlots.add(appts.get(i).getApptTime());
 				appts.remove(i);
+				System.out.println("----");
 			}				
 		}
 		return bookedSlots;

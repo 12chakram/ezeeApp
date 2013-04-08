@@ -79,7 +79,7 @@ public class TEABusinessDetailServiceBean extends TEABasicAbstractServiceBean im
 			for(TEADayAndTimeDTO daytime: stffDTO.getDayTimes()){
 				DayAndTime dt = new DayAndTime();
 				
-				dt.setDays(daytime.getDays().toString());
+				dt.setDays(daytime.getDayss().toString());
 				dt.setFromTime(daytime.getFromTime());
 				dt.setToTime(daytime.getToTime());
 				dt.setStaff(st);

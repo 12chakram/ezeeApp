@@ -78,7 +78,7 @@ public class HibernateTest {
 		staffdto.setUserName("devauser");
 		staffdto.setDayTimes(dayTimes);
 		
-		daytimedao.setDays(days);
+		daytimedao.setDayss(days);
 		daytimedao.setFromTime("8:00am");
 		daytimedao.setToTime("6:00pm");
 		
@@ -168,7 +168,7 @@ public class HibernateTest {
 			for(TEADayAndTimeDTO daytime: stffDTO.getDayTimes()){
 				DayAndTime dt = new DayAndTime();
 				
-				dt.setDays(daytime.getDays().toString());
+				dt.setDays(daytime.getDayss().toString());
 				dt.setFromTime(daytime.getFromTime());
 				dt.setToTime(daytime.getToTime());
 				dt.setStaff(st);
