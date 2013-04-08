@@ -87,7 +87,7 @@ public TEABusinessUserDTO getBusnUser() {
 			if(u != null){
 				getActiveUser().setBusnUser(u);
 			
-				if(u.getBusinessSetupFlag().equals("Y")) 
+				if(u.getBusinessSetupFlag().equals("y")) 
 					 return "ezeedashboardn";
 					 
 					return "businesssetup1";
