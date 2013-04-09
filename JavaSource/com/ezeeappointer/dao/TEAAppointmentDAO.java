@@ -35,7 +35,7 @@ public class TEAAppointmentDAO {
 			
 			em.persist(app);
 			transaction.commit();
-			em.close();
+		
 			
 		}
 		
