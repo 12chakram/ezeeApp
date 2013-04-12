@@ -20,6 +20,8 @@ import com.ezeeappointer.service.TEABusinessUserManagementService;
 public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
 	
+
+	
 	private static final long serialVersionUID = -4850861653651843128L;
 	private String userId;
 	private String password;

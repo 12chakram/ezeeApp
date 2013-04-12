@@ -65,7 +65,7 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 	public String searchForStaff() throws ParseException{
 		
 		SimpleDateFormat dateFormate = new SimpleDateFormat("dd-MM-yyyy");
-		aptDtlsMbean.setUiStaffDTOs(aptService.searchForStaffDetailsByServiceId(11, Long.parseLong(aptDtlsMbean.getSelectedService()), dateFormate.parse(aptDtlsMbean.getSearchDate())));
+		aptDtlsMbean.setUiStaffDTOs(aptService.searchForStaffDetailsByServiceId(1, Long.parseLong(aptDtlsMbean.getSelectedService()), dateFormate.parse(aptDtlsMbean.getSearchDate())));
 		TEAUIStaffDTO uiStaffDTO = aptDtlsMbean.getUiStaffDTOs().get(0);
 		selectedStaffIndex = Long.toString(uiStaffDTO.getStaffId());
 		aptSlots = uiStaffDTO.getAptSlots();
@@ -81,7 +81,7 @@ public class TEAAppointmentMBean extends TEASecureMbean {
 public String searchForService() throws ParseException{
 		
 		SimpleDateFormat dateFormate = new SimpleDateFormat("dd-MM-yyyy");
-		aptDtlsMbean.setUiStaffDTO(aptService.searchForStaffDetailsByStaffId(11,Long.parseLong(aptDtlsMbean.getSelectedStaff()), dateFormate.parse(aptDtlsMbean.getSearchDate())));
+		aptDtlsMbean.setUiStaffDTO(aptService.searchForStaffDetailsByStaffId(1,Long.parseLong(aptDtlsMbean.getSelectedStaff()), dateFormate.parse(aptDtlsMbean.getSearchDate())));
 		TEAUIStaffDTO uiStaffDTO = aptDtlsMbean.getUiStaffDTO();
 		selectedStaffIndex = Long.toString(uiStaffDTO.getStaffId());
 		aptSlots = uiStaffDTO.getAptSlots();
@@ -142,11 +142,17 @@ public String searchForService() throws ParseException{
 	
 	public String register(){
 		
+		TEAAppointeeUserDTO appuser = null;
+		
 		TEAAppointeeUserManagementService service = (TEAAppointeeUserManagementService) getBackendService("appointeeUserService");
 		boolean isSuccess = service.register(appointee);
 		if(!isSuccess) return null;
-		saveAppintmentDetails(appointee.getId());
-		getActiveUser().setApptUser(appointee);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("APPT_USER", appointee);		
+		if(appointee.getEmail() != null && appointee.getPassword() != null){
+			TEAAppointeeUserManagementService lservice = (TEAAppointeeUserManagementService)TEAServiceDelegate.getService("appointeeUserService");			
+			appuser = lservice.login(appointee.getEmail(), appointee.getPassword());
+		saveAppintmentDetails(appuser.getId());
+		}
+		getActiveUser().setApptUser(appuser);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("APPT_USER", appointee);		
 		return "appointmentbooked";
 	}
 	
@@ -160,7 +166,7 @@ public String searchForService() throws ParseException{
 		apptDTO.setSearchDate(TEADateUtility.convertStringddMMyyyyHiphnedToDate(aptDtlsMbean.getSearchDate()));
 		apptDTO.setStaffId(aptDtlsMbean.getSelectedUIStaffDTO().getStaffId());
 		apptDTO.setServiceId(Long.parseLong(aptDtlsMbean.getSelectedService()));
-		apptDTO.setBusnId(11);
+		apptDTO.setBusnId(1);
 		apptDTO.setApptSts("p");
 		apptDTO.setUserId(id);
 		aptService.saveAppintmentDetails(apptDTO);
@@ -172,7 +178,7 @@ public String searchForService() throws ParseException{
 	 */
 	public List<SelectItem> getServiceSelectItems() {
 		TEAAppointmentService service= (TEAAppointmentService) getBackendService("appointmentService");
-		List<TEAServiceDTO> dtos = service.retrieveAvailableServicesForBusiness((long) 11);
+		List<TEAServiceDTO> dtos = service.retrieveAvailableServicesForBusiness((long) 1);
 		serviceSelectItems = new ArrayList<SelectItem>();
 		serviceSelectItems.add(new SelectItem(null, "Choose a Service"));
 		for(TEAServiceDTO dto: dtos){
@@ -185,7 +191,7 @@ public String searchForService() throws ParseException{
 	public List<SelectItem> getStaffSelectItems() {
 		
 		TEAAppointmentService service= (TEAAppointmentService) getBackendService("appointmentService");
-		List<TEAStaffDTO> dtos = service.retrieveAvailableStaffForBusiness((long) 11);
+		List<TEAStaffDTO> dtos = service.retrieveAvailableStaffForBusiness((long) 1);
 		staffSelectItems = new ArrayList<SelectItem>();
 		staffSelectItems.add(new SelectItem(null, "Choose a Service"));
 		for(TEAStaffDTO dto: dtos){

@@ -29,11 +29,11 @@ public class TEALogoutMBean
 			session.invalidate();
 			
 			
-			return "index";
+			return "bulogin";
 		}
 		else
 		{
-			return "index";
+			return "bulogin";
 		}
 	}
 }

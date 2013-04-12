@@ -39,8 +39,8 @@ public class ServiceAndStaffXREF {
 	/*@Column(name="busn_detail_id")
 	private long businessId;*/
 	
-	@ManyToOne
-	private Staff staff;
+	/*@ManyToOne
+	private Staff staff;*/
 	
 	/**
 	 * @return the id
@@ -86,14 +86,14 @@ public class ServiceAndStaffXREF {
 	/**
 	 * @return the staff
 	 */
-	public Staff getStaff() {
+/*	public Staff getStaff() {
 		return staff;
 	}
-	/**
+	*//**
 	 * @param staff the staff to set
-	 */
+	 *//*
 	public void setStaff(Staff staff) {
 		this.staff = staff;
-	}
+	}*/
 
 }

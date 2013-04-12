@@ -2,6 +2,7 @@ package com.ezeeappointer.serviceimpl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -79,7 +80,19 @@ public class TEABusinessDetailServiceBean extends TEABasicAbstractServiceBean im
 			for(TEADayAndTimeDTO daytime: stffDTO.getDayTimes()){
 				DayAndTime dt = new DayAndTime();
 				
-				dt.setDays(daytime.getDayss().toString());
+				// need to change util class
+				int dayssize = daytime.getDayss().length;
+				StringBuffer workingDays = new StringBuffer();;
+				if(dayssize>=0){
+					for(int x = 0; x <=dayssize-1; x++){
+				       StringTokenizer stringTokenizer = new StringTokenizer(daytime.getDayss()[x],",");
+				   while(stringTokenizer.hasMoreTokens()){
+					   workingDays.append(stringTokenizer.nextToken()+",");
+					 }
+					}
+				}
+				
+				dt.setDays(workingDays.toString());
 				dt.setFromTime(daytime.getFromTime());
 				dt.setToTime(daytime.getToTime());
 				dt.setStaff(st);

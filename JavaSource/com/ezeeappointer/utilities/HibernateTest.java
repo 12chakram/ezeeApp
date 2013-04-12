@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,11 +25,11 @@ import com.ezeeappointer.dto.TEAStaffDTO;
 public class HibernateTest {
 
 	static TEABusinessDetailDTO businessDTO;
-	static long userId =1;
+	static long userId =11;
 	static String[] emailn = {"admin","customer"};	
 	static String[] smsn = {"admin","customer"};
 	static String [] service = {"dental", "ITservices"};
-	static String[] days = {"sun","MON","sat"};
+	static String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thusrday","Friday"};
 	
 	static List<TEAServiceDTO> services;
 	static List<TEAStaffDTO> staff;
@@ -165,10 +166,24 @@ public class HibernateTest {
 //				//st.getSrvcStaffXref().add(xref);
 //			}
 			
+			
+		//	UserTransferDTO utd = new UserTransferDTO();
+			
 			for(TEADayAndTimeDTO daytime: stffDTO.getDayTimes()){
 				DayAndTime dt = new DayAndTime();
 				
-				dt.setDays(daytime.getDayss().toString());
+				int dayssize = daytime.getDayss().length;
+				StringBuffer workingDays = new StringBuffer();;
+				if(dayssize>=0){
+					for(int x = 0; x <=dayssize-1; x++){
+				       StringTokenizer stringTokenizer = new StringTokenizer(daytime.getDayss()[x],",");
+				   while(stringTokenizer.hasMoreTokens()){
+					   workingDays.append(stringTokenizer.nextToken()+",");
+					 }
+					}
+				}
+				
+				dt.setDays(workingDays.toString());
 				dt.setFromTime(daytime.getFromTime());
 				dt.setToTime(daytime.getToTime());
 				dt.setStaff(st);

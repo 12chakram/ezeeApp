@@ -66,7 +66,12 @@ public class TEAAppointmentDAO {
 		List<Staff> s =(List<Staff>)q2.list();
 		 
 		 for(Staff st:s){
-			 List<DayAndTime> dayTimes = (List<DayAndTime>) em.get(DayAndTime.class,st.getId() );
+			 
+			 String queryStringdayTime = "select s from DayAndTime s where s.staff="+st.getId();
+			 
+			 org.hibernate.Query dayTimeQuery =  em.createQuery(queryStringdayTime.toString());
+			 
+			 List<DayAndTime> dayTimes = (List<DayAndTime>)dayTimeQuery.list();
 			 st.setDayTimes(dayTimes);
 		 }
 		 

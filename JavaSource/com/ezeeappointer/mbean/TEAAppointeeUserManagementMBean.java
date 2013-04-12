@@ -70,8 +70,7 @@ public String getEmail() {
 }
 /**
  * @param email the email to set
- */
-public void setEmail(String email) {
+ */ void setEmail(String email) {
 	this.email = email;
 }
 /**

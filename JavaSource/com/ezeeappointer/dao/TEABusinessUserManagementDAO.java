@@ -67,7 +67,7 @@ public class TEABusinessUserManagementDAO {
 	  if(ubu.getId()!=0) ubu.setId(user.getId());
 	  em.persist(ubu);
 		 em.getTransaction().commit();
-			em.close();	
+		
 			return true; 
 		
 	}
@@ -174,7 +174,7 @@ public class TEABusinessUserManagementDAO {
 		  businessUser.setBusinessSetupFlag("y");
 		  em.update(businessUser);
 		  em.getTransaction().commit();
-			em.close();
+			
 			
 			
 	
@@ -192,14 +192,16 @@ public class TEABusinessUserManagementDAO {
 		TEAUIBussinessDashboardDTO bDashboardValObj=new TEAUIBussinessDashboardDTO();
 		Session em =  TEAEntityManagerFactory.get();
 		em.getTransaction().begin();
-		StringBuffer queryString = new StringBuffer("select apt from Appointment apt where apt.busnId="+bid);
-		Query q = (Query) em.createQuery(queryString.toString());
-		int i=q.getResultList().size();
+		
+		String queryString = "select apt from Appointment apt where apt.busnId="+bid;
+		 org.hibernate.Query q = em.createQuery(queryString.toString());
+		int i=q.list().size();
+		
 		bDashboardValObj.setTotalAptnts(i);
-		StringBuffer queryString1 = new StringBuffer("select apt from Appointment apt where apt.busnId="+bid+" and apt.apptSts='p'");
-		Query q1 = (Query) em.createQuery(queryString.toString());
-		List<Appointment> appointmentObj=q1.getResultList();
-		int j=q1.getResultList().size();
+		String queryString1 = "from Appointment apt where apt.busnId="+bid+" and apt.apptSts='p'";
+		org.hibernate.Query q1 =  em.createQuery(queryString1.toString());
+		List<Appointment> appointmentObj=q1.list();
+		int j=q1.list().size();
 		bDashboardValObj.setPendingAptnts(j);
 		/*StringBuffer queryString2 = new StringBuffer("select st from Service st where st.businessId="+bid);
 		Query q2 = em.createQuery(queryString2.toString());
@@ -220,15 +222,15 @@ public class TEABusinessUserManagementDAO {
 		for(Appointment apntObj: appointmentObj)
 		{
 			BsLoginDashboard bsLoginDashboardObj = new BsLoginDashboard();
-			StringBuffer queryString4 = new StringBuffer("select st from Service st where st.id="+apntObj.getServiceId());
-			Query q4 = (Query) em.createQuery(queryString4.toString());
-			q4.setMaxResults(1);
-			Service srvObj = (Service)q4.getSingleResult();
+			/*String queryString4 = "select st from Service st where st.id="+apntObj.getServiceId();
+			org.hibernate.Query q4 = em.createQuery(queryString4.toString());
+			q4.setMaxResults(1);*/
+			Service srvObj = (Service)em.get(Service.class,Long.parseLong(apntObj.getServiceId()));
 			bsLoginDashboardObj.setServiceName(srvObj.getServiceName());
-			StringBuffer queryString5 = new StringBuffer("select st from Staff st where st.id="+apntObj.getStaffId());
-			Query q5 = (Query) em.createQuery(queryString5.toString());
-			q5.setMaxResults(1);
-			Staff stfObj = (Staff)q5.getSingleResult();
+			/*String queryString5 = "select st from Staff st where st.id="+apntObj.getStaffId();
+			org.hibernate.Query q5 = em.createQuery(queryString5.toString());
+			q5.setMaxResults(1);*/
+			Staff stfObj = (Staff)em.get(Staff.class, apntObj.getStaffId());
 			bsLoginDashboardObj.setStaffName(stfObj.getStaffName());
 			bsLoginDashboardObj.setApptDate(apntObj.getApptDate());
 			bsLoginDashboardObj.setApptTime(apntObj.getApptTime());
@@ -243,27 +245,28 @@ public class TEABusinessUserManagementDAO {
 		//staff apt
 		Map<Long,Integer> mapObj=new HashMap<Long, Integer>();
 		List<BsDashboardStafApnt> bsDashboardStafApntList=new ArrayList<BsDashboardStafApnt>();
-		StringBuffer queryString6 = new StringBuffer("select st from Staff st where st.businessId="+bid);
-		Query q6 = (Query) em.createQuery(queryString6.toString());
-		List<Staff> staffList=q6.getResultList();
+		String queryString6 = "select st from Staff st where st.business="+bid;
+		org.hibernate.Query q6 = em.createQuery(queryString6.toString());
+		List<Staff> staffList=(List<Staff>)q6.list();
 		for (Staff staff : staffList)
 		{
 			BsDashboardStafApnt stafAppTemptObj=new BsDashboardStafApnt();
-			StringBuffer queryString7 = new StringBuffer("select s from ServiceAndStaffXREF s where s.staffId="+staff.getId());
-			Query q7 = (Query) em.createQuery(queryString7.toString());
-			List<ServiceAndStaffXREF> srveStaffList=q7.getResultList();
+			String queryString7 ="select s from ServiceAndStaffXREF s where s.staffId="+staff.getId();
+			org.hibernate.Query q7 = em.createQuery(queryString7.toString());
+			List<ServiceAndStaffXREF> srveStaffList= (List<ServiceAndStaffXREF>)q7.list();
 			int k=0;
 			StringBuffer sb=new StringBuffer();
 			for (ServiceAndStaffXREF serviceAndStaffXREF : srveStaffList)
 			{
-				StringBuffer queryString8 = new StringBuffer("select a from Appointment a where a.busnId="+bid+" and a.serviceId='"+String.valueOf(serviceAndStaffXREF.getServiceId())+"'"+ " and a.staffId="+serviceAndStaffXREF.getStaffId());
-				Query q8 = (Query) em.createQuery(queryString8.toString());
-				List<Appointment> a=q8.getResultList();
+				String queryString8 ="select a from Appointment a where a.busnId="+bid+" and a.serviceId='"+String.valueOf(serviceAndStaffXREF.getServiceId())+"'"+ " and a.staffId="+serviceAndStaffXREF.getStaffId();
+				org.hibernate.Query q8 = em.createQuery(queryString8.toString());
+				List<Appointment> a=q8.list();
 				k=k+a.size();
-				Query q9 = (Query) em.createQuery("select s from Service s where s.id=:id");
+				
+		/*	org.hibernate.Query q9 = em.createQuery("select s from Service s where s.id=:id");
 				q9.setParameter("id", serviceAndStaffXREF.getServiceId());
-				q9.setMaxResults(1);
-				Service srvObj1 = (Service)q9.getSingleResult();
+				q9.setMaxResults(1);*/
+				Service srvObj1 = (Service)em.get(Service.class,serviceAndStaffXREF.getServiceId());
 				sb.append(srvObj1.getServiceName()).append(",");
 			}
 				mapObj.put(staff.getId(),k);
@@ -285,7 +288,7 @@ public class TEABusinessUserManagementDAO {
 		bDashboardValObj.setStaffApntList(bsDashboardStafApntList);
 		bDashboardValObj.setIndividualCounts(mapObj);
 		em.getTransaction().commit();
-		em.close();
+	
 		return bDashboardValObj; 
 	}
 	
@@ -293,10 +296,10 @@ public class TEABusinessUserManagementDAO {
 	{
 		Session em =  TEAEntityManagerFactory.get();
 		em.getTransaction().begin();
-		StringBuffer queryString = new StringBuffer("select a from Appointment a where a.id="+id);
+		/*StringBuffer queryString = new StringBuffer("select a from Appointment a where a.id="+id);
 		Query q = (Query) em.createQuery(queryString.toString());
-		q.setMaxResults(1);
-		Appointment apt = (Appointment)q.getSingleResult();
+		q.setMaxResults(1);*/
+		Appointment apt = (Appointment)em.get(Appointment.class,id);
 		if(null!=apt)
 		{
 			apt.setId(id);
@@ -312,7 +315,7 @@ public class TEABusinessUserManagementDAO {
 			
 				em.merge(apt); 
 				em.getTransaction().commit();
-				em.close();
+			
 				return true;
 		}
 		else
@@ -333,10 +336,10 @@ public class TEABusinessUserManagementDAO {
 		Session em =  TEAEntityManagerFactory.get();
 		em.getTransaction().begin();
 		StringBuffer queryString1 = new StringBuffer("select apt from Appointment apt where apt.busnId="+id+" and apt.apptSts='p'");
-		Query q = (Query) em.createQuery(queryString1.toString());
-		int j=q.getResultList().size();
+		org.hibernate.Query q = em.createQuery(queryString1.toString());
+		int j=q.list().size();
 		em.getTransaction().commit();
-		em.close();
+	
 		return j;
 	}
 }

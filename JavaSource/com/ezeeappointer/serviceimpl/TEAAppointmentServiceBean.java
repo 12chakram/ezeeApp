@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
@@ -74,15 +75,17 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 			
 			TEAUIStaffDTO dto = new TEAUIStaffDTO();
 			List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
-			String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
+			//String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
 		
 			TEADayAndTimeDTO tdt = new TEADayAndTimeDTO();
 			for(DayAndTime dt: sf.getDayTimes()){
 				
+				
+				String workingdays = dt.getDays();
+				
 				tdt.setFromTime(dt.getFromTime());
 				tdt.setToTime(dt.getToTime());
-				tdt.setDayss(days);
-				
+				tdt.setDayss(workingdays.split(","));
 				ldt.add(tdt);
 				
 				//  dt.setDays(days);
@@ -108,7 +111,8 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 	private List<String> getAllBookedSlotsByDate(List<Appointment> appts, Date date){
 		List<String> bookedSlots = new ArrayList<String>();
 		for(int i = appts.size()-1; i >= 0; i--){
-			if(appts.get(i).getApptDate().equals(date)){
+			if(DateUtils.isSameDay(appts.get(i).getApptDate(), date)){
+			//if(appts.get(i).getApptDate().equals(date)){
 				bookedSlots.add(appts.get(i).getApptTime());
 				appts.remove(i);
 				System.out.println("----");
@@ -166,6 +170,7 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		    	//slots.putAll(TEATimePeriodUtility.createAllPossiblePeriods("02:00 pm", "04:30 pm", "AVL"));
 		    	for(String bslot: getAllBookedSlotsByDate(appts, startDate.getTime()))
 		    		slots.put(bslot, "BK");
+		    	System.out.println("jjj");
 		    	slot.setApptSlots(slots);
 		    	aptSlots.add(slot);
 		    }
