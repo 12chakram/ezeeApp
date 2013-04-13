@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+<title>ziceinclude&trade; admin  version 1.0 online</title>
+        <!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+<link href="css/zice.style.css" rel="stylesheet" type="text/css" />
+<link href="css/icon.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="components/tipsy/tipsy.css" media="all"/>
+<style type="text/css">
+html {
+	background-image: none;
+}
+#versionBar {
+	background-color:#212121;
+	position:fixed;
+	width:100%;
+	height:35px;
+	bottom:0;
+	left:0;
+	text-align:center;
+	line-height:35px;
+}
+.copyright{
+	text-align:center; font-size:10px; color:#CCC;
+}
+.copyright a{
+	color:#A31F1A; text-decoration:none
+}    
+</style>
+</head>
+<body >
+<div id="header" >
+                <div id="account_info"> 
+                    <img src="images/avatar.png" alt="Online" class="avatar" />
+					<div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">John Doe</b><img src="images/gear.png" class="gear"  alt="Profile Setting" ></div>
+					<div class="logout" title="Disconnect"><b >Logout</b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" ></div> 
+                </div>
+            </div> <!--//  header -->
+			<div id="shadowhead"></div>
+<div class="onecolumn" >
+                        <div class="header"> <span ><span class="ico gray home"></span> Site Data manager</span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+                            <div class="boxtitle min">website status</div>
+                            <div  class="grid2">
+                                
+                                <div class="chart-pie-shadow" ></div>
+                                <div class="chart_title"><span>Pages is popular  in your web</span></div>
+                            </div>
+                            <div  class="grid2">
+                                <div class="inner">
+                                    <form action="#">
+                                        <div class="section">
+                                            <label> Website Name <small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" name="sitename" id="sitename"  class=" full"  value="Yoursite.com" />
+                                            </div>
+                                        </div>
+                                        <div class="section">
+                                            <label> Website title <small>Text custom</small></label>
+                                            <div>
+                                                <input type="text" name="sitename" class=" full" />
+                                            </div>
+                                        </div>
+                                        <div class="section">
+                                            <label> Status <small>website status </small></label>
+                                            <div> 
+                                                      <input type="checkbox" id="online" name="online"   class="online"  value="1"   checked="checked" />
+                                           </div>
+                                        </div>
+                                        <div class="section">
+                                            <label> SEO metaTag <small>Text custom</small></label>
+                                            <div>
+                                                <select  class="chzn-select"  multiple="multiple" tabindex="4">
+                                                    <option value=""></option>
+                                                    <option value="" selected="selected">webstie </option>
+                                                    <option value="" selected="selected">data manager</option>
+                                                    <option value="" selected="selected">shopping</option>
+                                                    <option value="" selected="selected">appication</option>
+                                                    <option value="" >webdesign</option>
+                                                    <option value="" >admin template</option>
+                                                    <option value="" >icon </option>
+                                                    <option value="">your tag</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="section last">
+                                            <div> <a class="uibutton loading"  title="Saving"  rel="1" > save</a> <a class="uibutton  special" >button</a> <a class="uibutton  confirm" >button</a> </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+
+<!--Login div-->
+<div class="clear"></div>
+<div id="versionBar" >
+  <div class="copyright" > &copy; Copyright 2012  All Rights Reserved <span class="tip"><a  href="#" title="Zice Admin" >Your company</a> </span> </div>
+  <!-- // copyright-->
+</div>
+<!-- Link JScript-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="components/effect/jquery-jrumble.js"></script>
+<script type="text/javascript" src="components/ui/jquery.ui.min.js"></script>     
+<script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
+<script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+</body>
+</html>

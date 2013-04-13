@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+        
+    <title>Ezee Appointer - Register</title>
+    <!-- Link shortcut icon-->
+    <link rel="shortcut icon" type="image/ico" href="images/favicon2.html" /> 
+   <!-- Link css-->
+   		<link rel="stylesheet" type="text/css" href="css/zice.style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/icon.css"/>
+        <link rel="stylesheet" type="text/css" href="css/ui-custom.css"/>
+        <link rel="stylesheet" type="text/css" href="css/timepicker.css"  />
+        <link rel="stylesheet" type="text/css" href="components/fancybox/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="components/datatables/dataTables.css"  /> 
+        <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />
+        <link rel="stylesheet" type="text/css" href="components/confirm/jquery.confirm.css" />
+       
+   
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="components/ui/jquery.ui.min.js"></script> 
+        <script type="text/javascript" src="components/ui/timepicker.js"></script>
+        <script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+        <script type="text/javascript" src="components/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="components/datatables/dataTables.min.js"></script>
+        <script type="text/javascript" src="components/datatables/ColVis.js"></script>
+        <script type="text/javascript" src="components/scrolltop/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="components/chosen/chosen.js"></script>
+        <script type="text/javascript" src="components/confirm/jquery.confirm.js"></script>
+        <script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
+        <script type="text/javascript" src="components/filestyle/jquery.filestyle.js" ></script>
+        <script type="text/javascript" src="components/placeholder/jquery.placeholder.js" ></script>
+		<script type="text/javascript" src="js/scripts.js"></script>    
+    
+    <style type="text/css">
+	body.dashborad{
+		  background-image:none;
+	}
+	</style>   
+</head>        
+<body>        
+    <div id="alertMessage" class="error"></div> 
+                   
+   
+    
+	<div id="shadowhead"></div>
+    <div id="hide_panel"> 
+        <a class="butAcc" rel="0" id="show_menu"></a>
+        <a class="butAcc" rel="1" id="hide_menu"></a>
+        <a class="butAcc" rel="0" id="show_menu_icon"></a>
+        <a class="butAcc" rel="1" id="hide_menu_icon"></a>
+    </div>           
+
+	<div id="content" class="registrationpg">
+		<div class="inner">
+		<div class="topcolumn">
+		<div class="logo"></div>
+	</div>
+    <div class="clear"></div>
+        <div class="onecolumn" >
+        <div class="clear"></div>
+        <div class="content" >
+        <div class="registration_form">
+        	<div class="setup_div">
+            		<h3>Set Up Your Business in 10 Mintues</h3>
+                    <div class="uibar">
+                    	<div class="step step1_on">
+                        </div>
+                        <div class="step step2_on">
+                        </div>
+                        <div class="step step3_off">
+                        </div>
+                        <div class="step step4_off">
+                        </div>
+                        <div class="step step5_off">
+                        </div>
+                      <div class="step stepgo_off">
+                        </div>
+                        
+                    </div>
+                        </div>
+        <h2>Step2 - Services</h2>
+        
+        <div class="formEl_b">
+        <form action="business_setup2.html" id="validation"> 
+    	<fieldset>
+		
+		<div class="section serviceboxes">
+      		 <label>Service Name</label>
+             <input type="text" id="e_required" name="servicename" class="validate[required]  medium">
+        </div>
+        <div class="section serviceboxes">
+             <label>Description</label> 
+             <textarea name="servicedescription" class="medium"></textarea>
+        </div>
+        <div class="section serviceboxes">
+            <label>Duration</label> 
+          <select name="serviceduration" id="serviceduration">
+			<option value="Select Duration">Select Duration</option>
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="90">1 hour 30 minutes</option>
+            <option value="120">2 hours</option>
+            <option value="150">2 hours 30 minutes</option>
+            <option value="180">3 hours</option>
+            <option value="210">3 hours 30 minutes</option>
+            <option value="240">4 hours</option>
+            <option value="270">4 hours 30 minutes</option>
+            <option value="300">5 hours</option>
+            <option value="330">5 hours 30 minutes</option>
+            <option value="360">6 hours</option>
+            <option value="390">6 hours 30 minutes</option>
+            <option value="420">7 hours</option>
+            <option value="450">7 hours 30 minutes</option>
+            <option value="480">8 hours</option>
+		</select>
+        </div>
+        <div class="section serviceboxes">
+             <label>Price</label>   
+              <input type="text" id="price" name="serviceprice" class="xsmall">
+        </div>
+       <div id="services" class="services"> 
+		
+       
+        <div class="clear"></div>  	
+        </div>                              
+		<div class="clear"></div>			
+          
+		<div class="section last setps">
+            <div>
+            <a href="javascript:void(0)" title="service" id="addbtn" class="addbtn buttonFinish uibutton">Add</a>
+			
+            </div>
+          </div>     
+            </fieldset>
+            </form>             
+        </div>
+		<div class="onecolumn" >
+                    <div class="header">
+                    <span ><span class="ico  gray random"></span> Dynamic Table </span>
+                    </div><!-- End header -->	
+                    <div class=" clear"></div>
+                    <div class="content"  >
+                  
+					<div class="tableName">
+					
+<table id="servicetbl" class="display" >
+	<thead>
+		<tr>
+			<th width="20%"><div class="th_wrapp">Service Name</div></th>
+			<th width="40%"><div class="th_wrapp">Service Description</div></th>
+            <th width="10%"><div class="th_wrapp">Duration</div></th>
+			<th width="10%"><div class="th_wrapp">Price</div></th>
+			<th width="20%"><div class="th_wrapp">Manage</div></th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table>
+
+                    </div>
+                    <div class="clear"></div>		
+                    
+                    
+<div class="clear"></div>		
+                    
+               
+                    
+                    </div>
+                    </div>
+                    <div class="section last setps">
+            <div>
+          	<input type="submit" class="regi_submit buttonNext uibutton special icon next" Value="Next" /></div>
+            </div>
+              <div class="clear"></div>	
+                    
+    </div> 
+    </div>
+      
+        <!--/END of Registration/-->
+        <div class="clear"/></div>                  
+    </div>
+    </div>
+	<div class="clear"></div>
+        <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Ezee Appointer" >Your Company Name</a> </span> </div>
+		</div> <!--// End inner -->
+        </div> <!--// End content --> 
+     <script language="javascript">
+	 $(document).ready(function() {
+		$('#addbtn').bind('click', function(){
+			var title = $(this).attr("title");
+			//alert(title);
+			var servicename = $('input[name=servicename]');
+			var servicedes = $('textarea[name=servicedescription]');
+			//var servicetime = $('input[name=serviceduration]');
+			var serviceprice = $('input[name=serviceprice]');
+			//alert(name.val());
+			var servicename1 = servicename.val();
+			var servicedes1 = servicedes.val();
+			var servicetime1 = $('#serviceduration').val();
+			var serviceprice1 = serviceprice.val();
+			
+			if(servicename1 != '')
+			{
+				$('#servicetbl > tbody').append('<tr class="odd gradeX"><td>'+servicename1+'</td><td><p>'+servicedes1+'</p></td><td>'+servicetime1+'</td><td>Rs. '+serviceprice1+'</td><td><span class="tip"><a  title="Edit"><img src="images/icon/icon_edit.png" ></a></span><span class="tip"><a id="1" class="Delete"  name="Band ring" title="Delete"><img src="images/icon/icon_delete.png"></a></span></td></tr>');
+			}
+			
+			$('#validation')[0].reset();
+			
+	 });
+	});
+	 
+	 
+	 
+	 
+	 	/*$("select").change(function () {
+          var str = "";
+         	 $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+              });
+			 
+         $(".show").text(str);
+        })
+        .change();*/
+
+	 </script>   
+        
+</body>
+</html>
