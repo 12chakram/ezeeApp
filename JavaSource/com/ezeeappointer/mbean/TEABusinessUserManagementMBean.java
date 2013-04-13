@@ -311,5 +311,32 @@ public TEABusinessUserDTO getBusnUser() {
 
 	
 	
+	public String getAccountProfileData()
+	{
+		busnUser = getActiveUser().getBusnUser();
+	
+		this.thispage = true;
+		return "accountSetting";
+	}
+
+	public String gotoDashbord(){
+		
+		return "ezeedashboardn";
+	
+	}
+	
+	
+	public String getBusinesServiceseData(){
+		return "businesServices";
+	}
+	
+   public String getBusinessConfigurationData(){
+	   return "businesconfiguration";
+   }
+
+  public String  getBusinesStaffeData() {
+	
+	return "buserstaff";
+  }
 	
 }
