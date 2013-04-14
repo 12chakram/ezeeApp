@@ -120,7 +120,7 @@ public String searchForService() throws ParseException{
 				return null;
 			}else{
 				saveAppintmentDetails(getActiveUser().getApptUser().getId());
-				return "appointmentbooked";
+				return "userdashboardn";
 			}
 	}
 	
@@ -133,7 +133,7 @@ public String searchForService() throws ParseException{
 			if(u != null){
 				saveAppintmentDetails(u.getId());
 				getActiveUser().setApptUser(u);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("APPT_USER", u);
-				return "appointmentbooked";
+				return "userdashboardn";
 			}
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Invalid credentials."));
@@ -153,7 +153,7 @@ public String searchForService() throws ParseException{
 		saveAppintmentDetails(appuser.getId());
 		}
 		getActiveUser().setApptUser(appuser);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("APPT_USER", appointee);		
-		return "appointmentbooked";
+		return "userdashboardn";
 	}
 	
 	private void saveAppintmentDetails(long id){

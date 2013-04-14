@@ -169,13 +169,14 @@ public class TEAAppointmentDAO {
 			em.getTransaction().begin();
 			org.hibernate.Query q = em.createQuery("select a from Appointment a where a.userId=:userId");
 			q.setParameter("userId", userId);
-			List<Appointment> appts = ((Query) q).getResultList();
+			List<Appointment> appts = (List<Appointment>)q.list();
 			for(Appointment appt: appts){
 				AppointeeDashboard apptDb = new AppointeeDashboard();
-				q = em.createQuery("select s from Staff s where s.id=" + appt.getStaffId());
-				Staff staff = (Staff)((Query) q).getSingleResult();
-				q = em.createQuery("select s from Service s where s.id=" + appt.getServiceId());
-				Service srvc = (Service)((Query) q).getSingleResult();
+				//q = em.createQuery("select s from Staff s where s.id=" + appt.getStaffId());
+				Staff staff = (Staff)em.get(Staff.class, appt.getStaffId());
+				//Staff staff = (Staff)((Query) q).getSingleResult();
+				//q = em.createQuery("select s from Service s where s.id=" + appt.getServiceId());
+				Service srvc =(Service)em.get(Service.class,Long.parseLong(appt.getServiceId()));
 				apptDb.setApptDate(appt.getApptDate());
 				apptDb.setApptNo(appt.getId());
 				apptDb.setApptTakenDate(appt.getApptTakenDate());
