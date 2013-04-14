@@ -53,9 +53,9 @@ public class TEABusinessUserManagementDAO {
 		Session em =  TEAEntityManagerFactory.get();
 		em.getTransaction().begin();
 
-		//BusinessUser ubu =(BusinessUser) em.find(BusinessUser.class, findBusinessUserByID(user.getId()));
+		BusinessUser ubu =(BusinessUser) em.get(BusinessUser.class, user.getId());
 		
-		BusinessUser ubu = null;
+		//BusinessUser ubu = null;
 		
 	  if(ubu.getPassword() != null) ubu.setAddress(user.getAddress());
 	  if(ubu.getFirstName()!=null) ubu.setFirstName(user.getFirstName());
@@ -65,7 +65,7 @@ public class TEABusinessUserManagementDAO {
 	  if(ubu.getUserId()!=null) ubu.setUserId(user.getUserId());
 	   if(ubu.getPhoneNumber()!=null) ubu.setPhoneNumber(user.getPhoneNumber());
 	  if(ubu.getId()!=0) ubu.setId(user.getId());
-	  em.persist(ubu);
+	  em.merge(ubu);
 		 em.getTransaction().commit();
 		
 			return true; 

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+   
+	<title>Login - Ezee Appointer</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <link href="css/zice.style.css" rel="stylesheet" type="text/css" />
+	<link href="css/icon.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="components/tipsy/tipsy.css" media="all"/>
+	
+	<style type="text/css">
+	html {
+		background-image: none;
+	}
+	#versionBar {
+		background-color:#212121;
+		position:fixed;
+		width:100%;
+		height:35px;
+		bottom:0;
+		left:0;
+		text-align:center;
+		line-height:35px;
+	}
+	.copyright{
+		text-align:center; font-size:10px; color:#CCC;
+	}
+	.copyright a{
+		color:#A31F1A; text-decoration:none
+	}    
+	</style>
+</h:head>
+<h:body >
+
+<h:form  id="formLogin">
+          	         
+	<div id="alertMessage" class="error"></div>
+	<div id="successLogin"></div>
+	<div class="text_success"><img src="images/loadder/loader_green.gif"  alt="ziceAdmin" /><span>Please wait</span></div>
+
+	<div id="login" >
+  		<div class="ribbon"></div>
+  		<div class="inner">
+  		<div  class="logo" ><img src="images/logo/logo_login.png" alt="ziceAdmin" /></div>
+  		<div class="userbox"></div>
+  		<div class="formLogin">
+  			
+  				
+          		<div class="tip">
+          		 	<center><font color="red"><h:outputLabel value="#{apptUserMngmntBean.loginErrorMsg}"/></font></center>
+          			<h:inputText id="email_id"  value="#{apptUserMngmntBean.emailID}" styleClass="username_id" title="Username" >
+          				<f:ajax event="blur"  render="usermessage" />
+					</h:inputText>
+          			<h:message for="email_id" id="usermessage" style="font-family:arial;color:red;font-size:10px;" />
+          		
+          		</div>
+          		
+          		<div class="tip">
+          			<h:inputSecret id="password" title="Password" styleClass="password" value="#{apptUserMngmntBean.password}" >
+          				<f:ajax event="blur" render="passwordmessage" />
+          			 
+          		</h:inputSecret>
+          			<h:message for="password" id="passwordmessage" style="font-family:arial;color:red;font-size:10px;"/> 
+          			
+          		</div>
+          		
+          		
+          		 <div style="padding:20px 0px 0px 0px ;">
+            		<div style="float:left; padding:0px 0px 2px 0px ;">
+           				<h:selectBooleanCheckbox id="on_off" name="remember" styleClass="on_off_checkbox on_off" value="1" >
+           				</h:selectBooleanCheckbox>
+           				
+           	
+		            	<span class="f_help">Remember me</span>
+        	    </div>
+         
+	          		<div style="float:right;padding:2px 0px ;">
+    	          		<div> 
+        	        		<ul class="uibutton-group">
+        	        			<li><h:commandLink id="but_login" styleClass="uibutton normal but_login" value="login" action="#{apptUserMngmntBean.doLogin}"  /></li>
+ <li><a class="uibutton normal" href="#" id="forgetpass">forpassword</a></li>
+         	       		</ul>
+              			</div>
+              			<span><h:link outcome="buregister.xhtml">New User? Register...</h:link></span>
+            		</div>
+				</div>
+			
+  		</div>
+	</div>
+  	<div class="clear"/>
+  	<div class="shadow"/>
+</div>
+<div class="clear"/>
+<div id="versionBar" >
+  <div class="copyright" > &copy; Copyright 2012  All Rights Reserved <span class="tip"><a  href="#" title="Zice Admin" >Your company</a> </span> </div>
+</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="components/effect/jquery-jrumble.js"></script>
+	<script type="text/javascript" src="components/ui/jquery.ui.min.js"></script>     
+	<script type="text/javascript" src="components/tipsy/jquery.tipsy.js"></script>
+	<script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+</h:form>
+</h:body>
+</html>

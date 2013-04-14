@@ -1,23 +1,25 @@
 package com.ezeeappointer.mbean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import com.ezeeappointer.common.TEAServiceDelegate;
-import com.ezeeappointer.data.AppointeeUser;
+
 import com.ezeeappointer.dto.TEAAppointeeUserDTO;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 
 @ManagedBean(name="apptUserMngmntBean")
 @RequestScoped
-public class TEAAppointeeUserManagementMBean extends TEAAppointeeSecureMbean {
+public class TEAAppointeeUserManagementMBean extends TEASecureMbean {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6830570917493952262L;
-	private String email;
+	
+	private String emailID;
 	private String password;
 	private String cfrmPassword;
 	private String firstName;
@@ -26,11 +28,20 @@ public class TEAAppointeeUserManagementMBean extends TEAAppointeeSecureMbean {
 	private String address;
 	private String city;
 	private String country;
+	private String loginErrorMsg;
 	
+public String getLoginErrorMsg() {
+		return loginErrorMsg;
+	}
+
+	public void setLoginErrorMsg(String loginErrorMsg) {
+		this.loginErrorMsg = loginErrorMsg;
+	}
+
 public String registerAppointeeUser(){
 		
 		TEAAppointeeUserDTO userDTO= new TEAAppointeeUserDTO();
-		userDTO.setEmail(email);
+		userDTO.setEmail(emailID);
 		userDTO.setPassword(password);
 		userDTO.setCfrmPassword(cfrmPassword);
 		userDTO.setFirstName(firstName);
@@ -47,7 +58,7 @@ public String registerAppointeeUser(){
 			return "userregister";
 	}
 
-	public String doLogin(){
+	/*public String doLogin(){
 		TEAAppointeeUserDTO u = null;		
 		if(email != null && password != null){
 			TEAAppointeeUserManagementService service = (TEAAppointeeUserManagementService)TEAServiceDelegate.getService("appointeeUserService");			
@@ -58,21 +69,34 @@ public String registerAppointeeUser(){
 			}
 		}
 		return "userlogin";
-	}
+	}*/
 	
 	
+public String getEmailID() {
+	return emailID;
+}
 
-/**
- * @return the email
- */
-public String getEmail() {
-	return email;
+public void setEmailID(String emailID) {
+	this.emailID = emailID;
 }
-/**
- * @param email the email to set
- */ void setEmail(String email) {
-	this.email = email;
+
+public String doLogin(){
+	
+	TEAAppointeeUserDTO u = null;		
+	if(emailID != null && password != null){
+		TEAAppointeeUserManagementService service = (TEAAppointeeUserManagementService)TEAServiceDelegate.getService("appointeeUserService");			
+		u = service.login(emailID,password);
+		if(u != null){
+			getActiveUser().setApptUser(u);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("APPT_USER", u);
+			return "userdashboardn";
+		}
+	}
+	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Invalid credentials."));
+	return null;
 }
+
+
+
 /**
  * @return the password
  */

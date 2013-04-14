@@ -189,6 +189,7 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		List<TEAAppointeeDashboardDTO> apptDTOs = new ArrayList<TEAAppointeeDashboardDTO>();
 		List<AppointeeDashboard> apptDbs = dao.retrieveAppointmetsByUserId(userId);
 		for(AppointeeDashboard apptDb: apptDbs){
+			
 			TEAAppointeeDashboardDTO dto = mapper.map(apptDb, TEAAppointeeDashboardDTO.class);
 			StringBuffer sb = new StringBuffer();
 			sb.append("Your appointment is booked for ").append(apptDb.getApptService()).append(" service with Dr. ").append(apptDb.getApptStaff()).append(" on " ).append(
@@ -196,10 +197,18 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 			dto.setApptDescr(sb.toString());
 			dto.setApptDate(TEADateUtility.convertDateObjectToddMMMyyyyWithCommasAndSpaces(apptDb.getApptDate()));
 			dto.setApptTakenDate(TEADateUtility.convertDateObjectToddMMMyyyyWithCommasAndSpaces(apptDb.getApptTakenDate()));
+			dto.setApptService(apptDb.getApptService());
 			if(apptDb.getApptSts().equals("p")) dto.setApptSts("Pending");
-			else if(apptDb.getApptSts().equals( "a")) dto.setApptSts("Approved");
+			else if(apptDb.getApptSts().equals( "c")) dto.setApptSts("Approved");
 			else if(apptDb.getApptSts().equals("d")) dto.setApptSts("Denied");
-			else if(apptDb.getApptSts().equals("c")) dto.setApptSts("Cancelled");
+			else if(apptDb.getApptSts().equals("ca")) dto.setApptSts("Cancelled");
+			
+			if(apptDb.getApptSts().equals("p")) dto.setStatusval(true);
+			else if(apptDb.getApptSts().equals( "c")) dto.setStatusval(false);
+			else if(apptDb.getApptSts().equals("d")) dto.setStatusval(false);
+			else if(apptDb.getApptSts().equals("ca")) dto.setStatusval(false);
+			
+			
 			apptDTOs.add(dto);
 		}
 		return apptDTOs;

@@ -97,7 +97,7 @@ public TEABusinessUserDTO getBusnUser() {
 			
 		}
 		loginErrorMsg = "Invalid credentials.";
-		return "index";
+		return "bulogin";
 	}
 	
   
@@ -339,4 +339,19 @@ public TEABusinessUserDTO getBusnUser() {
 	return "buserstaff";
   }
 	
+  
+  
+  public void  updateBusinessUser(){
+		
+		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
+		boolean isSuccess = service.updateBusinessUser(busnUser);
+	
+	}
+  
+  
+  
+  
+  
+  
+  
 }

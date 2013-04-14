@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+       xmlns:c="http://java.sun.com/jsp/jstl/core">
       <h:head>
       	<script type="text/javascript" src="js/popup.js"></script>  
  <style type="text/css">
@@ -44,37 +43,50 @@
                           <div id="tab1" class="tab_content"> 
                           
                             <h3>Appointments waiting for Approval</h3>
-                            <p:dataTable id="appts" var="appt" value="#{appointeeDashboard.apdbDTOs}" sortBy="#{appt.apptDate}">  					  
-												        <p:column headerText="Appt. No" sortBy="#{appt.apptNo}">  
-												            <h:outputText value="#{appt.apptNo}" />  
-												        </p:column>  
-												         <p:column headerText="Appt. Date" sortBy="#{appt.apptDate}" >  
-												            <h:outputText value="#{appt.apptDate}" >
-															    <f:convertDateTime pattern="dd MMM yyyy" />
-															</h:outputText>
-												        </p:column> 
-												           <p:column headerText="Booked Date" sortBy="#{appt.apptTakenDate}">  
-												            <h:outputText value="#{appt.apptTakenDate}" >
-															    <f:convertDateTime pattern="dd MMM yyyy" />
-															</h:outputText>
-												        </p:column>
-												        <p:column headerText="Status" sortBy="#{appt.apptSts}">  
-												            <h:outputText value="#{appt.apptSts}" />  
-												        </p:column> 							  
-												        <p:column headerText="Appointment Description" style="width:60%" sortBy="#{appt.apptDescr}">  
-												            <h:outputText value="#{appt.apptDescr}" />  
-												        </p:column>			  
-												  		  <p:column headerText="Action" style="width:8.25%">  
-												                <p:commandButton id="cancleButton" icon="ui-icon-cancel" title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}">  
-												                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
-												            </p:commandButton> 
-												            <p:commandButton id="changeButton" icon="ui-icon-update" title="Reschedule">  
-												            </p:commandButton>   
-												        </p:column>  					  
-								 </p:dataTable> 
+                         	
+                          <h:dataTable id="appts" var="appt" value="#{appointeeDashboard.apdbDTOs}"  styleClass="display static">
+                              <h:column>  
+                              <f:facet name="header">Appt. No</f:facet>
+								  <h:outputText value="#{appt.apptNo}" />  
+							  </h:column> 
                               
-                            
-                            
+                              <h:column>  
+                               <f:facet name="header">Staff Name</f:facet>
+								<h:outputText value="#{appt.apptStaff}" >
+								   <f:convertDateTime pattern="dd MMM yyyy" />
+								</h:outputText>
+						  </h:column> 
+                              
+                              
+                         <h:column>
+				          <f:facet name="header">Service</f:facet>
+				            <h:outputText value="#{appt.apptService}" />  
+				        </h:column>		
+				        
+                              
+                              <h:column>  
+                               <f:facet name="header">Time</f:facet>
+								<h:outputText value="#{appt.apptDate}" >
+								   <f:convertDateTime pattern="dd MMM yyyy" />
+								</h:outputText>
+						  </h:column> 
+												          
+					 <h:column>
+				           <f:facet name="header">Status</f:facet>
+				            <h:outputText value="#{appt.apptSts}" />  
+				        </h:column> 
+				        					
+				       <h:column>
+				         <f:facet name="header">Edit/Delete</f:facet>
+				         <h:commandButton id="cancleButton"   title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}" image="/images/trash_can_delete.png">  
+				                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
+				            </h:commandButton>
+				          <h:commandButton id="changeButton" title="Reschedule" image="/images/calendar.png"/>  
+				           
+				        </h:column>  	
+                      
+                         </h:dataTable>
+                              
                            <div class="clear"></div> 
                            </div>
                            <div id="tab2" class="tab_content"> 

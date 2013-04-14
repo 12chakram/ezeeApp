@@ -16,6 +16,22 @@ public class TEAAppointeeDashboardDTO implements Serializable {
 	private String apptDescr;
 	private String apptStaff;
 	private String apptUser;
+	private String apptService;
+	private boolean statusval;
+	
+	
+	public boolean isStatusval() {
+		return statusval;
+	}
+	public void setStatusval(boolean statusval) {
+		this.statusval = statusval;
+	}
+	public String getApptService() {
+		return apptService;
+	}
+	public void setApptService(String apptService) {
+		this.apptService = apptService;
+	}
 	/**
 	 * @return the apptNo
 	 */

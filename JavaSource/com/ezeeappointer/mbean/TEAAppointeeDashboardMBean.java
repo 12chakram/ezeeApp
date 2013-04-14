@@ -33,6 +33,8 @@ public class TEAAppointeeDashboardMBean extends TEASecureMbean{
 	private TEAAppointmentService aptService;
 	private TEAAppointeeDashboardDTO selectedAppt;
 	
+
+	
 	public TEAAppointeeDashboardMBean(){
 		today = TEADateUtility.convertDateObjectToEEEEMMMMyyyyWithCommasAndSpaces(new Date());
 		aptService = (TEAAppointmentService) getBackendService("appointmentService");
@@ -41,6 +43,8 @@ public class TEAAppointeeDashboardMBean extends TEASecureMbean{
 	@PostConstruct
 	private void showDashoard(){
 		apdbDTOs = aptService.retrieveAppointeeeDashboardDetails(getActiveUser().getApptUser().getId());
+		
+	
 	}
 	
 	public void cancelAppointment(){
