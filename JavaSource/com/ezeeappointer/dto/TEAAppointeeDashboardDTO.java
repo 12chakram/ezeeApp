@@ -17,14 +17,36 @@ public class TEAAppointeeDashboardDTO implements Serializable {
 	private String apptStaff;
 	private String apptUser;
 	private String apptService;
-	private boolean statusval;
+	private boolean Denied;
+	private boolean cancelled;
+	private boolean pending;
+	private boolean approved;
 	
 	
-	public boolean isStatusval() {
-		return statusval;
+	public boolean isApproved() {
+		return approved;
 	}
-	public void setStatusval(boolean statusval) {
-		this.statusval = statusval;
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+	public boolean isPending() {
+		return pending;
+	}
+	public void setPending(boolean pending) {
+		this.pending = pending;
+	}
+	public boolean isCancelled() {
+		return cancelled;
+	}
+	public void setCancelled(boolean cancelled) {
+		this.cancelled = cancelled;
+	}
+
+	public boolean isDenied() {
+		return Denied;
+	}
+	public void setDenied(boolean denied) {
+		Denied = denied;
 	}
 	public String getApptService() {
 		return apptService;

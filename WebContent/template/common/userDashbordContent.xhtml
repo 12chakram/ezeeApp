@@ -78,11 +78,16 @@
 				        					
 				       <h:column>
 				         <f:facet name="header">Edit/Delete</f:facet>
-				         <h:commandButton id="cancleButton"   title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}" image="/images/trash_can_delete.png">  
+				        
+				          <h:graphicImage url="/images/approvied.png" rendered="#{appt.approved}" />
+				          <h:graphicImage url="/images/cancled.png" rendered="#{appt.cancelled}"/>
+				           
+				          
+				         <h:commandButton id="cancleButton"   title="Cancle"  actionListener="#{appointeeDashboard.cancelAppointment}" image="/images/trash_can_delete.png" rendered="#{appt.pending}">  
 				                	<f:setPropertyActionListener value="#{appt}" target="#{appointeeDashboard.selectedAppt}" />
 				            </h:commandButton>
-				          <h:commandButton id="changeButton" title="Reschedule" image="/images/calendar.png"/>  
-				           
+				         <h:commandButton id="changeButton" title="Reschedule" image="/images/calendar1.png"  rendered="#{appt.pending}"/>  
+				    
 				        </h:column>  	
                       
                          </h:dataTable>

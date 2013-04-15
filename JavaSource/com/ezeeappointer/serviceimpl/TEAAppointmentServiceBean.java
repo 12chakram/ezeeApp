@@ -203,10 +203,10 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 			else if(apptDb.getApptSts().equals("d")) dto.setApptSts("Denied");
 			else if(apptDb.getApptSts().equals("ca")) dto.setApptSts("Cancelled");
 			
-			if(apptDb.getApptSts().equals("p")) dto.setStatusval(true);
-			else if(apptDb.getApptSts().equals( "c")) dto.setStatusval(false);
-			else if(apptDb.getApptSts().equals("d")) dto.setStatusval(false);
-			else if(apptDb.getApptSts().equals("ca")) dto.setStatusval(false);
+			if(apptDb.getApptSts().equals("p")) dto.setPending(true);
+			else if(apptDb.getApptSts().equals( "c")) dto.setApproved(true);
+			else if(apptDb.getApptSts().equals("d")) dto.setDenied(true);
+			else if(apptDb.getApptSts().equals("ca")) dto.setCancelled(true);
 			
 			
 			apptDTOs.add(dto);
