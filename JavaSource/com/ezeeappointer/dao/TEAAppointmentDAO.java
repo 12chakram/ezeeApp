@@ -135,29 +135,37 @@ public class TEAAppointmentDAO {
 		public TEAUIStaffDTO retrieveServiceDetailsByStaffId(long staffId){
 			Session em = TEAEntityManagerFactory.get();
 			 Mapper mapper = new DozerBeanMapper();
+			 
+		
 			em.getTransaction().begin();
-			org.hibernate.Query q1 = em.createQuery("select from Staff s where s.id="+staffId);		 
-			  Staff sf = (Staff) ((Query) q1).getSingleResult();
-			//List<Long> serviceIds = (List<Long>) CollectionUtils.collect(sf.getSrvcStaffXref(), new BeanToPropertyValueTransformer("serviceId"));
-				org.hibernate.Query q2 = em.createQuery("select from Service s where s.id=:id");
-			//	q2.setParameter("id", serviceIds);
-				List<Service> services = ((Query) q2).getResultList();
-				List<Service> services2 = new ArrayList<Service> ();
-				services2.addAll(services);
-				TEAUIStaffDTO dto = new TEAUIStaffDTO();
+					 
+			  Staff sf = (Staff)em.get(Staff.class, staffId);
+			
+			 TEAUIStaffDTO dto = new TEAUIStaffDTO();
 				List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
-				for(DayAndTime dt: sf.getDayTimes())
-					ldt.add(mapper.map(dt,  TEADayAndTimeDTO.class));
+				String[] dayss =null;
+				for(DayAndTime dt: sf.getDayTimes()){	
+					
+					 dayss = dt.getDays().split(",");
+					 
+					 TEADayAndTimeDTO tad = new TEADayAndTimeDTO(); 
+					 tad.setDayss(dayss);
+					 tad.setFromTime(dt.getFromTime());
+					 tad.setToTime(dt.getToTime());
+				
+					 ldt.add(mapper.map(tad,  TEADayAndTimeDTO.class));
+				}
+					
 				dto.setDayTime(ldt);
 				dto.setStaffName(sf.getStaffName());
 				dto.setStaffId(sf.getId());
 				
 				List<TEAServiceDTO> sdt = new ArrayList<TEAServiceDTO>();
-				for(Service sr: services2)
+				for(Service sr: sf.getServices())
 					sdt.add(mapper.map(sr,  TEAServiceDTO.class));
 				
 				dto.setServices(sdt);
-				dto.setStaffDescription("No description yet.");
+				dto.setStaffDescription("No description yet..");
 				em.getTransaction().commit();
 	
 		   return dto;
