@@ -95,7 +95,7 @@
           		<div class="section">                                                                  
 			                     <h:outputLabel value="Account Information"/> 
 								 <div>
-								 <h:inputText  value="#{busnUserMngmntBean.userId}" id="Domain" styleClass="validate[required,minSize[3],maxSize[20],] medium username" required = "true" requiredMessage="AccInformation is Required">
+								 <h:inputText  value="#{busnUserMngmntBean.userId}" id="Domain" styleClass="validate[required,minSize[3],maxSize[20],] medium username" required = "true" requiredMessage="AccInformation is Required" validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessUser}">
 								  <f:attribute name="minmax" value="4,50"/>
 								 <f:ajax event="blur"  render="accmessage" />
 								 </h:inputText><label>.ezeeappointor.com</label>
@@ -108,7 +108,7 @@
 	                    		 
 	                			 <h:outputLabel value="Password"/>
 								 <div>
-	                        	 <h:inputSecret id="Password" value="#{busnUserMngmntBean.password}" styleClass="validate[required,minSize[3]] medium password" required = "true" requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
+	                        	 <h:inputSecret id="Password"  binding="#{passwordComponent}" value="#{busnUserMngmntBean.password}" styleClass="validate[required,minSize[3]] medium password" required = "true" requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
 	                        	 <f:attribute name="minmax" value="4,50"/>
 	                        	 <f:ajax event="blur" render="passwordmessage" />
                                  </h:inputSecret>
@@ -120,7 +120,9 @@
 	                    		 								  
 								 <h:outputLabel value="Confirm Password"/>
 	                    		 <div>
-	                        	 <h:inputSecret value="#{busnUserMngmntBean.cfrmPassword}" styleClass="validate[required,equals[password]] medium passwordCon"  id="CnfrmPassword" required = "true" requiredMessage="ConfirmPwd is Required" validator = "#{busnUserMngmntBean.validator.validateText}"  >
+	                        	 <h:inputSecret value="#{busnUserMngmntBean.cfrmPassword}" styleClass="validate[required,equals[password]] medium passwordCon"  id="CnfrmPassword" required = "#{not empty passwordComponent.value}" requiredMessage="ConfirmPwd is Required" validator = "#{busnUserMngmntBean.validator.validateText}"  >
+	                        	 <f:validator validatorId="confirmPasswordValidator" />
+	                        	 <f:attribute name="passwordComponent" value="#{passwordComponent}" />
 	                        	 <f:attribute name="minmax" value="4,50"/>
 	                        	 <f:ajax event="blur" render="conpasswordmessage" />
                                  </h:inputSecret>
@@ -135,7 +137,7 @@
 			<div class="section ">
 				<h:outputLabel value="Email"/>    
                     <div> 
-                          <h:inputText  value="#{busnUserMngmntBean.email}" id="Email" styleClass="validate[required,custom[email]]  medium e_required" required = "true" requiredMessage="Email is required.">
+                          <h:inputText  value="#{busnUserMngmntBean.email}" id="Email" styleClass="validate[required,custom[email]]  medium e_required" required = "true" requiredMessage="Email is required." validator = "#{busnUserMngmntBean.validator.checkForDuplicateBusinessEmail}">
                         	 <f:attribute name="minmax" value="4,50"/>
                         	<f:ajax event="blur"  render="emailmessage" />
                             </h:inputText>
