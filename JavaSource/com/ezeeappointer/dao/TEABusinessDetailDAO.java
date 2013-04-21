@@ -55,9 +55,9 @@ public class TEABusinessDetailDAO {
 		
 		Session em = TEAEntityManagerFactory.get();
 		em.getTransaction().begin();
-		org.hibernate.Query q = em.createQuery("select b from Business b where b.userId="+userId);
+		org.hibernate.Query q = em.createQuery("from Business b where b.busnUser="+userId);
 		System.out.println(q);
-		Business bussBusiness = (Business) ((Query) q).getSingleResult();
+		Business bussBusiness = (Business) q.uniqueResult();
 		em.getTransaction().commit();
 		em.close();
 		return bussBusiness;

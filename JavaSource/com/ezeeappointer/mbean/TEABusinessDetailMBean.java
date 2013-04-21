@@ -24,7 +24,7 @@ import com.ezeeappointer.service.TEABusinessDetailService;
  */
 @ManagedBean(name="teaBusinessDetail")
 @SessionScoped
-public class TEABusinessDetailMBean implements Serializable{
+public class TEABusinessDetailMBean extends TEASecureMbean implements Serializable{
 
 	/**
 	 * 
@@ -330,7 +330,7 @@ public class TEABusinessDetailMBean implements Serializable{
 		
 		TEABusinessDetailService service = (TEABusinessDetailService)TEAServiceDelegate.getService("businessService");
 		
-		  TEABusinessDetailDTO teaBusinessDetailDTO  = service.getBusinessDetailsbyUserId(10001);
+		  TEABusinessDetailDTO teaBusinessDetailDTO  = service.getBusinessDetailsbyUserId(getActiveUser().getBusnUser().getId());
 		
 		  if(teaBusinessDetailDTO!=null){
 		    this.companyName =teaBusinessDetailDTO.getCompanyName();
