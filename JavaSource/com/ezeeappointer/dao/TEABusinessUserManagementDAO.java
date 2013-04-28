@@ -122,8 +122,9 @@ public class TEABusinessUserManagementDAO {
 		Session em =  TEAEntityManagerFactory.get();
 			StringBuffer queryString = new StringBuffer("select bu from BusinessUser bu where bu.email='"+email+"'");
 			em.getTransaction().begin();
-			Query q = (Query) em.createQuery(queryString.toString());
-			List<BusinessUser> user= q.getResultList();
+			
+			org.hibernate.Query q =  em.createQuery(queryString.toString());
+			List<BusinessUser> user= q.list();
 			em.getTransaction().commit();
 			//findBusiness();
 			if(user.isEmpty())
