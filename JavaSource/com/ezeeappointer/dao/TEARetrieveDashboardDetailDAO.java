@@ -2,8 +2,6 @@
  * 
  */
 package com.ezeeappointer.dao;
-import javax.persistence.EntityManager;
-
 import org.hibernate.Session;
 
 import com.ezeeappointer.common.TEAEntityManagerFactory;

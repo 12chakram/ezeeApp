@@ -3,16 +3,12 @@
  */
 package com.ezeeappointer.serviceimpl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
 import com.ezeeappointer.dao.TEABusinessUserManagementDAO;
 import com.ezeeappointer.data.BusinessUser;
 import com.ezeeappointer.dto.TEABusinessUserDTO;
-import com.ezeeappointer.dto.TEAServiceDTO;
 import com.ezeeappointer.dto.TEAUIBussinessDashboardDTO;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 

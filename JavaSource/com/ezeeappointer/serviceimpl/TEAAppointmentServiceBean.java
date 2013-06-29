@@ -29,7 +29,6 @@ import com.ezeeappointer.dto.TEAUIStaffDTO;
 import com.ezeeappointer.service.TEAAppointmentService;
 import com.ezeeappointer.utilities.TEADateUtility;
 import com.ezeeappointer.utilities.TEATimePeriodUtility;
-import com.ezeeappointer.data.DayAndTime;
 
 public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean implements TEAAppointmentService{
 	

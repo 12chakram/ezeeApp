@@ -9,16 +9,12 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.servlet.http.HttpServletRequest;
 
-import com.ezeeappointer.data.BusinessUser;
 import com.ezeeappointer.dto.TEABusinessDetailDTO;
-import com.ezeeappointer.dto.TEABusinessUserDTO;
+import com.ezeeappointer.dto.TEADayAndTimeDTO;
 import com.ezeeappointer.dto.TEAServiceDTO;
 import com.ezeeappointer.dto.TEAStaffDTO;
-import com.ezeeappointer.dto.TEADayAndTimeDTO;
 import com.ezeeappointer.service.TEABusinessDetailService;
 
 

@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.apache.commons.beanutils.BeanToPropertyValueTransformer;
-import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.hibernate.Session;
@@ -17,8 +14,6 @@ import org.hibernate.Transaction;
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.AppointeeDashboard;
 import com.ezeeappointer.data.Appointment;
-import com.ezeeappointer.data.Business;
-import com.ezeeappointer.data.BusinessUser;
 import com.ezeeappointer.data.DayAndTime;
 import com.ezeeappointer.data.Service;
 import com.ezeeappointer.data.Staff;

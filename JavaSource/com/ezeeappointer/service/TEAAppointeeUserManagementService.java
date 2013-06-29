@@ -4,7 +4,6 @@
  */
 package com.ezeeappointer.service;
 
-import com.ezeeappointer.data.AppointeeUser;
 import com.ezeeappointer.dto.TEAAppointeeUserDTO;
 
 

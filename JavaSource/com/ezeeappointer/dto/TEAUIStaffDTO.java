@@ -4,10 +4,7 @@
 package com.ezeeappointer.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.ezeeappointer.data.Service;
 
 /**
  * @author dreddy

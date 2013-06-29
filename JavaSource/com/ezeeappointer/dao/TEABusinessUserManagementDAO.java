@@ -5,14 +5,12 @@ package com.ezeeappointer.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Query;
 
 import org.hibernate.Session;
-
 
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.Appointment;

@@ -2,14 +2,10 @@ package com.ezeeappointer.dao;
 
 import java.util.List;
 
-
-import javax.persistence.Query;
-
 import org.hibernate.Session;
 
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.AppointeeUser;
-import com.ezeeappointer.data.BusinessUser;
 
 public class TEAAppointeeUserManagementDAO {
 
