@@ -195,8 +195,10 @@
 					      <f:attribute name="minmax" value="4,50"/>
 					     <f:ajax event="blur"  render="addrsmessage" />
                          </h:inputText>
+                         <div>
                         <h:message for="Address" id="addrsmessage" style="font-family:arial;color:red;font-size:10px;" />
                 		 </div>
+                		</div>
                 </div>
           
 			<div class="section alphaonly">
@@ -213,7 +215,7 @@
 		<div class="section">
                 	  <h:outputLabel value="Country"/>   
                 	  <div>
-					  <h:selectOneMenu id = "Country" label = "country"  value="#{busnUserMngmntBean.country}" disabled = "false" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
+					  <h:selectOneMenu id = "Country" label = "country" styleClass="chzn-select" value="#{busnUserMngmntBean.country}" disabled = "false" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
 					    <f:ajax event="change"  render="countrymessage" />
 					     <f:selectItems value="#{busnUserMngmntBean.countrySelectItems}"/>        
 		              </h:selectOneMenu> 
@@ -222,7 +224,7 @@
                   	  </div>    
      				</div>
      	 		</div>
-			
+     	 		
 			<div class="section">
                 <h:outputLabel value="Type of Business"/>     
 					<div>

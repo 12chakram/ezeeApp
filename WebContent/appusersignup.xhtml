@@ -98,7 +98,7 @@
         <div class="section ">
 				<h:outputLabel value="Email"/>   
                     <div> 
-                        <h:inputText  id="Email" name="Email" value="#{apptUserMngmntBean.email}" styleClass="validate[required,custom[email]]  medium " required = "true" requiredMessage="Email is required." validator = "#{apptUserMngmntBean.validator.checkForDuplicateAppointeeEmail}" >
+                        <h:inputText  id="Email" name="Email" value="#{apptUserMngmntBean.emailID}" styleClass="validate[required,custom[email]]  medium " required = "true" requiredMessage="Email is required." validator = "#{apptUserMngmntBean.validator.checkForDuplicateAppointeeEmail}" >
                         <f:attribute name="minmax" value="5,50" />
                         <f:ajax event="blur"  render="emailmsg" />
                        </h:inputText>
@@ -111,26 +111,30 @@
                
               <h:outputLabel value="Password"/>
 					<div>
-                        <h:inputSecret styleClass="validate[required,minSize[3]] medium " value="#{apptUserMngmntBean.password}" name="Password" id="Password" required = "true" requiredMessage="Password is required."  validator = "#{apptUserMngmntBean.validator.validateText}" >
+                        <h:inputSecret id="Password" binding="#{passwordComponent}" required="true"
+                         styleClass="validate[required,minSize[3]] medium " value="#{apptUserMngmntBean.password}" 
+                        name="Password" requiredMessage="Password is required." 
+                         validator = "#{apptUserMngmntBean.validator.validateText}" >
                          <f:attribute name="minmax" value="5,50" />
                          <f:ajax event="blur"  render="Pwdmsg" />
                          </h:inputSecret>
                           <h:message for="Password" id="Pwdmsg" style="font-family:arial;color:red;font-size:10px;" />
-                    </div>									  
+                    </div>	
+                    
 			<h:outputLabel value="Confirm Password"/>
                     <div>
-                        <h:inputSecret  styleClass="validate[required,equals[password]] medium " value="#{apptUserMngmntBean.cfrmPassword}" name="CofirmPassword" id="CofirmPassword" required = "true" requiredMessage="Confirm Password is required." validator = "#{apptUserMngmntBean.validator.validateText}" >
-                        <f:attribute name="minmax" value="5,50" />
-                       <f:ajax event="blur"  render="confirmpwdmsg" />
+                        <h:inputSecret value="#{apptUserMngmntBean.cfrmPassword}" styleClass="validate[required,equals[password]] medium " 
+                         id="CofirmPassword" required = "true" requiredMessage="Confirm Password is required.">
+                      	 <f:ajax event="blur"  render="confirmpwdmsg" />
+                        <f:validator validatorId="confirmPasswordValidator"/>
+	                     <f:attribute name="passwordComponent" value="#{passwordComponent}" />
                        </h:inputSecret>
                     <h:message for="CofirmPassword" id="confirmpwdmsg" style="font-family:arial;color:red;font-size:10px;" />
                        
                         <span class="f_help"> Your password should be at least 6 characters.</span>
 					</div>
             </div>
-                                      
-			   
-
+            
 			<div class="section textonly">
 				<h:outputLabel value="First Name"/>  
                     <div> 

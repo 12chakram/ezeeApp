@@ -91,8 +91,9 @@ public String doLogin(){
 			return "userdashboardn";
 		}
 	}
-	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Invalid credentials."));
-	return null;
+	//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Invalid credentials."));
+	loginErrorMsg = "Invalid credentials.";
+	return "appntuserlogin";
 }
 
 

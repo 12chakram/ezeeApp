@@ -106,7 +106,7 @@ public TEABusinessUserDTO getBusnUser() {
 	
 	public List<SelectItem> getCountrySelectItems() {
 		countrySelectItems = new ArrayList<SelectItem>();
-		countrySelectItems.add(new SelectItem("", "Choose a Country"));
+		countrySelectItems.add(new SelectItem(null, "Choose a Country"));
 		countrySelectItems.add(new SelectItem("AF", "Afghanistan"));
 		countrySelectItems.add(new SelectItem("AG", "Algeria"));
 		countrySelectItems.add(new SelectItem("AT", "Argentina"));
@@ -129,7 +129,7 @@ public TEABusinessUserDTO getBusnUser() {
 
 	public List<SelectItem> getTypeOfBusinessSelectItems() {
 		typeOfBusinessSelectItems = new ArrayList<SelectItem>();
-		typeOfBusinessSelectItems.add(new SelectItem("", "select Type of Business"));
+		typeOfBusinessSelectItems.add(new SelectItem(null, "select Type of Business"));
 		typeOfBusinessSelectItems.add(new SelectItem("Accountant", "Accountant"));
 		typeOfBusinessSelectItems.add(new SelectItem("Administrative Professional", "Administrative Professional"));
 		typeOfBusinessSelectItems.add(new SelectItem("Beauty Salon", "Beauty Salon"));

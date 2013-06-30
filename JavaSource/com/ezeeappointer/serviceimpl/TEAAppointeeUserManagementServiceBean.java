@@ -48,7 +48,10 @@ public class TEAAppointeeUserManagementServiceBean extends TEABasicAbstractServi
 	public TEAAppointeeUserDTO login(String email, String password) {
 		
 		TEAAppointeeUserManagementDAO dao = getTeaDAOFactory().getTEAAppointeeUserManagementDAO();
-				
-		return mapper.map(dao.findAppointeeUser(email, password), TEAAppointeeUserDTO.class);
+		AppointeeUser appointeeUser = dao.findAppointeeUser(email, password);
+		if(appointeeUser!=null){
+			return mapper.map(appointeeUser, TEAAppointeeUserDTO.class);
+		}
+		return null;
 	}
 }
