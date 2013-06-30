@@ -108,23 +108,24 @@
 	                    		 
 	                			 <h:outputLabel value="Password"/>
 								 <div>
-	                        	 <h:inputSecret id="Password"   value="#{busnUserMngmntBean.password}" styleClass="validate[required,minSize[3]] medium password" required = "true" requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}" >
-	                        	 <f:attribute name="minmax" value="4,50"/>
+	                        	 <h:inputSecret id="Password" binding="#{passwordComponent}" required="true"
+	                        	   value="#{busnUserMngmntBean.password}" styleClass="validate[required,minSize[3]] medium password" 
+	                        	  requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}">
+	                        	
 	                        	 <f:ajax event="blur" render="passwordmessage" />
                                  </h:inputSecret>
                                  <div>
                                  <h:message for="Password" id="passwordmessage" style="font-family:arial;color:red;font-size:10px;"/>
                                  </div>	
 	                    		 </div>	
-	                    		 
-	                    		 								  
 								 <h:outputLabel value="Confirm Password"/>
 	                    		 <div>
-	                        	 <h:inputSecret value="#{busnUserMngmntBean.cfrmPassword}" styleClass="validate[required,equals[password]] medium passwordCon"  id="CnfrmPassword" required = "#{not empty passwordComponent.value}" requiredMessage="ConfirmPwd is Required" validator = "#{busnUserMngmntBean.validator.validateText}"  >
-	                        	
+	                        	 <h:inputSecret value="#{busnUserMngmntBean.cfrmPassword}" 
+	                        	 styleClass="validate[required,equals[password]] medium passwordCon" 
+	                        	  id="CnfrmPassword" required = "true" requiredMessage="Confirm Password is Required">
+	                        	   <f:validator validatorId="confirmPasswordValidator"/>
 	                        	 <f:attribute name="passwordComponent" value="#{passwordComponent}" />
-	                        	 <f:attribute name="minmax" value="4,50"/>
-	                        	
+	                        	  <f:ajax event="blur" render="conpasswordmessage" />
                                  </h:inputSecret>
                                  <div>
                                  <h:message for="CnfrmPassword" id="conpasswordmessage" style="font-family:arial;color:red;font-size:10px;"/>

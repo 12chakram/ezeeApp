@@ -30,10 +30,12 @@ public class TEAAppointeeUserManagementDAO {
 		org.hibernate.Query q = em.createQuery(queryString.toString());
 		List<AppointeeUser> user= (List<AppointeeUser>)q.list();
 		em.getTransaction().commit();
-		if(user.isEmpty())
+		if(user.isEmpty()){
 			return null;
-		else
+		}
+		else{
 			return user.get(0);
+		}
 	}
 
 }
