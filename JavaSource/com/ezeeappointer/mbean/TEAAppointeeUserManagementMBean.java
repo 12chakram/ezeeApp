@@ -1,17 +1,14 @@
 package com.ezeeappointer.mbean;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
 
 import com.ezeeappointer.common.TEAServiceDelegate;
-
 import com.ezeeappointer.dto.TEAAppointeeUserDTO;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 
 @ManagedBean(name="apptUserMngmntBean")
-@RequestScoped
+@SessionScoped
 public class TEAAppointeeUserManagementMBean extends TEASecureMbean {
 	
 	/**
@@ -95,8 +92,6 @@ public String doLogin(){
 	loginErrorMsg = "Invalid credentials.";
 	return "appntuserlogin";
 }
-
-
 
 /**
  * @return the password

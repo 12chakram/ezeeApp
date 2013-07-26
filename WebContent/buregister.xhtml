@@ -104,14 +104,11 @@
 								 </div>
           	                     <span class="f_help"> Username login or register. <br />Should be between 3 and not more than 20 characters.</span> 
 	                    		 </div>
-	                    		 
-	                    		 
 	                			 <h:outputLabel value="Password"/>
 								 <div>
 	                        	 <h:inputSecret id="Password" binding="#{passwordComponent}" required="true"
 	                        	   value="#{busnUserMngmntBean.password}" styleClass="validate[required,minSize[3]] medium password" 
 	                        	  requiredMessage="Password is Required" validator = "#{busnUserMngmntBean.validator.validateText}">
-	                        	
 	                        	 <f:ajax event="blur" render="passwordmessage" />
                                  </h:inputSecret>
                                  <div>

@@ -51,7 +51,7 @@ html {
   <div class="formLogin">
  	  <h:form   id="formLogin">
           <div class="tip">
-          <h:inputText styleClass="username_id" value="#{apptUserMngmntBean.email}"  id="Email"  required="true" requiredMessage="Email is Required" validator = "#{apptUserMngmntBean.validator.validateText}">
+          <h:inputText styleClass="username_id" value="#{apptUserMngmntBean.emailID}"  id="Email"  required="true" requiredMessage="Email is Required" validator = "#{apptUserMngmntBean.validator.validateText}">
            <f:attribute name="minmax" value="5,50" />
            <f:ajax event="blur"  render="emailmsg" />
            </h:inputText>

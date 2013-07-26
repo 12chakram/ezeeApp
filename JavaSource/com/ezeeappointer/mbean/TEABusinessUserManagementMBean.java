@@ -19,9 +19,6 @@ import com.ezeeappointer.service.TEABusinessUserManagementService;
 @SessionScoped
 public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
-	
-
-	
 	private static final long serialVersionUID = -4850861653651843128L;
 	private String userId;
 	private String password;
@@ -42,20 +39,14 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
 	 private TEABusinessUserDTO busnUser;
 
-
-
-public TEABusinessUserDTO getBusnUser() {
+	public TEABusinessUserDTO getBusnUser() {
 		return busnUser;
 	}
-
-
 	public void setBusnUser(TEABusinessUserDTO busnUser) {
 		this.busnUser = busnUser;
 	}
 
 	private Map<String,String> countries= new HashMap<String,String>();
-	
-	
 	
 	public String registerBusinessUser(){
 		
@@ -100,9 +91,6 @@ public TEABusinessUserDTO getBusnUser() {
 		loginErrorMsg = "Invalid credentials.";
 		return "bulogin";
 	}
-	
-  
-	
 	
 	public List<SelectItem> getCountrySelectItems() {
 		countrySelectItems = new ArrayList<SelectItem>();
@@ -348,11 +336,5 @@ public TEABusinessUserDTO getBusnUser() {
 		boolean isSuccess = service.updateBusinessUser(busnUser);
 	
 	}
-  
-  
-  
-  
-  
-  
   
 }
