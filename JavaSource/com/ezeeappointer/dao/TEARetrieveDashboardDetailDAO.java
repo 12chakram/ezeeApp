@@ -20,6 +20,6 @@ public class TEARetrieveDashboardDetailDAO {
 		em.getTransaction().begin();
 		em.persist(dashboard);
 		em.getTransaction().commit();
-		em.close();	
+		//em.close();	
 	}
 }

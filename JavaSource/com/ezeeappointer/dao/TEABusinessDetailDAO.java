@@ -44,7 +44,7 @@ public class TEABusinessDetailDAO {
        List<Business> b= ((Query) q).getResultList();
        Business bb = b.get(0);
 		em.getTransaction().commit();
-		em.close();	
+		//em.close();	
 	}
 
 	
@@ -58,7 +58,7 @@ public class TEABusinessDetailDAO {
 		System.out.println(q);
 		Business bussBusiness = (Business) q.uniqueResult();
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 		return bussBusiness;
 	
 		
