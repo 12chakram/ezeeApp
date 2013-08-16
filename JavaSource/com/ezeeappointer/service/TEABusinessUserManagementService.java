@@ -57,6 +57,7 @@ public interface TEABusinessUserManagementService {
 	
 	public boolean updateBusinessUser(TEABusinessUserDTO userDTO);
 	
+	public TEABusinessUserDTO generateNewPassword(String userId);
 
 }
 	

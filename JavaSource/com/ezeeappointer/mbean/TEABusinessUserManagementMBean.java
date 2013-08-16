@@ -35,6 +35,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	private List<SelectItem> countrySelectItems;
 	private List<SelectItem> typeOfBusinessSelectItems;
 	private String loginErrorMsg;
+	private String passwordResetSucessMsg;
 	private boolean thispage;
 	
 	 private TEABusinessUserDTO busnUser;
@@ -90,6 +91,29 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		}
 		loginErrorMsg = "Invalid credentials.";
 		return "bulogin";
+	}
+	
+	
+	/** this method used for generate new password 
+	 * @return
+	 */
+	public String forgotpassword(){
+
+		TEABusinessUserDTO u = null;		
+		if(userId != null){
+			TEABusinessUserManagementService service = (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");			
+			u = service.generateNewPassword(userId);
+			if(u != null){
+				this.userId = u.getUserId();
+				this.password =u.getPassword();
+				passwordResetSucessMsg = "Password Reset Sucessfully";
+				loginErrorMsg =null;
+				return "bulogin";
+			}
+		}
+		loginErrorMsg = "Invalid userId.";
+		return "bulogin";
+		
 	}
 	
 	public List<SelectItem> getCountrySelectItems() {
@@ -327,10 +351,16 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	
 	return "buserstaff";
   }
-	
   
-  
-  public void  updateBusinessUser(){
+    public String getPasswordResetSucessMsg() {
+        return passwordResetSucessMsg;
+    }
+    
+    public void setPasswordResetSucessMsg(String passwordResetSucessMsg) {
+    	this.passwordResetSucessMsg = passwordResetSucessMsg;
+    }
+    
+public void  updateBusinessUser(){
 		
 		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
 		boolean isSuccess = service.updateBusinessUser(busnUser);

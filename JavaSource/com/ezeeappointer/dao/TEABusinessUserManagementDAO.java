@@ -44,9 +44,6 @@ public class TEABusinessUserManagementDAO {
 		
 	}
 	
-	
-	
-	
 	public boolean updateBusinessUser(BusinessUser user){
 		Session em =  TEAEntityManagerFactory.get();
 		em.getTransaction().begin();
@@ -69,7 +66,6 @@ public class TEABusinessUserManagementDAO {
 			return true; 
 		
 	}
-	
 
 	/**
 	 * @param userId
@@ -92,6 +88,25 @@ public class TEABusinessUserManagementDAO {
 			else
 				return user.get(0);
 		}
+	
+	/**
+	 * @param userId
+	 * @return
+	 */
+	public BusinessUser findBusinessUser(String userId){
+			
+		Session em =  TEAEntityManagerFactory.get();
+		StringBuffer queryString = new StringBuffer("select bu from BusinessUser bu where bu.userId='"+userId+"'");
+		em.getTransaction().begin();
+		org.hibernate.Query q =  em.createQuery(queryString.toString());
+		BusinessUser user=(BusinessUser) q.uniqueResult();
+		em.getTransaction().commit();
+		if(user==null){
+			 return null;
+		}else{
+				return user;
+		 }
+    }
 	
 	
 	public BusinessUser findBusinessUserByID(Long Id){

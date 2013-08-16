@@ -3,6 +3,9 @@
  */
 package com.ezeeappointer.serviceimpl;
 
+import java.util.Random;
+
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
@@ -73,6 +76,31 @@ public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServic
 			return null;
 	}
 	
+	@Override
+	public TEABusinessUserDTO generateNewPassword(String userId) {
+		
+		TEABusinessUserManagementDAO dao = getTeaDAOFactory().getTEABusinessUserManagementDAO();
+		BusinessUser user = dao.findBusinessUser(userId);
+		StringBuffer generatedpassword = null;
+		if(user != null){
+		   generatedpassword = new StringBuffer();
+		   generatedpassword.append(user.getTypeOfBusiness().substring(2, 5));
+		   generatedpassword.append(user.getBusinessSetupFlag().toUpperCase());
+		   generatedpassword.append(user.hashCode());
+		   generatedpassword.append(user.getCountry().charAt(1));
+		   generatedpassword.append(user.getPhoneNumber().charAt(5));
+		   generatedpassword.append(user.getId());
+		   Random randomGenerator = new Random();
+		   generatedpassword.append(randomGenerator.nextInt(100));
+		   generatedpassword.append(user.getEmail().indexOf(4));
+		   generatedpassword.append(user.getId()*user.getId());
+		   user.setPassword(generatedpassword.substring(1, 8));
+		  if(updateBusinessUser( mapper.map(user, TEABusinessUserDTO.class))){
+			return mapper.map(user, TEABusinessUserDTO.class);
+		  }
+		}
+		return null;
+	}
 	
 	
 	/* (non-Javadoc)
