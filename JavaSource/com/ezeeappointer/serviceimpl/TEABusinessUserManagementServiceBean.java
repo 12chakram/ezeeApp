@@ -95,6 +95,7 @@ public class TEABusinessUserManagementServiceBean extends TEABasicAbstractServic
 		   generatedpassword.append(user.getEmail().indexOf(4));
 		   generatedpassword.append(user.getId()*user.getId());
 		   user.setPassword(generatedpassword.substring(1, 8));
+		   user.setPasswordResetFlag("y");
 		  if(updateBusinessUser( mapper.map(user, TEABusinessUserDTO.class))){
 			return mapper.map(user, TEABusinessUserDTO.class);
 		  }

@@ -60,25 +60,18 @@ public class TEAAppointmentServiceBean extends TEABasicAbstractServiceBean imple
 		return staffDTOs;
 	}
 	
-	
-	
-	
-	
 	public List<TEAUIStaffDTO> searchForStaffDetailsByServiceId(long busnId, long serviceId, Date appointmentDate){
 		TEAAppointmentDAO dao = getTeaDAOFactory().getTEAUserAppointmentDAO();
 		List<Staff> staffs = dao.retrieveStaffDetailsByServiceId(serviceId);
 		
 		List<TEAUIStaffDTO> uiStaffDTOs = new ArrayList<TEAUIStaffDTO>();
 		for(Staff sf: staffs){
-			
-			
 			TEAUIStaffDTO dto = new TEAUIStaffDTO();
 			List<TEADayAndTimeDTO> ldt = new ArrayList<TEADayAndTimeDTO>();
 			//String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
 		
 			TEADayAndTimeDTO tdt = new TEADayAndTimeDTO();
 			for(DayAndTime dt: sf.getDayTimes()){
-				
 				
 				String workingdays = dt.getDays();
 				

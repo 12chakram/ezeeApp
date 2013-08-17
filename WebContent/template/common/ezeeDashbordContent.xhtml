@@ -25,11 +25,9 @@
       	
 </style>
 </h:head>
-   
-   
     <h:body>
-	  <h:form>
-	 		 <div class="onecolumn">
+	  <h:form id="dashboard">
+	 		 <div class="onecolumn" id="onecolumnid">
                         <div class="header"> <span ><span class="ico gray"></span> Today's Overview: Sunday, May 20,<b> 2012</b></span> </div>
                         <div class="clear"></div>
                         <div class="content" >
@@ -386,6 +384,24 @@
        </div>
   </div>
 </div>
+<h:panelGroup id = "popuparea">         
+<p:dialog id="passwordreset" header="Change password" widgetVar="passwordresetDlg" visible="#{busnUserMngmntBean.passwordreset}"  modal="true" resizable="false" showEffect="clip">
+	<h:form id="chagepasswordForm">
+	<p:messages id="loginmessages" showDetail="true" autoUpdate="true"/>
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel for="newpassword" value="New Password:" />
+			<p:inputText value="#{busnUserMngmntBean.password}" 
+					id="newpassword" required="true" label="newpassword" requiredMessage="password is required" />
+			<h:outputLabel for="confrmpassword" value="confrm Password:" />
+			<p:password value="#{busnUserMngmntBean.cfrmPassword}" 
+					id="confrmpassword" required="true" label="confrmpassword" requiredMessage="confrmPassword is required"/>
+			<f:facet name="footer">
+				<p:commandButton id="changepasswordButton" value="Change" action="#{busnUserMngmntBean.changePassword}" onsuccess="passwordresetDlg.hide()" />
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+</p:dialog>
+</h:panelGroup>
 <div id="backgroundPopup"></div>
 	  </h:form>
     </h:body>

@@ -60,15 +60,12 @@ public class BusinessUser {
 	@Column(name="business_setup_flag")
 	private String businessSetupFlag = "n";
 	
-	
+	@Column(name="business_resetpassword_flag")
+	private String passwordResetFlag;
 	
 	
 	@OneToMany(targetEntity=Business.class,mappedBy = "busnUser", cascade = CascadeType.ALL)
 	private List<Business> business = new ArrayList<Business>();
-	
-	
-	
-	
 	
 	public long getId() {
 		return id;
@@ -141,6 +138,12 @@ public class BusinessUser {
 	}
 	public void setBusinessSetupFlag(String businessSetupFlag) {
 		this.businessSetupFlag = businessSetupFlag;
+	}
+	public String getPasswordResetFlag() {
+		return passwordResetFlag;
+	}
+	public void setPasswordResetFlag(String passwordResetFlag) {
+		this.passwordResetFlag = passwordResetFlag;
 	}
 	
 }

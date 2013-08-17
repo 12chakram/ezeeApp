@@ -36,6 +36,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	private List<SelectItem> typeOfBusinessSelectItems;
 	private String loginErrorMsg;
 	private String passwordResetSucessMsg;
+	private boolean passwordreset;
 	private boolean thispage;
 	
 	 private TEABusinessUserDTO busnUser;
@@ -82,6 +83,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 				getActiveUser().setBusnUser(u);
 			
 				if(u.getBusinessSetupFlag().equals("y")){ 
+					 passwordreset=true;
 					 return "ezeedashboardn";
 				}else{	 
 					return "businesssetup1";
@@ -113,7 +115,17 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		}
 		loginErrorMsg = "Invalid userId.";
 		return "bulogin";
+	}
+	
+	public String changePassword(){
 		
+		TEABusinessUserManagementService service = (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");			
+		TEABusinessUserDTO businessuserDTO = getActiveUser().getBusnUser();
+		businessuserDTO.setPassword(cfrmPassword);
+		if(service.updateBusinessUser(businessuserDTO)){
+			passwordreset=false;
+		}
+		return "ezeedashboardn";
 	}
 	
 	public List<SelectItem> getCountrySelectItems() {
@@ -360,6 +372,13 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
     	this.passwordResetSucessMsg = passwordResetSucessMsg;
     }
     
+    public boolean isPasswordreset() {
+		return passwordreset;
+	}
+	public void setPasswordreset(boolean passwordreset) {
+		this.passwordreset = passwordreset;
+	}
+	
 public void  updateBusinessUser(){
 		
 		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");

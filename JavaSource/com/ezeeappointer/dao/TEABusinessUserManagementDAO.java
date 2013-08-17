@@ -49,10 +49,8 @@ public class TEABusinessUserManagementDAO {
 		em.getTransaction().begin();
 
 		BusinessUser ubu =(BusinessUser) em.get(BusinessUser.class, user.getId());
-		
 		//BusinessUser ubu = null;
-		
-	  if(ubu.getPassword() != null) ubu.setAddress(user.getAddress());
+	  if(ubu.getPassword() != null) ubu.setPassword(user.getPassword());
 	  if(ubu.getFirstName()!=null) ubu.setFirstName(user.getFirstName());
 	  if(ubu.getLastName()!=null) ubu.setLastName(user.getLastName());
 	  if(ubu.getAddress()!=null) ubu.setAddress(user.getAddress());

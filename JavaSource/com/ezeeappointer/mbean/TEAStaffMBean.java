@@ -6,6 +6,7 @@ package com.ezeeappointer.mbean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -34,7 +35,7 @@ public class TEAStaffMBean implements Serializable{
 	private String profileName = "Choose File";
 	private String[] services;
 	private List<TEADayAndTimeMBean> dayTimes = new ArrayList<TEADayAndTimeMBean>();
-	
+	private Set<String> serviceName;
 	
 	/**
 	 * @return the staffName
@@ -149,6 +150,12 @@ public class TEAStaffMBean implements Serializable{
 	 */
 	public void setServices(String[] services) {
 		this.services = services;
+	}
+	public Set<String> getServiceName() {
+		return serviceName;
+	}
+	public void setServiceName(Set<String> serviceName) {
+		this.serviceName = serviceName;
 	}
 	
 	 

@@ -28,6 +28,7 @@ public class TEABusinessUserDTO implements Serializable{
 	private String typeOfBusiness;
 	private String businessSetupFlag = "n";
 	private long id;
+	private String passwordResetFlag ="n";
 	
 	
 	public String getUserId() {
@@ -119,6 +120,12 @@ public class TEABusinessUserDTO implements Serializable{
 	 */
 	public void setBusinessSetupFlag(String businessSetupFlag) {
 		this.businessSetupFlag = businessSetupFlag;
+	}
+	public String getPasswordResetFlag() {
+		return passwordResetFlag;
+	}
+	public void setPasswordResetFlag(String passwordResetFlag) {
+		this.passwordResetFlag = passwordResetFlag;
 	}
 	
 }

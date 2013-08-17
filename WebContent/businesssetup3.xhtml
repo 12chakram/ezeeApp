@@ -260,10 +260,6 @@
                      </h:commandLink>
                 <!-- <a href="javascript:void(0)" title="service" id="addstf" class="addbtn buttonFinish uibutton">Add Staff</a>-->
                      </div>
-					 
-					 
-					 
-					 
 	<h:panelGroup id = "staffTable"> 
 	<div class="onecolumn" >
       <div class="header">
@@ -291,10 +287,10 @@
     		</h:column>
  
     		<h:column>
- 
     			<f:facet name="header">Staff Services</f:facet>
-    			#{o.services}
- 
+    			<h:dataTable value="#{businessSetup.businessDetail.staff.get(0).services}" var="s">
+    			#{s}
+    			</h:dataTable>
     		</h:column>
  
     		<h:column>
