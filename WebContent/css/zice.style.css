@@ -342,7 +342,8 @@ span img {
 	width: 36%;
 }
 .grid1 {
-	width: 24%;
+	/*This is a comment*/
+	/*width: 24%;*/
 }
 .grid3 .inner, .grid2 .inner, .grid1 .inner, .grid1 .inner {
 	padding:0px 10px 10px 10px;

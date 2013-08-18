@@ -122,6 +122,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		TEABusinessUserManagementService service = (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");			
 		TEABusinessUserDTO businessuserDTO = getActiveUser().getBusnUser();
 		businessuserDTO.setPassword(cfrmPassword);
+		businessuserDTO.setPasswordResetFlag("n");
 		if(service.updateBusinessUser(businessuserDTO)){
 			passwordreset=false;
 		}

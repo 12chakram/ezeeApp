@@ -22,6 +22,31 @@
 .CommonBtn_Link .SmallFont{font-size:7pt; text-transform:none; white-space:nowrap;}
 .CommonBtn_Link_Gray{float:left; height:24px; background:url(../images/ImageBtnBgImgGray.png) repeat-x; text-decoration:none; text-align:center; -moz-border-radius:3px; -webkit-border-radius:3px; -khtml-border-radius:3px; border-radius:3px; color:#FFFFFF; font-weight:bold; height:30px; font-size:11pt; font-family:Helvetica, Arial, sans-serif; padding:4px 18px; cursor:pointer; text-transform:uppercase; margin:3px 8px; }
 .CommonBtn_Link_Gray .SmallFont{font-size:7pt;text-transform:none; white-space:nowrap;}
+.ui-widget-overlay {
+    background: url("/eappointer/javax.faces.resource/images/ui-bg_flat_0_2d5972_40x100.png.jspx?ln=primefaces-aristo") repeat-x scroll 50% -50% rgb(45, 89, 114);
+    opacity: 0.3;
+}
+.popuppassword {
+    height: auto !important;
+    left: 389px !important;
+    top: 165px !important;
+    width: 400 !important;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    border: 0 none;
+    padding: 0px !important;
+    position: relative;
+}
+
+.ui-corner-all {
+    border-radius: 10px 10px 10px 10px !important;
+}
+
+.ui-widget {
+    font-family: Arial,sans-serif;
+    font-size: 8.1pt !important;
+}
       	
 </style>
 </h:head>
@@ -352,15 +377,11 @@
                       </div>
                     </div></td>
                 </tr>
-               
               </tbody>
             </table>
                              </div> 
                            </div>
                           </div> 
-                            
-                            
-                            
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -384,27 +405,31 @@
        </div>
   </div>
 </div>
-<h:panelGroup id = "popuparea">         
-<p:dialog id="passwordreset" header="Change password" widgetVar="passwordresetDlg" visible="#{busnUserMngmntBean.passwordreset}"  modal="true" resizable="false" showEffect="clip">
+</h:form>        
+<p:dialog id="passwordreset" header="Change password" widgetVar="passwordresetDlg" visible="#{busnUserMngmntBean.passwordreset}" 
+	modal="true" resizable="false" showEffect="clip" styleClass="popuppassword">
 	<h:form id="chagepasswordForm">
-	<p:messages id="loginmessages" showDetail="true" autoUpdate="true"/>
+	<p:message for="newpassword" id="newpassmsg" showDetail="true" autoUpdate="true"/>
+	<p:message for="confrmpassword" id="cnfrmpassmsg" showDetail="true" autoUpdate="true"/>
 		<h:panelGrid columns="2" cellpadding="5">
 			<h:outputLabel for="newpassword" value="New Password:" />
 			<p:inputText value="#{busnUserMngmntBean.password}" 
-					id="newpassword" required="true" label="newpassword" requiredMessage="password is required" />
+					id="newpassword" required="true" label="newpassword" requiredMessage="password is required" style="width:176px;">
+					 <p:ajax event="blur" update="newpassmsg"/>
+					</p:inputText>
 			<h:outputLabel for="confrmpassword" value="confrm Password:" />
 			<p:password value="#{busnUserMngmntBean.cfrmPassword}" 
-					id="confrmpassword" required="true" label="confrmpassword" requiredMessage="confrmPassword is required"/>
+					id="confrmpassword" required="true" label="confrmpassword" requiredMessage="confrmPassword is required" style="width:176px;">
+					<p:ajax event="blur" update="cnfrmpassmsg"/>
+				</p:password>
 			<f:facet name="footer">
-				<p:commandButton id="changepasswordButton" value="Change" action="#{busnUserMngmntBean.changePassword}" onsuccess="passwordresetDlg.hide()" />
+				<p:commandButton id="changepasswordButton" value="Change" action="#{busnUserMngmntBean.changePassword}"
+				 update=":passwordreset">
+				 </p:commandButton>
+				
 			</f:facet>
 		</h:panelGrid>
 	</h:form>
 </p:dialog>
-</h:panelGroup>
-<div id="backgroundPopup"></div>
-	  </h:form>
     </h:body>
 </ui:composition>
-
-
