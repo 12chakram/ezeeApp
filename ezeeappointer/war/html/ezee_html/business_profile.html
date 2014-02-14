@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        
+        <title>Business Profile</title>
+        <!-- Link shortcut icon-->
+        <link rel="shortcut icon" type="image/ico" href="images/favicon2.html" /> 
+     <!-- Link css-->
+   		<link rel="stylesheet" type="text/css" href="css/zice.style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/icon.css"/>
+        <link rel="stylesheet" type="text/css" href="css/ui-custom.css"/>
+        <link rel="stylesheet" type="text/css" href="css/timepicker.css"  />
+        <link rel="stylesheet" type="text/css" href="components/fancybox/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="components/datatables/dataTables.css"  /> 
+        <link rel="stylesheet" type="text/css" href="components/chosen/chosen.css" />
+        <link rel="stylesheet" type="text/css" href="components/confirm/jquery.confirm.css" />
+       
+   
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="components/flot/excanvas.min.js"></script><![endif]-->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="components/ui/jquery.ui.min.js"></script> 
+        <script type="text/javascript" src="components/ui/timepicker.js"></script>
+        <script type="text/javascript" src="components/checkboxes/iphone.check.js"></script>
+        <script type="text/javascript" src="components/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="components/datatables/dataTables.min.js"></script>
+        <script type="text/javascript" src="components/datatables/ColVis.js"></script>
+        <script type="text/javascript" src="components/scrolltop/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="components/chosen/chosen.js"></script>
+        <script type="text/javascript" src="components/confirm/jquery.confirm.js"></script>
+        <script type="text/javascript" src="components/checkboxes/customInput.jquery.js"></script>
+        <script type="text/javascript" src="components/filestyle/jquery.filestyle.js" ></script>
+        <script type="text/javascript" src="components/placeholder/jquery.placeholder.js" ></script>
+		<script type="text/javascript" src="js/scripts.js"></script>        
+ <style type="text/css">
+ .notificationbox{
+	 margin: 0 0 10px;
+    padding: 15px 20px;
+    position: relative;
+	 background-color: #ffffff;
+border: 1px solid #a5a5a5;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 4px #999999;
+-webkit-box-shadow: 0px 0px 4px #999999;
+box-shadow: 0px 0px 4px #999999;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f8f8f8', endColorstr = '#eaeaea');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f8f8f8', endColorstr = '#eaeaea')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: -ms-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: -o-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#f8f8f8), to(#eaeaea));
+background-image: -webkit-linear-gradient(top, #f8f8f8, #eaeaea);
+background-image: linear-gradient(top, #f8f8f8, #eaeaea);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+
+ }
+.notification_left{
+	width:70%;
+	float:left;
+}
+.notification_right{
+	width:30%;
+	float:left;
+}
+.notificationbox strong{
+	color:#666666;
+	font-size:16px;
+}
+.notificationbox em{
+	color:#f24f84;
+	font-size:12px;
+}
+ </style>
+           
+        </head>        
+        <body class="dashborad">        
+        <div id="alertMessage" class="error"></div> 
+                       
+        <div id="header" >
+                <div id="account_info"> 
+                    <img src="images/avatar.png" alt="Online" class="avatar" />
+					<div class="setting" title="Profile Setting"><b>Welcome,</b> <b class="red">John Doe</b><img src="images/gear.png" class="gear"  alt="Profile Setting" ></div>
+					<div class="logout" title="Disconnect"><b >Logout</b> <img src="images/connect.png" name="connect" class="disconnect" alt="disconnect" ></div> 
+                </div>
+            </div> <!--//  header -->
+			<div id="shadowhead"></div>
+                   
+                  <div id="left_menu">
+                    <ul id="main_menu" class="main_menu">
+                      <li class="limenu" ><a href="dashboard.html"><span class="ico gray shadow home" ></span><b>Dashboard</b></a></li>
+                      <li class="limenu select" ><a href="#" ><span class="ico gray shadow window"></span><b>Business Settings</b></a>
+                        <ul>
+                          <li ><a href="business_profile.html">Business Profile</a></li>
+                          <li ><a href="services.html"> Services </a></li>
+                          <li ><a href="staff.html"> Staff </a></li>
+                          <li ><a href="config.html"> Configuration </a></li>
+                        </ul>
+                      </li>
+                      <li class="limenu" ><a href="#"><span class="ico gray  dimensions" ></span><b>Customers</b></a>
+                        <ul>
+                          <li ><a href="customers.html"> View/Search Customers </a></li>
+                          <li ><a href="promote.html"> Promote </a></li>
+                          <li ><a href="customer_settings.html">Customer Settings</a></li>
+                        </ul>
+                      </li>
+                      <li class="limenu" ><a href="table.html"><span class="ico gray shadow  spreadsheet"></span><b>Reports</b> </a></li>
+                      <li class="limenu" ><a href="gallery.html"><span class="ico gray shadow pictures_folder"></span><b>Accounting </b></a></li>   
+                    </ul>
+              </div>
+          
+            
+            <div id="content">
+                <div class="inner">
+					<div class="topcolumn">
+						<div class="logo"></div>
+                            
+					</div>
+                    <div class="clear"></div>
+                    
+                    <div class="onecolumn">
+                        <div class="header"> <span ><span class="ico gray"></span> Business Profile</span> </div>
+                        <div class="clear"></div>
+                        <div class="content" >
+        <div class="registration_form">
+        	
+        
+        <div class="formEl_b">
+        <form action="business_setup1.html" id="validation"> 
+    
+		<fieldset>
+          	
+                                      
+			<div class="section ">
+				<label> Company Name</label>   
+                    <div> 
+                        <input type="text" id="e_required" name="e_required" class="validate[required]  medium">
+                    </div>
+            </div>   
+
+			<div class="section textonly">
+				<label>About Company</label>   
+                    <div> 
+                        <textarea name="about-company" class="medium"></textarea>
+                    </div>
+            </div>
+			
+			<div class="section textonly">
+				<label>Tag</label>   
+				<div> 
+					<textarea name="tag" class="medium"></textarea>
+				</div>
+			</div>
+			
+			<div class="section ">
+				<label>Company Address</label>   
+                    <div> 
+                        <input type="text" id="e_required" name="e_required" class="validate[required]  medium">
+                    </div>
+            </div>   
+
+    
+			<div class="section">
+                <label>State</label>   
+                <div>
+					<select data-placeholder="Choose a State..." class="chzn-select" tabindex="2" >
+                        <option value=""></option> 
+                        <option value="Andaman and Nicobar Icelands">Andaman and Nicobar Icelands</option> 
+                        <option value="Andhra Pradesh">Andhra Pradesh</option> 
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option> 
+                        <option value="Assam">Assam</option> 
+                        <option value="Bihar">Bihar</option> 
+                        <option value="Chandigarh">Chandigarh</option> 
+                        <option value="Chhattisgarh">Chhattisgarh</option> 
+                        <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option> 
+                        <option value="Daman and Diu">Daman and Diu</option> 
+                        <option value="Delhi">Delhi</option> 
+                        <option value="Goa">Goa</option> 
+                        <option value="Gujarath">Gujarath</option> 
+                        <option value="Haryana">Haryana</option> 
+                        <option value="Himachal Pradesh">Himachal Pradesh</option> 
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option> 
+                        <option value="Jarkhand">Jarkhand</option> 
+                        <option value="Karnataka">Karnataka</option> 
+                        <option value="Kerala">Kerala</option> 
+                        <option value="Lakshadweep">Lakshadweep</option> 
+                        <option value="Madhya Pradesh">Madhya Pradesh</option> 
+                        <option value="Maharashtra">Maharashtra</option> 
+                        <option value="Manipur">Manipur</option> 
+                        <option value="Meghalaya">Meghalaya</option> 
+                        <option value="Mizoram">Mizoram</option> 
+                        <option value="Nagaland">Nagaland</option> 
+                        <option value="Orissa">Orissa</option> 
+                        <option value="Pondicherry">Pondicherry</option> 
+                        <option value="Rajasthan">Rajasthan</option> 
+                        <option value="Sikkim">Sikkim</option> 
+                        <option value="Tamilnadu">Tamilnadu</option> 
+                        <option value="Tripura">Tripura</option> 
+                        <option value="Uttar Pradesh">Uttar Pradesh</option> 
+                        <option value="Uttaranchal">Uttaranchal</option> 
+                        <option value="West Bengal">West Bengal</option> 
+                    </select>       
+				</div>
+            </div>
+			
+			<div class="section">
+                <label>City</label>   
+					<div>
+						<select data-placeholder="Choose a City..." class="chzn-select" tabindex="2" >
+							<option value=""></option> 
+                            <option value="4">Hyderabad</option>
+							<option value="81">Delhi</option>
+							<option value="1">Banglore</option>
+							<option value="19">Chennai</option>
+							<option value="43">Mumbai</option>
+							<option value="77">Trivendram</option>
+							<option value="77">Bhuvaneswar</option>
+							<option value="36">Colcutta</option>
+							<option value="53">Ahmadabad</option>
+							<option value="24">Jaipur</option>
+							<option value="40">Patna</option>
+							<option value="35">Simla</option>
+							<option value="33">Impal</option>
+							<option value="39">Dispur</option>
+							<option value="3">Shillang</option>
+							<option value="25">Srinagar</option>
+                        </select>       
+                    </div>
+			</div>		
+		<div class="section ">
+            <label>Profile Picture<small>Choose</small></label>   
+            <div> 
+                <input placeholder="Choose File" class="file fileupload" style="display: inline; color: rgb(102, 102, 102); font-size: 11px; width: 150px;"><div class="filebtn" style="width: 203px; height: 30px; background: url(&quot;images/addFiles.png&quot;) no-repeat scroll right center transparent; display: inline; position: absolute; margin-left: -168px;"><input type="file" class="fileupload" style="position: absolute; height: 30px; width: 203px; display: inline; cursor: pointer; opacity: 0; margin-left: -142px;"></div>
+            </div>
+        </div>
+		   
+		<div class="section last">
+            <div>
+				<input type="submit" class="regi_submit uibutton icon special forward" Value="Next" /></div>
+            </div>                
+       
+		</fieldset>
+        </form>
+    </div> 
+    </div>
+      
+        <!--/END of Registration/-->
+        <div class="clear"/></div>                  
+    </div>
+                    </div>
+                    <!-- // End onecolumn -->
+                   
+                    
+                    <div class="clear"></div>
+                    <div id="footer"> &copy; Copyright 2012 <span class="tip"><a  href="#" title="Zice Admin" >Your Company Name</a> </span> </div>
+                </div> <!--// End inner -->
+            </div> <!--// End content --> 
+</body>
+</html>
