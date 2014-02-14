@@ -20,7 +20,6 @@
 	</bean>	  	
 	<bean id="appointmentService" class="com.ezeeappointer.serviceimpl.TEAAppointmentServiceBean">
 		<property name="teaDAOFactory" ref="daoFactory"/>
-		<property name="teaSeqGenService" ref="sequenceNumService"/>
 	</bean>
 	
 </beans>

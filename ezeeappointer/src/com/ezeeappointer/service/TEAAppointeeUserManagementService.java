@@ -25,7 +25,7 @@ public interface TEAAppointeeUserManagementService {
 	 * @param password
 	 * @return
 	 */
-	public TEAAppointeeUserDTO login(String email, String passWord );
+	public AppointeeUser login(String email, String passWord );
 	
 	/**
 	 * @param userDTO

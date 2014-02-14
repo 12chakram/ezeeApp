@@ -211,7 +211,7 @@
                      <div class="stafftime">
                      	<div class="grid2">
                         	<div class="section">
-                            <h:outputLabel value="From"><small>Select Start Time</small></h:outputLabel>   
+                               <h:outputLabel value="From"><small>Select Start Time</small></h:outputLabel>   
 			       <div> 
 			       <h:inputText id="FromTime" styleClass="timepicker" value="#{businessSetup.dayTime.fromTime}" name="timepicker" required="true" requiredMessage="From Time is required." validator = "#{businessSetup.validator.validateTime}">
 			           <f:ajax event="blur" render="frmtimemessage" />			           
@@ -264,7 +264,7 @@
 					 
 					 
 					 
-	<h:panelGroup id = "staffTable"> 
+					 	<h:panelGroup id = "staffTable"> 
 	<div class="onecolumn" >
       <div class="header">
            <span ><span class="ico  gray random"></span> Dynamic Table </span>
@@ -301,11 +301,9 @@
  
     			<f:facet name="header">Manage</f:facet>
  
- 				<a4j:commandButton value="Delete" action="#{businessSetup.deleteStaff}" render="staffTable" immediate="true">
- 				   <f:setPropertyActionListener target="#{businessSetup.staff}" value="#{o}" />
- 			</a4j:commandButton>
+    			<a4j:commandButton value="Delete" action="#{businessSetup.deleteAction(o)}"	reRender="staffTable"/>
  
- 		</h:column>
+    		</h:column>
  
     		</h:dataTable>
 		

@@ -3,18 +3,12 @@
  */
 package com.ezeeappointer.dto;
 
-import java.io.Serializable;
-
 /**
  * @author dreddy
  *
  */
-public class TEAServiceDTO implements Serializable{
+public class TEAServiceDTO {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1923680360158454848L;
 	//business setup2 form fields	
 	private String serviceName;
 	private String description;

@@ -10,15 +10,12 @@ import javax.persistence.Query;
 
 import com.ezeeappointer.common.TEAEntityManagerFactory;
 import com.ezeeappointer.data.Business;
-import com.ezeeappointer.dto.TEABusinessDetailDTO;
 
 /**
  * @author Administrator
  *
  */
 public class TEABusinessDetailDAO {
-	
-	
 	
 	/**
 	 * @param business
@@ -41,22 +38,5 @@ public class TEABusinessDetailDAO {
        Business bb = b.get(0);
 		em.getTransaction().commit();
 		em.close();	
-	}
-
-	
-	
-	
-	public Business getBusinessDetailsbyUserId(long userId) {
-		
-		EntityManager em = TEAEntityManagerFactory.get().createEntityManager();
-		em.getTransaction().begin();
-		Query q = em.createQuery("select b from Business b where b.userId="+userId);
-		System.out.println(q);
-		Business bussBusiness = (Business) q.getSingleResult();
-		em.getTransaction().commit();
-		em.close();
-		return bussBusiness;
-	
-		
 	}
 }

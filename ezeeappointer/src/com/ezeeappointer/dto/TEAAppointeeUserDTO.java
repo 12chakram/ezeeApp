@@ -1,13 +1,7 @@
 package com.ezeeappointer.dto;
 
-import java.io.Serializable;
-
-public class TEAAppointeeUserDTO implements Serializable{
+public class TEAAppointeeUserDTO {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7056854848835418320L;
 	private String email;
 	private String password;
 	private String cfrmPassword;
@@ -17,7 +11,6 @@ public class TEAAppointeeUserDTO implements Serializable{
 	private String address;
 	private String city;
 	private String country;
-	private long id;
 	/**
 	 * @return the email
 	 */
@@ -127,16 +120,11 @@ public class TEAAppointeeUserDTO implements Serializable{
 		this.country = country;
 	}
 	/**
-	 * @return the id
+	 * @return the userId
 	 */
-	public long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
 	
+	
+	
+	
+
 }

@@ -3,17 +3,11 @@
  */
 package com.ezeeappointer.dto;
 
-import java.io.Serializable;
-
 /**
  * @author Administrator
  *
  */
-public class TEADashboardDetailDTO implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8438240232938315959L;
+public class TEADashboardDetailDTO {
 	private String apptDate;
 
 	/**

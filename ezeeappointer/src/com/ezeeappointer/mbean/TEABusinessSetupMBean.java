@@ -23,12 +23,8 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 
 @ManagedBean(name="businessSetup")
 @RequestScoped
-	public class TEABusinessSetupMBean extends TEASecureMbean {
+	public class TEABusinessSetupMBean extends BaseMBean {
 		
-		/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4450582646450241502L;
 		@ManagedProperty(value="#{teaBusinessDetail}")
 		private TEABusinessDetailMBean businessDetail;	
 		@ManagedProperty(value="#{teaServiceMBean}")
@@ -133,8 +129,6 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			businessDTO.setCompanyAddress(businessDetail.getCompanyAddress());
 			businessDTO.setState(businessDetail.getState());
 			businessDTO.setCity(businessDetail.getCity());
-			businessDTO.setStartingTime(businessDetail.getStartingTime());
-			businessDTO.setEndingTime(businessDetail.getEndingTime());
 			businessDTO.setProfilePicture(businessDetail.getProfilePicture());
 			for(TEAServiceMBean srvMBean: businessDetail.getServices()){
 				TEAServiceDTO s = new TEAServiceDTO();
@@ -170,8 +164,9 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			businessDTO.setHrsBfrAppRemainderNotification(businessDetail.getHrsBfrAppRemainderNotification());
 			
 			TEABusinessDetailService service= (TEABusinessDetailService) getBackendService("businessService");
-			service.createBusiness(businessDTO, getActiveUser().getBusnUser().getId());
-			return "ezeedashboardn";
+			long userid = ((TEABusinessUserDTO)((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getSession().getAttribute("AUTH_KEY")).getId();
+			service.createBusiness(businessDTO, userid);
+			return "ezeedashboard";
 		}
 		
 		/**
@@ -289,81 +284,13 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 		
 		public List<SelectItem> getCitySelectItems() {
 			citySelectItems = new ArrayList<SelectItem>();
-			
-			if(businessDetail.getState()==null){
-				citySelectItems.add(new SelectItem("", "Choose a State"));
-			}
-			else if(businessDetail.getState().equalsIgnoreCase("AP")){
-				citySelectItems.add(new SelectItem("HYD", "Hyderabad"));
-				citySelectItems.add(new SelectItem("TPT", "Tirupathi"));
-			}else if (businessDetail.getState().equalsIgnoreCase("AR")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("AS")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("BH")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("CG")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("DL")) {
-				citySelectItems.add(new SelectItem("DL", "Delhi"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("GA")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("GJ")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("HP")) {
-				citySelectItems.add(new SelectItem("SM", "Simla"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("JK")) {
-				citySelectItems.add(new SelectItem("SRN", "Srinagar"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("KA")) {
-				citySelectItems.add(new SelectItem("BNG", "Banglore"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("KL")) {
-				citySelectItems.add(new SelectItem("TRD", "Trivendram"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("MP")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("MH")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("MN")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("ML")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("MZ")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("NL")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("OR")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("PB")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("RJ")) {
-				citySelectItems.add(new SelectItem("JP", "Jaipurd"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("SK")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("TN")) {
-				citySelectItems.add(new SelectItem("CHN", "Chennai"));
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("TR")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("UK")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("UP")) {
-				
-			}else if (businessDetail.getState().equalsIgnoreCase("WB")) {
-				citySelectItems.add(new SelectItem("CLT", "Colcutta"));
-			}
-			
-			/*citySelectItems.add(new SelectItem(null, "Choose a city"));
+			citySelectItems.add(new SelectItem(null, "Choose a city"));
 			citySelectItems.add(new SelectItem("DL", "Delhi"));
 			citySelectItems.add(new SelectItem("BNG", "Banglore"));
 			citySelectItems.add(new SelectItem("CHN", "Chennai"));
-			
+			citySelectItems.add(new SelectItem("MB", "Mumbai"));
 			citySelectItems.add(new SelectItem("TRD", "Trivendram"));
-			
+			citySelectItems.add(new SelectItem("HYD", "Hyderabad"));
 			citySelectItems.add(new SelectItem("BNS", "Bhuvaneswar"));
 			citySelectItems.add(new SelectItem("CLT", "Colcutta"));
 			citySelectItems.add(new SelectItem("JP", "Jaipurd"));
@@ -372,8 +299,7 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			citySelectItems.add(new SelectItem("IPL", "Impal"));
 			citySelectItems.add(new SelectItem("DSR", "Dispur"));
 			citySelectItems.add(new SelectItem("SLG", "Shillang"));
-			citySelectItems.add(new SelectItem("SRN", "Srinagar"));*/
-			
+			citySelectItems.add(new SelectItem("SRN", "Srinagar"));
 			return citySelectItems;
 			}
 	//SECONDFORM
@@ -428,16 +354,8 @@ import com.ezeeappointer.service.TEABusinessDetailService;
 			return weekDaysSelectItems;
 		}
 		
-		public String deleteAction() {	
-			if(service!=null){
-		   businessDetail.getServices().remove(service);
-			}
-			return null;
-		}
-		
-		
-		public String deleteStaff() {
-				businessDetail.getStaff().remove(staff);
+		public String deleteAction(TEAServiceMBean service) {			 
+			businessDetail.getServices().remove(service);
 			return null;
 		}
 }

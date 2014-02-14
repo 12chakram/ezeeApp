@@ -16,10 +16,6 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class TEADayAndTimeMBean implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1139559032603698272L;
 	private String[] days;
 	private String fromTime;
 	private String toTime;

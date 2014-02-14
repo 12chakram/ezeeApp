@@ -11,12 +11,8 @@ import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 
 @ManagedBean(name="apptUserMngmntBean")
 @RequestScoped
-public class TEAAppointeeUserManagementMBean extends TEAAppointeeSecureMbean {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6830570917493952262L;
+
+public class TEAAppointeeUserManagementMBean extends BaseMBean {
 	private String email;
 	private String password;
 	private String cfrmPassword;
@@ -38,7 +34,10 @@ public String registerAppointeeUser(){
 		userDTO.setPhoneNo(phoneNo);
 		userDTO.setAddress(address);
 		userDTO.setCity(city);
-		userDTO.setCountry(country);		
+		userDTO.setCountry(country);
+		
+		
+		
 		TEAAppointeeUserManagementService service= (TEAAppointeeUserManagementService) getBackendService("appointeeUserService");
 		boolean isSuccess = service.register(userDTO);
 		if(isSuccess)
@@ -48,12 +47,13 @@ public String registerAppointeeUser(){
 	}
 
 	public String doLogin(){
-		TEAAppointeeUserDTO u = null;		
+		AppointeeUser u = null;		
 		if(email != null && password != null){
 			TEAAppointeeUserManagementService service = (TEAAppointeeUserManagementService)TEAServiceDelegate.getService("appointeeUserService");			
 			u = service.login(email, password);
 			if(u != null){
-				getActiveUser().setApptUser(u);//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("AUTH_KEY", u);
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+				        "AUTH_KEY", u);
 				return "userappointment";
 			}
 		}
@@ -170,4 +170,8 @@ public String getCountry() {
 public void setCountry(String country) {
 	this.country = country;
 }
+
+// checking svn....
+
+//checkin 2
 }

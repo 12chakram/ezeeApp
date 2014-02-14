@@ -16,10 +16,6 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class TEAServiceMBean implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4724598479425818286L;
 	//business setup2 form fields	
 	private String serviceName;
 	private String description;

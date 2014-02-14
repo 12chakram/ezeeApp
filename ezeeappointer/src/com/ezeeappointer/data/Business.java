@@ -31,9 +31,6 @@ public class Business {
 	private String companyAddress;
 	private String state;
 	private String city;
-	// ezee 1001
-	private String startingTime;
-	private String endingTime;
 	private String profilePicture;
 	@OneToMany(mappedBy = "business", cascade = CascadeType.ALL)
 	private List<Service> services = new ArrayList<Service>();		
@@ -137,22 +134,6 @@ public class Business {
 	 */
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getStartingTime() {
-		return startingTime;
-	}
-
-	public void setStartingTime(String startingTime) {
-		this.startingTime = startingTime;
-	}
-
-	public String getEndingTime() {
-		return endingTime;
-	}
-
-	public void setEndingTime(String endingTime) {
-		this.endingTime = endingTime;
 	}
 
 	/**

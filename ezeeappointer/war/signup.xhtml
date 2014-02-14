@@ -204,7 +204,7 @@
             		<div class="section">
                 	  <h:outputLabel value="Country"/>   
                 	  <div>
-					  <h:selectOneMenu id = "Country" label = "country"  value="#{busnUserMngmntBean.country}" disabled = "false" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
+					  <h:selectOneMenu id = "Country" label = "country"  value="#{busnUserMngmntBean.country}" disabled = "true" required = "true" requiredMessage="Select one country" validator = "#{busnUserMngmntBean.validator.validateText}">
 					    <f:ajax event="change"  render="countrymessage" />
 					     <f:selectItems value="#{busnUserMngmntBean.countrySelectItems}"/>        
 		              </h:selectOneMenu> 
@@ -228,7 +228,7 @@
 	               </div>
                     			
 	         <div class="section last">
-	            <div><h:commandButton styleClass="regi_submit uibutton normal" id="but_login" value="Register" action="#{busnUserMngmntBean.registerBusinessUser}"/>
+	            <div><h:commandButton styleClass="regi_submit" id="but_login" value="Register" action="#{busnUserMngmntBean.registerBusinessUser}"/>
 	            </div>
 	         </div>                
 	     	

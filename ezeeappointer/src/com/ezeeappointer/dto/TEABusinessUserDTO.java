@@ -3,18 +3,12 @@
  */
 package com.ezeeappointer.dto;
 
-import java.io.Serializable;
-
 /**
  * @author sairam
  *
  */
-public class TEABusinessUserDTO implements Serializable{
+public class TEABusinessUserDTO {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8966342409249834273L;
 	private String userId;
 	private String password;
 	private String cfrmPassword;
@@ -26,7 +20,7 @@ public class TEABusinessUserDTO implements Serializable{
 	private String city;
 	private String country;
 	private String typeOfBusiness;
-	private String businessSetupFlag = "n";
+	private char businessSetupFlag = 'n';
 	private long id;
 	
 	
@@ -111,14 +105,14 @@ public class TEABusinessUserDTO implements Serializable{
 	/**
 	 * @return the businessSetupFlag
 	 */
-	public String getBusinessSetupFlag() {
+	public char getBusinessSetupFlag() {
 		return businessSetupFlag;
 	}
 	/**
 	 * @param businessSetupFlag the businessSetupFlag to set
 	 */
-	public void setBusinessSetupFlag(String businessSetupFlag) {
+	public void setBusinessSetupFlag(char businessSetupFlag) {
 		this.businessSetupFlag = businessSetupFlag;
 	}
-	
+
 }

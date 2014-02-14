@@ -5,17 +5,12 @@ import javax.persistence.Persistence;
 
 public final class TEAEntityManagerFactory {
 	
-    private static EntityManagerFactory emfInstance;
+    private static final EntityManagerFactory emfInstance = Persistence.createEntityManagerFactory("transactions-optional");
 
     /**
      * @return
      */
     public static EntityManagerFactory get() {
-    	try{if(emfInstance == null)
-    		emfInstance  = Persistence.createEntityManagerFactory("transactions-optional");
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
         return emfInstance;
     }
 }

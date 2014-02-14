@@ -1,7 +1,5 @@
 package com.ezeeappointer.data;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,79 +13,128 @@ import com.google.appengine.api.datastore.Key;
 @Table(name = "APPOINTMENT_DETAIL")
 public class Appointment {
 	
-	private String serviceId;
-	private Date  apptDate;
-	private Date apptTakenDate;
-	private Date searchDate;
-	private long staffId;
-	private String apptTime;
-	private long busnId;
-	private String apptSts;
+	private String chooseService;
+	private String appointmentDate;
+	private String availableSlots;
+	private String staffDescription;
+	private String chooseDoctor;
+	private String selectDOAppointment;
+	private String listofAvailableSlots;
+	private String selectServices;
 	private long id;
 	private long userId;
+	
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
-	
 	/**
-	 * @return the serviceId
+	 * @return the chooseService
 	 */
-	public String getServiceId() {
-		return serviceId;
+	public String getChooseService() {
+		return chooseService;
 	}
 	/**
-	 * @param serviceId the serviceId to set
+	 * @param chooseService the chooseService to set
 	 */
-	public void setServiceId(String serviceId) {
-		this.serviceId = serviceId;
+	public void setChooseService(String chooseService) {
+		this.chooseService = chooseService;
 	}
 	/**
-	 * @return the apptDate
+	 * @return the appointmentDate
 	 */
-	public Date getApptDate() {
-		return apptDate;
+	public String getAppointmentDate() {
+		return appointmentDate;
 	}
 	/**
-	 * @param apptDate the apptDate to set
+	 * @param appointmentDate the appointmentDate to set
 	 */
-	public void setApptDate(Date apptDate) {
-		this.apptDate = apptDate;
+	public void setAppointmentDate(String appointmentDate) {
+		this.appointmentDate = appointmentDate;
 	}
 	/**
-	 * @return the searchDate
+	 * @return the availableSlots
 	 */
-	public Date getSearchDate() {
-		return searchDate;
+	public String getAvailableSlots() {
+		return availableSlots;
 	}
 	/**
-	 * @param searchDate the searchDate to set
+	 * @param availableSlots the availableSlots to set
 	 */
-	public void setSearchDate(Date searchDate) {
-		this.searchDate = searchDate;
+	public void setAvailableSlots(String availableSlots) {
+		this.availableSlots = availableSlots;
 	}
 	/**
-	 * @return the staffId
+	 * @return the staffDescription
 	 */
-	public long getStaffId() {
-		return staffId;
+	public String getStaffDescription() {
+		return staffDescription;
 	}
 	/**
-	 * @param staffId the staffId to set
+	 * @param staffDescription the staffDescription to set
 	 */
-	public void setStaffId(long staffId) {
-		this.staffId = staffId;
+	public void setStaffDescription(String staffDescription) {
+		this.staffDescription = staffDescription;
 	}
 	/**
-	 * @return the apptTime
+	 * @return the chooseDoctor
 	 */
-	public String getApptTime() {
-		return apptTime;
+	public String getChooseDoctor() {
+		return chooseDoctor;
 	}
 	/**
-	 * @param apptTime the apptTime to set
+	 * @param chooseDoctor the chooseDoctor to set
 	 */
-	public void setApptTime(String apptTime) {
-		this.apptTime = apptTime;
+	public void setChooseDoctor(String chooseDoctor) {
+		this.chooseDoctor = chooseDoctor;
+	}
+	/**
+	 * @return the selectDOAppointment
+	 */
+	public String getSelectDOAppointment() {
+		return selectDOAppointment;
+	}
+	/**
+	 * @param selectDOAppointment the selectDOAppointment to set
+	 */
+	public void setSelectDOAppointment(String selectDOAppointment) {
+		this.selectDOAppointment = selectDOAppointment;
+	}
+	/**
+	 * @return the listofAvailableSlots
+	 */
+	public String getListofAvailableSlots() {
+		return listofAvailableSlots;
+	}
+	/**
+	 * @param listofAvailableSlots the listofAvailableSlots to set
+	 */
+	public void setListofAvailableSlots(String listofAvailableSlots) {
+		this.listofAvailableSlots = listofAvailableSlots;
+	}
+	/**
+	 * @return the selectServices
+	 */
+	public String getSelectServices() {
+		return selectServices;
+	}
+	/**
+	 * @param selectServices the selectServices to set
+	 */
+	public void setSelectServices(String selectServices) {
+		this.selectServices = selectServices;
+	}
+	/**
+	 * @return the key
+	 */
+	public Key getKey() {
+		return key;
+	}
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(Key key) {
+		this.key = key;
 	}
 	/**
 	 * @return the id
@@ -113,49 +160,9 @@ public class Appointment {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	/**
-	 * @return the key
-	 */
-	public Key getKey() {
-		return key;
-	}
-	/**
-	 * @param key the key to set
-	 */
-	public void setKey(Key key) {
-		this.key = key;
-	}
-	/**
-	 * @return the apptTakenDate
-	 */
-	public Date getApptTakenDate() {
-		return apptTakenDate;
-	}
-	/**
-	 * @param apptTakenDate the apptTakenDate to set
-	 */
-	public void setApptTakenDate(Date apptTakenDate) {
-		this.apptTakenDate = apptTakenDate;
-	}
-	/**
-	 * @return the busnId
-	 */
-	public long getBusnId() {
-		return busnId;
-	}
-	/**
-	 * @param busnId the busnId to set
-	 */
-	public void setBusnId(long busnId) {
-		this.busnId = busnId;
-	}
-
-	public String getApptSts() {
-		return apptSts;
-	}
-	public void setApptSts(String apptSts) {
-		this.apptSts = apptSts;
-	}
+	
+	
+	
 	
 
 }

@@ -6,18 +6,12 @@ import java.util.List;
 
 public class TEABusinessDetailDTO implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5388862920372805586L;
 	private String companyName;
 	private String aboutCompany;
 	private String tag;
 	private String companyAddress;
 	private String state;
 	private String city;
-	private String startingTime;
-	private String endingTime;
 	private String profilePicture;
 	
 	//Business setup form2 fields
@@ -106,18 +100,6 @@ public class TEABusinessDetailDTO implements Serializable{
 	 */
 	public void setCity(String city) {
 		this.city = city;
-	}
-	public String getStartingTime() {
-		return startingTime;
-	}
-	public void setStartingTime(String startingTime) {
-		this.startingTime = startingTime;
-	}
-	public String getEndingTime() {
-		return endingTime;
-	}
-	public void setEndingTime(String endingTime) {
-		this.endingTime = endingTime;
 	}
 	/**
 	 * @return the profilePicture

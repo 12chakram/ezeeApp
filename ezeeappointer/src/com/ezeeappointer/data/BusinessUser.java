@@ -29,7 +29,7 @@ public class BusinessUser {
 	private String city;
 	private String country;
 	private String typeOfBusiness;
-	private String businessSetupFlag = "n";
+	private char businessSetupFlag = 'n';
 	private long id;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,7 +154,18 @@ public class BusinessUser {
 	public void setTypeOfBusiness(String typeOfBusiness) {
 		this.typeOfBusiness = typeOfBusiness;
 	}
-	
+	/**
+	 * @return the businessSetupFlag
+	 */
+	public char getBusinessSetupFlag() {
+		return businessSetupFlag;
+	}
+	/**
+	 * @param businessSetupFlag the businessSetupFlag to set
+	 */
+	public void setBusinessSetupFlag(char businessSetupFlag) {
+		this.businessSetupFlag = businessSetupFlag;
+	}
 	/**
 	 * @return the key
 	 */
@@ -178,18 +189,6 @@ public class BusinessUser {
 	 */
 	public void setId(long id) {
 		this.id = id;
-	}
-	/**
-	 * @return the businessSetupFlag
-	 */
-	public String getBusinessSetupFlag() {
-		return businessSetupFlag;
-	}
-	/**
-	 * @param businessSetupFlag the businessSetupFlag to set
-	 */
-	public void setBusinessSetupFlag(String businessSetupFlag) {
-		this.businessSetupFlag = businessSetupFlag;
 	}
 	
 	

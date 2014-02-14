@@ -1,8 +1,5 @@
 package com.ezeeappointer.serviceimpl;
 
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
-
 import com.ezeeappointer.dao.TEAAppointeeUserManagementDAO;
 import com.ezeeappointer.data.AppointeeUser;
 import com.ezeeappointer.dto.TEAAppointeeUserDTO;
@@ -10,7 +7,7 @@ import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 
 public class TEAAppointeeUserManagementServiceBean extends TEABasicAbstractServiceBean implements TEAAppointeeUserManagementService{
 	
-	private Mapper mapper = new DozerBeanMapper();
+	
 	
 	public boolean register(TEAAppointeeUserDTO userDTO) {
 			
@@ -45,10 +42,10 @@ public class TEAAppointeeUserManagementServiceBean extends TEABasicAbstractServi
 	/* (non-Javadoc)
 	 * @see com.ezeeappointer.service.TEABusinessUserManagementService#login(java.lang.String, java.lang.String)
 	 */
-	public TEAAppointeeUserDTO login(String email, String password) {
+	public AppointeeUser login(String email, String password) {
 		
 		TEAAppointeeUserManagementDAO dao = getTeaDAOFactory().getTEAAppointeeUserManagementDAO();
-				
-		return mapper.map(dao.findAppointeeUser(email, password), TEAAppointeeUserDTO.class);
+		AppointeeUser user = dao.findAppointeeUser(email, password);		
+		return user;
 	}
 }

@@ -788,11 +788,11 @@
   }
 
   // imagesPath - returns the path to the images folder
-  function imagesPath() {
-    var cssFile = "jquery.cleditor.css",
-        href = $("link[href$='" + cssFile +"']").attr("href");
-    return href.substr(0, href.length - cssFile.length) + "img/";
-  }
+//  function imagesPath() {
+//    var cssFile = "jquery.cleditor.css",
+//        href = $("link[href$='" + cssFile +"']").attr("href");
+//    return href.substr(0, href.length - cssFile.length) + "img/";
+//  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////imageUrl - Returns the css url string for a filemane
   function imageUrl(filename) {

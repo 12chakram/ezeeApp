@@ -3,18 +3,12 @@
  */
 package com.ezeeappointer.dto;
 
-import java.io.Serializable;
-
 /**
  * @author dreddy
  *
  */
-public class TEADayAndTimeDTO implements Serializable{
+public class TEADayAndTimeDTO {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 964678886999033996L;
 	private String[] days;
 	private String fromTime;
 	private String toTime;

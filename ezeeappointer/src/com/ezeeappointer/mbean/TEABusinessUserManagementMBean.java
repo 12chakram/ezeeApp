@@ -3,7 +3,6 @@
  */
 package com.ezeeappointer.mbean;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +10,8 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.ezeeappointer.common.TEAServiceDelegate;
 import com.ezeeappointer.data.BusinessUser;
@@ -23,11 +19,9 @@ import com.ezeeappointer.dto.TEABusinessUserDTO;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 
 @ManagedBean(name="busnUserMngmntBean")
-@SessionScoped
-public class TEABusinessUserManagementMBean extends TEASecureMbean {
+@RequestScoped
+public class TEABusinessUserManagementMBean extends BaseMBean {
 	
-	
-	private static final long serialVersionUID = -4850861653651843128L;
 	private String userId;
 	private String password;
 	private String cfrmPassword;
@@ -43,27 +37,10 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	private List<SelectItem> countrySelectItems;
 	private List<SelectItem> typeOfBusinessSelectItems;
 	private String loginErrorMsg;
-	private boolean thispage;
 	
-	 private TEABusinessUserDTO busnUser;
-
-
-
-
-
-
-	public TEABusinessUserDTO getBusnUser() {
-		return busnUser;
-	}
-
-
-	public void setBusnUser(TEABusinessUserDTO busnUser) {
-		this.busnUser = busnUser;
-	}
+	
 
 	private Map<String,String> countries= new HashMap<String,String>();
-	
-	
 	
 	public String registerBusinessUser(){
 		
@@ -79,7 +56,7 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 		userDTO.setCity(city);
 		userDTO.setCountry(country);
 		userDTO.setTypeOfBusiness(typeOfBusiness);
-		userDTO.setId(getActiveUser().getBusnUser().getId());
+		
 		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
 		boolean isSuccess = service.register(userDTO);
 		if(isSuccess)
@@ -89,25 +66,17 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	}	
 	
 	
-	public void  updateBusinessUser(){
-		
-		TEABusinessUserManagementService service= (TEABusinessUserManagementService) getBackendService("businessUserService");
-		boolean isSuccess = service.updateBusinessUser(busnUser);
-	
-	}
-	
 	public String doLogin(){
 		TEABusinessUserDTO u = null;		
 		if(userId != null && password != null){
 			TEABusinessUserManagementService service = (TEABusinessUserManagementService)TEAServiceDelegate.getService("businessUserService");			
 			u = service.login(userId, password);
 			if(u != null){
-				getActiveUser().setBusnUser(u);
-			
-				if(u.getBusinessSetupFlag().equals("y")) 
-					 return "ezeedashboardn";
-					 
-					return "businesssetup1";
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+				        "AUTH_KEY", u);
+				if(u.getBusinessSetupFlag() == 'y')
+					return "ezeedashboard";
+				return "businesssetup1";
 			}
 			
 		}
@@ -194,7 +163,12 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	}
 
    
-	
+	public Map<String, String> getCountries() {
+		countries.put("india", "india");
+		countries.put("india1", "india1");
+		countries.put("india2", "india2");
+		return countries;
+	}
 
 
 	public void setCountries(Map<String, String> countries) {
@@ -268,49 +242,4 @@ public class TEABusinessUserManagementMBean extends TEASecureMbean {
 	public void setLoginErrorMsg(String loginErrorMsg) {
 		this.loginErrorMsg = loginErrorMsg;
 	}
-	
-	
-	public boolean isThispage() {
-		return thispage;
-	}
-
-
-	public void setThispage(boolean thispage) {
-		this.thispage = thispage;
-	}
-	
-	
-	// this section for Edit/Update existing details 
-	
-	
-	
-	public String getAccountProfileData()
-	{
-		busnUser = getActiveUser().getBusnUser();
-	
-		this.thispage = true;
-		return "accountSetting";
-	}
-
-	public String gotoDashbord(){
-		
-		return "ezeedashboardn";
-	
-	}
-	
-public String getBusinesServiceseData(){
-		return "businesServices";
-	}
-	
-   public String getBusinessConfigurationData(){
-	   return "businesconfiguration";
-   }
-
-  public String  getBusinesStaffeData() {
-	
-	return "buserstaff";
-  }
-	
-	
-	
 }

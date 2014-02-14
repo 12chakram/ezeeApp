@@ -7,10 +7,6 @@ import com.ezeeappointer.common.TEAValidator;
 
 public class BaseMBean implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7985737984241159463L;
 	private TEAValidator validator = new TEAValidator();
 	
 	/**

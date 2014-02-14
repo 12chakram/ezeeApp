@@ -1,6 +1,5 @@
 package com.ezeeappointer.common;
 
-import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,13 +11,8 @@ import javax.faces.validator.ValidatorException;
 import com.ezeeappointer.service.TEAAppointeeUserManagementService;
 import com.ezeeappointer.service.TEABusinessUserManagementService;
 
-public class TEAValidator  implements Serializable{
+public class TEAValidator {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public void validateText(FacesContext context,UIComponent toValidate,Object value) throws ValidatorException {
 		String fieldStr = (String) value;
 		String field = toValidate.getId().replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
@@ -109,7 +103,7 @@ public class TEAValidator  implements Serializable{
 		String frmTime = (String) value;
 		String field = toValidate.getId().replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
 		validateForEmpty(field, frmTime);
-		String TIME12HOURS_PATTERN = "(0[1-9]|1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)|(AM|PM)";
+		String TIME12HOURS_PATTERN = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
 		Pattern pattern = Pattern.compile(TIME12HOURS_PATTERN);
 		Matcher matcher = pattern.matcher(frmTime);
 		if (!matcher.matches()) {
